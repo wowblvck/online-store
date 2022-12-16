@@ -8,18 +8,46 @@
 </head>
 <body>
     <header>
-        <div class="wrapper">
+        <div class="header__wrapper">
             <div class="logo">
-                <a class="logo__link">Online Store</a>
+                <a class="logo__link">OnlineStore</a>
             </div>
             <nav class="navigation">
                 <ul class="navigation__list">
-                    <li class="navigation__item"><a class="navigation__link">Home</a></li>
+                    <li class="navigation__item active"><a class="navigation__link hovered">Home</a></li>
                     <li class="navigation__item"><a class="navigation__link">Products</a></li>
-                    <li class="navigation__item"><img class="cart" src="./assets/icons/cart.png" alt="cart"></li>
+                    <li class="navigation__item"><img class="cart" src="./assets/icons/cart1.png" alt="cart"></li>
                 </ul>
+                <span class="navigation__products-num">0</span>
             </nav>
         </div>
     </header>
+    <main>
+        <div class="main__wrapper">
+            <div class="logo">
+                <img class="logo__image" src="./assets/images/laptop.png" alt="laptop">
+            </div>
+            <div class="welcome__wrapper">
+                <h1 class="welcome__title text-shadow">Welcome to Online Store</h1>
+                <p class="welcome__subtitle">Our store sells electronics: the assortment of the store includes smartphones, laptops, smart watches and more.</p>
+                <button class="welcome__button">Start shopping</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer__wrapper">
+            <div class="authors__wrapper" style="width: 30%; display: flex; justify-content: center; column-gap: 5px;">
+                <span>Authors:</span>
+                <a class="github__link" href="https://github.com/wowblvck" target="_blank">Indar Basto,</a>
+                <a class="github__link" href="https://github.com/MikhailStn" target="_blank">Mikhail Stankevich</a>
+            </div>
+            <div style="width: 30%; display: flex; justify-content: center;">
+                <span class="year">2022 - 2023</span>
+            </div>
+            <div style="width: 30%; display: flex; justify-content: center;">
+                <a class="school__link" href="https://rs.school/" target="_blank">RS School</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

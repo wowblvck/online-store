@@ -68,7 +68,7 @@ const config = {
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js"],
   },
-  optimization: {
+  /* optimization: {
     minimizer: [
       "...",
       new ImageMinimizerPlugin({
@@ -96,7 +96,7 @@ const config = {
         skippedFilesRegex: null,
       }),
     ],
-  },
+  }, */
 };
 
 module.exports = () => {

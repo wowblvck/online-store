@@ -1,0 +1,111 @@
+@use '../modules/mixins.scss' as mix;
+
+* {
+    @include mix.font('Quicksand', 18px);
+    color: #010A13;
+}
+
+body {
+    height: 100vh;
+    background-image: url('../assets/images/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+header {
+
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.425);
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 5px 10px 2px rgba(27, 28, 29, 0.623);
+    transition: 0.3s;
+
+    .header__wrapper {
+        max-width: 1200px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .logo {
+        margin: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo__link {
+        margin: 0;
+        color: #ffffffc5;
+        @include mix.font('Quicksand', 45px);
+        letter-spacing: 0;
+        cursor: pointer;
+        text-shadow: 1px 1px 2px #1c1f22;
+        transition: 0.2s;
+    }
+
+    .logo__link:hover {
+        text-shadow: 1px 1px 4px #282c30;
+    }
+
+    .navigation {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+    }
+
+    .navigation__list {
+        display: flex;
+        margin: 0;
+        height: 100%;
+        list-style: none;
+        column-gap: 30px;
+    }
+
+    .navigation__item {
+        display: flex;
+        margin: 0;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.2s;
+        padding: 0 10px;
+    }
+
+    .navigation__item:hover {
+        background-color: #010a1354;
+    }
+
+    .active:hover {
+        background-color: #010a1354;
+    }
+
+    .navigation__link {
+        font-size: 22px;
+        color: #ffffff7e;
+    }
+
+    .hovered {
+        color: rgb(216, 216, 216);
+    }
+
+    .active:hover {
+        background-color: transparent !important;
+        cursor: default !important;
+    }
+
+    .cart {
+        width: 32px;
+        padding: 0 5px;
+    }
+
+    .navigation__products-num {
+        font-size: 24px;
+        color: rgb(216, 216, 216);
+    }
+
+}
+
+header:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}

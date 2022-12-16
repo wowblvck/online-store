@@ -1,0 +1,29 @@
+
+
+footer {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    max-height: 60px;
+    padding-bottom: 20px;
+
+    .footer__wrapper {
+        max-width: 1200px;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .github__link,
+    .school__link {
+        transition: 0.2s;
+    }
+
+    .github__link:hover,
+    .school__link:hover {
+        text-decoration: none;
+    }
+}
