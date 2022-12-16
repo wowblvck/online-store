@@ -1,21 +1,47 @@
 @use '../modules/mixins.scss' as mix;
 
 header {
+
     height: 90px;
-    background-color: black;
-}
+    background-color: rgb(131, 131, 131);
+    display: flex;
+    justify-content: center;
 
-header .logo {
-    margin: 0;
-    color: aliceblue;
-}
+    .wrapper {
+        max-width: 1440px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
 
-header .logo .logo__link {
-    margin: 0;
-    color: aliceblue;
-    @include mix.font('Roboto', 45px);
-}
+    .logo {
+        margin: 0;
+        color: aliceblue;
+        display: flex;
+        align-items: center;
+    }
 
-header .navigation .navigation__list {
-    margin: 0;
+    .logo__link {
+        margin: 0;
+        color: aliceblue;
+        @include mix.font('Roboto', 45px);
+    }
+
+    .navigation__list {
+        display: flex;
+        margin: 0;
+        height: 100%;
+        list-style: none;
+        column-gap: 30px;
+    }
+
+    .navigation__item {
+        display: flex;
+        margin: 0;
+        align-items: center;
+    }
+
+    .navigation__link {
+        font-size: 22px;
+    }
 }

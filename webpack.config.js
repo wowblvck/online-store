@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const FontminPlugin = require('fontmin-webpack');
 
 const isProduction = process.env.NODE_ENV == "production";
@@ -70,6 +71,23 @@ const config = {
   optimization: {
     minimizer: [
       "...",
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.imageminMinify,
+          options: {
+            plugins: [
+              'imagemin-gifsicle',
+              'imagemin-mozjpeg',
+              'imagemin-pngquant',
+              'imagemin-svgo',
+              ['gifsicle', {interlaced: true}],
+              ['jpegtran', {progressive: true}],
+              ['optipng', {optimizationLevel: 5}],
+            ],
+          },
+        },
+        loader: false,
+      }),
       new CssMinimizerPlugin(),
       new FontminPlugin({
         autodetect: true,
