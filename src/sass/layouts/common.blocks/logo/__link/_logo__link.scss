@@ -1,0 +1,15 @@
+@use "../../../../modules/mixins" as mix;
+
+.logo__link {
+    margin: 0;
+    color: #ffffffc5;
+    @include mix.font('Quicksand', 45px);
+    letter-spacing: 0;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px #1c1f22;
+    transition: 0.2s;
+    
+    &:hover {
+        text-shadow: 1px 1px 4px #282c30;
+    }
+}

@@ -1,0 +1,7 @@
+@use "../../../../modules/mixins" as mix;
+
+.nav__link {
+    @include mix.font("Quicksand", 22px);
+    font-size: 22px;
+    color: #ffffff7e;
+}

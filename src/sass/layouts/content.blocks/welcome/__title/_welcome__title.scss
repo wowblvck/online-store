@@ -1,0 +1,9 @@
+@use "../../../../modules/mixins" as mix;
+@forward "./_text-shadow/welcome__title_text-shadow";
+
+.welcome__title {
+    @include mix.font("Quicksand", 70px);
+    margin: 0;
+    transition: 0.1s;
+    color: #373737;
+}

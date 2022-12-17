@@ -1,0 +1,6 @@
+@use "../../../modules/mixins" as mix;
+
+.products-count {
+    @include mix.font("Quicksand", 24px);
+    color: rgb(216, 216, 216);
+}

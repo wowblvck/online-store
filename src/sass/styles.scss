@@ -1,4 +1,5 @@
-@forward './main-page/header.scss';
-@forward './main-page/main.scss';
-@forward './main-page/footer.scss';
-@forward './fonts/fonts.scss'
+//Layouts
+@forward "./layouts/index";
+
+//Load resources
+@forward './resources/fonts'

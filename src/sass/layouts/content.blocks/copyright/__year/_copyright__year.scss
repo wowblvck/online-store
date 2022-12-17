@@ -1,0 +1,8 @@
+@use "../../../../modules/mixins" as mix;
+@use "../../../../modules/colors" as *;
+
+.copyright__year {
+    @include mix.font("Quicksand", 18px);
+    color: $main-black;
+    margin: 0;
+}

@@ -1,0 +1,7 @@
+@forward "./__welcome/main__welcome";
+
+.main {
+    display: flex;
+    justify-content: center;
+    grid-area: main;
+}

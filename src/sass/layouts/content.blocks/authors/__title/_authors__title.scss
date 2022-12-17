@@ -1,0 +1,9 @@
+@use "../../../../modules/mixins" as mix;
+@use "../../../../modules/colors" as *;
+
+.authors__title {
+    @include mix.font("Quicksand", 18px);
+    color: $main-black;
+    display: inline;
+    margin: 0;
+}

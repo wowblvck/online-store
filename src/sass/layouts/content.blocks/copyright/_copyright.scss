@@ -1,0 +1,10 @@
+@forward "./__year/copyright__year";
+@forward "./__school/copyright__school";
+
+.copyright {
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}

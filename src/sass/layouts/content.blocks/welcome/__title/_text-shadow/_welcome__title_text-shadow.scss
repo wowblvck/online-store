@@ -1,0 +1,41 @@
+.welcome__title_text-shadow {
+    animation-name: changeColor;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes changeColor {
+    0% {
+        text-shadow: 1px 1px 8px yellow;
+    }
+    10% {
+        text-shadow: 1px 1px 8px rgb(102, 255, 0);
+    }
+    20% {
+        text-shadow: 1px 1px 8px rgb(0, 255, 179);
+    }
+    30% {
+        text-shadow: 1px 1px 8px rgb(0, 102, 255);
+    }
+    40% {
+        text-shadow: 1px 1px 8px rgb(98, 0, 255);
+    }
+    50% {
+        text-shadow: 1px 1px 8px rgb(183, 0, 255);
+    }
+    60% {
+        text-shadow: 1px 1px 8px rgb(234, 0, 255);
+    }
+    70% {
+        text-shadow: 1px 1px 8px rgb(255, 0, 43);
+    }
+    80% {
+        text-shadow: 1px 1px 8px rgb(255, 60, 0);
+    }
+    90% {
+        text-shadow: 1px 1px 8px rgb(255, 136, 0);
+    }
+    100% {
+        text-shadow: 1px 1px 8px yellow;
+    }
+}

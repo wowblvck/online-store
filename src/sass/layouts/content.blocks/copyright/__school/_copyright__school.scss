@@ -1,0 +1,12 @@
+@use "../../../../modules/mixins" as mix;
+@use "../../../../modules/colors" as *;
+
+.copyright__school {
+    display: block;
+    @include mix.font("Quicksand", 18px);
+    color: $main-black;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
