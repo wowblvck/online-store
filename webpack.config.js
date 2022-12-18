@@ -23,8 +23,11 @@ const config = {
     },
   },
   devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
     open: true,
-    host: "localhost",
+    host: "0.0.0.0",
     hot: true,
     compress: true,
     port: 8080,
