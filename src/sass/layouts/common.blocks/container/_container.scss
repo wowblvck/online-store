@@ -1,5 +1,19 @@
+@use "../../../modules/mixins" as mix;
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 35px;
+
+    // @include mix.responsive(desktop-s) {
+    //     max-width: 900px;
+    // }
+
+    // @include mix.responsive(tablet-m) {
+    //     max-width: 650px;
+    // }
+
+    // @include mix.responsive(tablet-s) {
+    //     max-width: 450px;
+    // }
 }
