@@ -4,7 +4,7 @@
 .copyright__school {
     display: block;
     @include mix.font("Quicksand", 18px);
-    color: $main-black;
+    color: $main-grey;
 
     &:hover {
         text-decoration: none;

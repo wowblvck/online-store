@@ -21,3 +21,27 @@
     font-style: normal;
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'FiraSans';
+    src: url('../assets/fonts/FiraSans-Thin.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FiraSans';
+    src: url('../assets/fonts/FiraSans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FiraSans';
+    src: url('../assets/fonts/FiraSans-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}

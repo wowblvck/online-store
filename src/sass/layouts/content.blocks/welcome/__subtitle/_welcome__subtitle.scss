@@ -1,5 +1,7 @@
 @use "../../../../modules/mixins" as mix;
 
 .welcome__subtitle {
-    @include mix.font("Quicksand", 18px);
+    @include mix.font("FiraSans", 20px);
+    font-weight: 300;
+    line-height: 30px;
 }

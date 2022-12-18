@@ -1,3 +1,14 @@
+@forward "./__container/footer__container";
+
 .footer {
     grid-area: footer;
+    display: flex;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.425);
+    box-shadow: 0px -5px 10px 2px rgb(27 28 29 / 62%);
+    transition: 0.3s;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
 }
