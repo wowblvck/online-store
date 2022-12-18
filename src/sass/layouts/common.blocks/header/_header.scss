@@ -1,5 +1,6 @@
 @use '../../../modules/mixins' as mix;
 @forward "./__container/header__container";
+@forward "./_state/_active/header_state_active";
 
 .header {
     display: flex;
@@ -8,8 +9,19 @@
     background-color: rgba(0, 0, 0, 0.425);
     box-shadow: 0px 5px 10px 2px rgba(27, 28, 29, 0.623);
     transition: 0.3s;
+    z-index: 2;
 
     &:hover {
         background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    @include mix.responsive(tablet-s) {
+        position: fixed;
+        width: 100%;
+    }
+
+    @include mix.responsive(mobile) {
+        position: fixed;
+        width: 100%;
     }
 }

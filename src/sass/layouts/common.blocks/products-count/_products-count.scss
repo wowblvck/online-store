@@ -7,4 +7,16 @@
     margin-bottom: 28px;
     @include mix.font("Quicksand", 20px);
     color: $main-grey;
+
+    @include mix.responsive(tablet-s) {
+        margin-bottom: 0;
+        margin-left: 10px;
+        position: static;
+    }
+
+    @include mix.responsive(mobile) {
+        margin-bottom: 0;
+        margin-left: 10px;
+        position: static;
+    }
 }

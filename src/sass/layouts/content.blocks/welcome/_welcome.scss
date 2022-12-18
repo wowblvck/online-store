@@ -6,7 +6,6 @@
 @use "../../../modules/mixins" as mix;
 
 .welcome {
-    margin-top: 100px;
     width: 100%;
     display: grid;
     grid-template-columns: fit-content(100%) minmax(100px, 400px);
@@ -14,17 +13,13 @@
 
     @include mix.responsive(tablet-s) {
         grid-template-columns: 1fr;
-        margin-top: 20px;
         justify-items: center;
-        margin-bottom: 30px;
         text-align: center;
     }
 
     @include mix.responsive(mobile) {
         grid-template-columns: 1fr;
-        margin-top: 20px;
         justify-items: center;
-        margin-bottom: 30px;
         text-align: center;
     }
 }

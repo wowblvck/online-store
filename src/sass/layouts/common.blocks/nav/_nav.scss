@@ -5,18 +5,10 @@
 @forward "./__link/nav__link";
 @forward "./__link/_state/_hovered/nav__link_state_hovered";
 
-@use "../../../modules/mixins" as mix;
+@forward "./__list/_state/_active/nav__list_state_active";
 
 .nav {
     display: flex;
     align-items: center;
     column-gap: 10px;
-
-    @include mix.responsive(tablet-s) {
-        display: none;
-    }
-
-    @include mix.responsive(mobile) {
-        display: none;
-    }
 }

@@ -1,4 +1,5 @@
 @forward "./_state/_active/nav__item_state_active";
+@use "../../../../modules/mixins" as mix;
 
 .nav__item {
     display: flex;
@@ -12,5 +13,21 @@
 
     &:hover {
         background-color: #010a1354;
+    }
+
+    @include mix.responsive(tablet-s) {
+        padding: 15px 0;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.418);
+        }
+    }
+
+    @include mix.responsive(mobile) {
+        padding: 15px 0;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.418);
+        }
     }
 }
