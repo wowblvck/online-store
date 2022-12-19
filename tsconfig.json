@@ -9,4 +9,8 @@
     "allowJs": false,
     "sourceMap": true,
   },
+  "include": [
+    "src",
+    "src/declaration.d.ts"
+  ],
 }
