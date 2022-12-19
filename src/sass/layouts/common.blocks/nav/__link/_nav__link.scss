@@ -3,6 +3,7 @@
 .nav__link {
     @include mix.font("Quicksand", 22px);
     text-transform: uppercase;
+    text-decoration: none;
     font-size: 22px;
     color: #ffffff7e;
 
