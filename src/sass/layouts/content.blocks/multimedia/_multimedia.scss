@@ -1,0 +1,15 @@
+@forward "./__icon/multimedia__icon";
+
+@use "../../../modules/mixins" as mix;
+
+.multimedia {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 15px;
+
+    @include mix.responsive(mobile) {
+        flex-direction: column;
+        align-items: center;
+    }
+}

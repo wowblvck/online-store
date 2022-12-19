@@ -1,0 +1,25 @@
+@use "../../../../modules/mixins" as mix;
+
+.welcome__img {
+    display: block;
+    max-width: 600px;
+    width: 100%;
+    object-fit: contain;
+    box-sizing: border-box;
+    padding: 0 30px;
+
+    @include mix.responsive(mobile) {
+        padding: 0;
+        max-width: 400px;
+    }
+
+    @include mix.responsive(tablet-s) {
+        padding: 0;
+        max-width: 400px;
+    }
+
+    @include mix.responsive(tablet-m) {
+        // min-width: 350px;
+        min-width: 280px;
+    }
+}
