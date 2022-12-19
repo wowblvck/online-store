@@ -1,0 +1,11 @@
+@use "../../../../modules/mixins" as mix;
+@use "../../../../modules/colors" as *;
+
+.authors__link {
+    @include mix.font("Quicksand", 18px);
+    color: $main-grey;
+
+    &:hover {
+        text-decoration: none;
+    }
+}

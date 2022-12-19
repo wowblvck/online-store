@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-const FontminPlugin = require('fontmin-webpack');
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -17,16 +16,26 @@ const config = {
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].[contenthash].js",
-    clean: true,
+    clean: isProduction,
+    assetModuleFilename: pathData => {
+      const filepath = path.dirname(pathData.filename).split('/').slice(1).join('/');
+      return `${filepath}/[name][ext]`;
+    },
   },
   devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
     open: true,
-    host: "localhost",
+    host: "0.0.0.0",
     hot: true,
+    compress: true,
+    port: 8080,
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: path.resolve(__dirname, 'src', 'index.html'),
+      inject: "body",
     }),
     new ESLintPlugin({ extensions: [".ts"] }),
   ],
@@ -42,33 +51,23 @@ const config = {
         exclude: ["/node_modules/"],
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.(c|sa|sc)ss$/i,
         use: [stylesHandler, "css-loader", "postcss-loader", "sass-loader"],
-      },
-      {
-        test: /\.css$/i,
-        use: [stylesHandler, "css-loader", "postcss-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
-        generator: {
-          filename: 'assets/images/[name].[contenthash][ext]'
-        },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
-        generator: {
-          filename: 'assets/fonts/[name].[contenthash][ext]'
-        }
       },
     ],
   },
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js"],
   },
-  /* optimization: {
+  optimization: {
     minimizer: [
       "...",
       new ImageMinimizerPlugin({
@@ -89,14 +88,8 @@ const config = {
         loader: false,
       }),
       new CssMinimizerPlugin(),
-      new FontminPlugin({
-        autodetect: true,
-        glyphs: ['\uf0c8'],
-        allowedFilesRegex: null,
-        skippedFilesRegex: null,
-      }),
     ],
-  }, */
+  }
 };
 
 module.exports = () => {
@@ -108,7 +101,7 @@ module.exports = () => {
     }));
   } else {
     config.mode = "development";
-    config.devtool = "inline-source-map";
+    config.devtool = "source-map";
   }
   return config;
 };

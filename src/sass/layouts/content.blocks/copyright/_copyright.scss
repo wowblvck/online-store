@@ -1,0 +1,18 @@
+@forward "./__year/copyright__year";
+@forward "./__school/copyright__school";
+
+@use "../../../modules/mixins" as mix;
+
+.copyright {
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+
+    @include mix.responsive(mobile) {
+        grid-template-columns: 1fr;
+        row-gap: 15px;
+    }
+}

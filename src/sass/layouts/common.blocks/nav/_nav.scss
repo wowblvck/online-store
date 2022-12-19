@@ -1,0 +1,14 @@
+@forward "./__list/nav__list";
+
+@forward "./__item/nav__item";
+
+@forward "./__link/nav__link";
+@forward "./__link/_state/_hovered/nav__link_state_hovered";
+
+@forward "./__list/_state/_active/nav__list_state_active";
+
+.nav {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
