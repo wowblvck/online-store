@@ -111,7 +111,7 @@ export const products = [
   },
   {
     id: "11",
-    title: "Ноутбук HP 255",
+    title: "HP 255 Laptop",
     category: "laptop",
     description:
       "Stay connected with this full-featured HP 255 Notebook PC with a redesigned, lightweight design that's easy to take anywhere. Powered by AMD Ryzen processors, this laptop comes with all the collaboration tools you need to tackle any task.",
@@ -220,3 +220,5 @@ export const products = [
     images: ["../images/20/1.jpg", "../images/20/2.jpg"],
   },
 ];
+
+export default products;

@@ -1,14 +1,14 @@
-import Header from "../pages/static/header";
-import Footer from "../pages/static/footer";
+import HomePage from "../pages/homePage/home";
+import Catalog from "../pages/catalog/productsPage";
 import Burger from "../burger/burger";
 
 class App {
-  header: Header;
-  footer: Footer;
+  homePage: HomePage;
+  catalogPage: Catalog;
 
   constructor() {
-    this.header = new Header();
-    this.footer = new Footer();
+    this.homePage = new HomePage();
+    this.catalogPage = new Catalog();
     this.contentLoad();
   }
 

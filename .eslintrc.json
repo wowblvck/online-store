@@ -24,6 +24,12 @@
         "no-console": 0,
         "class-methods-use-this": "off",
         "@typescript-eslint/no-explicit-any": "error",
-        "@typescript-eslint/no-var-requires": "error"
+        "@typescript-eslint/no-var-requires": "error",
+        "prettier/prettier": [
+            "error",
+            {
+              "endOfLine": "auto"
+            }
+        ]
     }
 }
