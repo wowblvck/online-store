@@ -1,4 +1,6 @@
 @forward "./__container/main__container";
+@forward "./__welcome/main__welcome";
+@forward "./__error/main__error";
 
 .main {
     display: flex;

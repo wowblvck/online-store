@@ -1,2 +1,19 @@
 @forward "./__title/authors__title";
 @forward "./__link/authors__link";
+@use "../../../modules/mixins" as mix;
+
+.authors {
+    @include mix.responsive(tablet-s) {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    @include mix.responsive(mobile) {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+}
