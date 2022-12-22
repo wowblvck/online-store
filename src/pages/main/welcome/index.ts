@@ -56,6 +56,9 @@ class Welcome extends Component {
 
     const button = createElementWithClass("button", "btn", "btn__welcome");
     button.textContent = "Start shopping";
+    button.addEventListener("click", () => {
+      location.href = "#catalog";
+    });
 
     content.append(title, multimediaBox, subtitle, button);
     this.subContainer.render().append(content);
