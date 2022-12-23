@@ -2,24 +2,8 @@
 @forward "./__content/welcome__content";
 @forward "./__title/welcome__title";
 @forward "./__subtitle/welcome__subtitle";
-
-@use "../../../modules/mixins" as mix;
+@forward "./__container/welcome__container";
 
 .welcome {
     width: 100%;
-    display: grid;
-    grid-template-columns: fit-content(100%) minmax(100px, 400px);
-    align-items: center;
-
-    @include mix.responsive(tablet-s) {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        text-align: center;
-    }
-
-    @include mix.responsive(mobile) {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        text-align: center;
-    }
 }

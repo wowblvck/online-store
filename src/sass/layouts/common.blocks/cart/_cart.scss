@@ -1,15 +1,18 @@
 @use "../../../modules/mixins" as mix;
+@forward "./__image/cart__image";
 
 .cart {
-    width: 28px;
-    margin-bottom: 5px;
-    align-self: flex-end;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
 
     @include mix.responsive(tablet-s) {
-        margin-bottom: 0;
+        flex-direction: row;
+        column-gap: 10px;
     }
 
     @include mix.responsive(mobile) {
-        margin-bottom: 0;
+        flex-direction: row;
+        column-gap: 10px;
     }
 }
