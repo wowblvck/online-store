@@ -1,0 +1,14 @@
+@use "../../../../modules/mixins" as mix;
+
+.filters-form__item {
+    @include mix.font("Quicksand", 16px);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    column-gap: 5px;
+    align-items: center;
+    transition: 0.2s;
+
+    &:hover {
+        box-shadow: 0px 2px 4px 1px rgba(27, 28, 29, 0.11);
+    }
+}

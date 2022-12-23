@@ -1,0 +1,6 @@
+@use "../../../../modules/mixins" as mix;
+
+.stock-content__max {
+    @include mix.font("Quicksand", 16px);
+    margin: 0;
+}

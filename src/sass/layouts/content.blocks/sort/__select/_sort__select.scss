@@ -1,0 +1,31 @@
+@use "../../../../modules/mixins" as mix;
+
+.sort__select {
+    @include mix.font("Quicksand", 16px);
+    -webkit-appearance: none;
+    padding: 7px 40px 7px 12px;
+    border: 1px solid #b6b6b6;
+    border-radius: 5px;
+    background-color: #f6f6f6;
+    box-shadow: 0px 2px 4px 1px rgb(27 28 29 / 11%);
+    cursor: pointer;
+    transition: all 150ms ease;
+
+    &:required:invalid {
+        color: #5a667f;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: #07f;
+        box-shadow: 0 0 0 2px rgba(0,119,255,0.2);
+    }
+
+    @include mix.responsive(tablet-m) {
+        width: 100%;
+    }
+
+    @include mix.responsive(mobile) {
+        width: 100%;
+    }
+}

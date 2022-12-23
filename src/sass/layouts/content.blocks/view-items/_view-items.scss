@@ -1,0 +1,15 @@
+@forward "./__button/view-items__button";
+@forward "./__button/_grid/view-items__button_grid";
+@forward "./__button/_list/view-items__button_list";
+@forward "./__button/_active/view-items__button_active";
+@use "../../../modules/mixins" as mix;
+
+.view-items {
+    display: flex;
+    justify-self: flex-end;
+    column-gap: 10px;
+
+    @include mix.responsive(mobile) {
+        display: none;
+    }
+}

@@ -1,0 +1,17 @@
+@use "../../../modules/mixins" as mix;
+
+.catalog-wrapper {
+    display: grid;
+    grid-template-columns: minmax(100px, 300px) 1fr;
+    grid-column-gap: 40px;
+
+    @include mix.responsive(tablet-s) {
+        grid-template-columns: 1fr;
+        row-gap: 15px;
+    }
+
+    @include mix.responsive(mobile) {
+        grid-template-columns: 1fr;
+        row-gap: 15px;
+    }
+}

@@ -1,0 +1,19 @@
+.filters-range__input {
+    appearance: none;
+    pointer-events: none;
+    height: 2px;
+    width: 100%;
+    background-color: #696969;
+
+    &::-webkit-slider-thumb {
+        width: 15px;
+        height: 15px;
+        z-index: 10;
+        background-color: #696969;
+        appearance: none;
+        -webkit-appearance: none;
+        border-radius: 50%;
+        cursor: pointer;
+        pointer-events: all;
+    }
+}

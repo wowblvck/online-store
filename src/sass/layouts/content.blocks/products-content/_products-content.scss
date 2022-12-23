@@ -1,0 +1,17 @@
+.products-content {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 2px;
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #6d6d6d88;
+        border-radius: 100px;
+    }
+}

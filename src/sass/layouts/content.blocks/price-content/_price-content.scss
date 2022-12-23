@@ -1,0 +1,7 @@
+@forward "./__min/price-content__min";
+@forward "./__max/price-content__max";
+
+.price-content {
+    display: flex;
+    justify-content: space-evenly;
+}

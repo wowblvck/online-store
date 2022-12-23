@@ -1,6 +1,5 @@
 @use '../../../modules/mixins' as mix;
 @forward "./__container/header__container";
-@forward "./_state/_active/header_state_active";
 
 .header {
     display: flex;

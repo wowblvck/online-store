@@ -1,0 +1,6 @@
+.sort__item {
+    color: #223254;
+    &[value=""][disabled] {
+        display: none;
+    }
+}

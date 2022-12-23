@@ -1,6 +1,35 @@
+//Welcome section content
 @forward "./welcome/welcome";
 @forward "./authors/authors";
 @forward "./copyright/copyright";
 @forward "./multimedia/multimedia";
-@forward "./catalog/_products_filters";
-@forward "./catalog/_products_container";
+//
+
+//Catalog section content
+@forward "./catalog/catalog";
+@forward "./catalog-wrapper/catalog-wrapper";
+
+@forward "./search/search";
+
+@forward "./filters/filters";
+@forward "./filters-buttons/filters-buttons";
+@forward "./filters-content/filters-content";
+@forward "./filters-content/_price/filters-content_price";
+@forward "./filters-content/_stock/filters-content_stock";
+@forward "./filters-form/filters-form";
+@forward "./filters-range/filters-range";
+
+@forward "./price-content/price-content";
+@forward "./stock-content/stock-content";
+
+@forward "./products/products";
+@forward "./products-content/products-content";
+@forward "./products-item/products-item";
+@forward "./products-header/products-header";
+
+@forward "./sort/sort";
+
+@forward "./found-items/found-items";
+
+@forward "./view-items/view-items";
+//

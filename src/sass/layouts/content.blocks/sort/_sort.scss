@@ -1,0 +1,8 @@
+@forward "./__label/sort__label";
+@forward "./__select/sort__select";
+@forward "./__item/sort__item";
+@forward "./__icon/sort__icon";
+
+.sort {
+    grid-area: sort;
+}

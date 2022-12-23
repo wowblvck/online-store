@@ -1,6 +1,7 @@
 @use "../../../modules/mixins" as mix;
 
 .btn {
+    @include mix.font("FiraSans", 20px);
     align-items: center;
     background-color: rgba(240, 240, 240, 0.26);
     border: 1px solid #DFDFDF;
@@ -9,7 +10,6 @@
     color: #000000;
     cursor: pointer;
     display: flex;
-    @include mix.font("FiraSans", 20px);
     justify-content: center;
     text-transform: uppercase;
     max-width: 100%;
