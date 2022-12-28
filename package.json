@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@types/webpack-env": "^1.18.0",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
     "@webpack-cli/generators": "^3.0.1",
@@ -25,6 +26,7 @@
     "postcss-loader": "^7.0.2",
     "postcss-preset-env": "^7.8.3",
     "prettier": "^2.8.1",
+    "rxjs": "^7.8.0",
     "sass": "^1.56.2",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",

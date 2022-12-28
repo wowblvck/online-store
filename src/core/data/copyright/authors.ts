@@ -1,7 +1,4 @@
-interface AuthorsData {
-  name: string;
-  link: string;
-}
+import { AuthorsData } from "../../interfaces/Authors";
 
 export const authors: Array<AuthorsData> = [
   {

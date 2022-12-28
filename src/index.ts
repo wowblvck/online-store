@@ -1,7 +1,6 @@
-import App from "./pages/app/app";
+import App from "./pages/App/App";
 
 import "normalize.css";
 import "./sass/styles.scss";
 
-const app = new App();
-app.run();
+new App();

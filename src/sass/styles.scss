@@ -2,4 +2,6 @@
 @forward "./layouts/index";
 
 //Load resources
-@forward './resources/fonts'
+@forward "./resources/fonts";
+
+@forward "./modules/loader";

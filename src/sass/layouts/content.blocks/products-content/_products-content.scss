@@ -1,3 +1,5 @@
+@use "../../../modules/mixins" as mix;
+
 .products-content {
     display: flex;
     justify-content: space-evenly;
@@ -13,5 +15,16 @@
     &::-webkit-scrollbar-thumb {
         background-color: #6d6d6d88;
         border-radius: 100px;
+    }
+
+    @include mix.responsive(mobile) {
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+    }
+    @include mix.responsive(tablet-s) {
+        &::-webkit-scrollbar {
+            width: 0;
+        }
     }
 }

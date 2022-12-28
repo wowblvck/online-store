@@ -8,6 +8,12 @@
     "target": "ES2015",
     "allowJs": false,
     "sourceMap": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "types": [
+      "node",
+      "webpack-env"
+    ]
   },
   "include": [
     "src",

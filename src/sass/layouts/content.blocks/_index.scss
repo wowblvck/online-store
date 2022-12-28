@@ -6,7 +6,6 @@
 //
 
 //Catalog section content
-@forward "./catalog/catalog";
 @forward "./catalog-wrapper/catalog-wrapper";
 
 @forward "./search/search";
@@ -32,4 +31,6 @@
 @forward "./found-items/found-items";
 
 @forward "./view-items/view-items";
+
+@forward "./error/error";
 //

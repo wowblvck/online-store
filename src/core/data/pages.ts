@@ -17,17 +17,7 @@ export const Pages: Array<PagesData> = [
 ];
 */
 
-export const enum PageIds {
-  MainPage = "main",
-  CatalogPage = "catalog",
-  CartPage = "cart",
-}
-
-interface PagesData {
-  id: string;
-  textLink: string;
-  box?: boolean;
-}
+import { PagesData, PageIds } from "../interfaces/Page";
 
 export const pages: Array<PagesData> = [
   {
