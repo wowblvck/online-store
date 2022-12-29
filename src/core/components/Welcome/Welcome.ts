@@ -56,7 +56,11 @@ class Welcome extends Component {
     subtitle.textContent =
       "Our store sells electronics: the assortment of the store includes smartphones, laptops, smart watches and more.";
 
-    const button = createElementWithClass("button", "btn", "btn__welcome");
+    const button = createElementWithClass(
+      "button",
+      "btn",
+      "btn__welcome"
+    ) as HTMLButtonElement;
     button.textContent = "Start shopping";
     button.addEventListener("click", () => {
       location.href = `#${PageIds.CatalogPage}`;

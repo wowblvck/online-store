@@ -11,13 +11,13 @@ class CatalogPage extends Page {
     super(id);
   }
 
-  render = () => {
+  render() {
     this.updateTitle(CatalogPage.TextObject.Title);
     this.updateDescription(CatalogPage.TextObject.Description);
     const catalog = new Catalog("section", "catalog", "main__catalog");
     this.container.append(catalog.render());
     return this.container;
-  };
+  }
 }
 
 export default CatalogPage;

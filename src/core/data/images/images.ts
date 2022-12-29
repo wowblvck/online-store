@@ -26,7 +26,12 @@ import modem from "../../../assets/icons/multimedia/modem.svg";
 import tablet from "../../../assets/icons/multimedia/tablet.svg";
 import tv from "../../../assets/icons/multimedia/tv.svg";
 
-import { ImagesData, MultimediaData } from "../../interfaces/Images";
+// icons
+
+import arrow_right from "../../../assets/icons/arrow_right.png";
+import arrow_left from "../../../assets/icons/arrow_left.png";
+
+import { ImagesData, MultimediaData, IconsData } from "../../interfaces/Images";
 
 const images: ImagesData = {
   "cart-logo": {
@@ -70,4 +75,15 @@ const multimedia: Array<MultimediaData> = [
   },
 ];
 
-export { images, multimedia };
+const icons: Array<IconsData> = [
+  {
+    name: "Arrow left",
+    src: arrow_left,
+  },
+  {
+    name: "Arrow right",
+    src: arrow_right,
+  },
+];
+
+export { images, multimedia, icons };

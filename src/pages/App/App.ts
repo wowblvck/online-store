@@ -2,6 +2,7 @@ import Page from "../../core/templates/Page";
 import CatalogPage from "../CatalogPage/CatalogPage";
 import MainPage from "../MainPage/MainPage";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import ProductPage from "../ProductPage/ProductsPage";
 
 import Header from "../../core/components/Header/Header";
 import Footer from "../../core/components/Footer/Footer";
@@ -37,6 +38,8 @@ class App {
     } else if (idPage === PageIds.CatalogPage) {
       page = new CatalogPage(idPage);
       // console.log(page.render());
+    } else if (idPage === PageIds.ProductPage) {
+      page = new ProductPage(idPage);
     } else {
       page = new ErrorPage(idPage);
     }

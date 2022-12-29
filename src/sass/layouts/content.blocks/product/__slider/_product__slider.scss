@@ -1,0 +1,22 @@
+@forward "./__images/slider__images";
+@forward "./_arrow/arrow";
+@use "../../../../modules/mixins" as mix;
+
+.product__slider {
+    display: flex;
+    justify-content: center;
+    column-gap: 30px;
+    align-items: center;
+
+    @include mix.responsive(tablet-m) {
+        column-gap: 20px;
+    }
+
+    @include mix.responsive(tablet-s) {
+        column-gap: 20px;
+    }
+
+    @include mix.responsive(mobile) {
+        column-gap: 10px;
+    }
+}

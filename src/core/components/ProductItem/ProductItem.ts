@@ -3,6 +3,8 @@ import Button from "../Button/Button";
 import { createElementWithClass } from "../../utils/functions";
 import ProductData from "../../interfaces/Products";
 
+import { PageIds } from "../../interfaces/Page";
+
 export default class ProductItem {
   private container: Container;
   private wrapper: Container;
@@ -60,8 +62,16 @@ export default class ProductItem {
     const btnAdd = new Button("button", "products-item__button");
     btnAdd.render().textContent = "Add to cart";
 
-    const btnMore = new Button("button", "products-item__button");
+    const btnMore = new Button(
+      "button",
+      "products-item__button",
+      "btn__see-more"
+    );
     btnMore.render().textContent = "See more";
+
+    /* btnMore.render().addEventListener("click", () => {
+      location.href = `#${PageIds.ProductPage}`;
+    }); */
 
     wrapper.render().append(btnAdd.render(), btnMore.render());
 
@@ -76,3 +86,19 @@ export default class ProductItem {
     return this.container.render();
   };
 }
+
+setInterval(() => {
+  const btnMore = document.querySelectorAll(".btn__see-more");
+  if (btnMore.length != 0) {
+    for (let i = 0; i < btnMore.length; i++) {
+      btnMore[i].setAttribute("id", `${i}`);
+    }
+    btnMore.forEach((el) =>
+      el.addEventListener("click", () => {
+        localStorage.setItem("idOfItem", `${el.getAttribute("id")}`);
+        location.href = `#${PageIds.ProductPage}`;
+      })
+    );
+    return;
+  }
+}, 1000);
