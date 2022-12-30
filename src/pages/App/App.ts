@@ -3,6 +3,7 @@ import CatalogPage from "../CatalogPage/CatalogPage";
 import MainPage from "../MainPage/MainPage";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import ProductPage from "../ProductPage/ProductsPage";
+import CartPage from "../CartPage/CartPage";
 
 import Header from "../../core/components/Header/Header";
 import Footer from "../../core/components/Footer/Footer";
@@ -40,6 +41,8 @@ class App {
       // console.log(page.render());
     } else if (idPage === PageIds.ProductPage) {
       page = new ProductPage(idPage);
+    } else if (idPage === PageIds.CartPage) {
+      page = new CartPage(idPage);
     } else {
       page = new ErrorPage(idPage);
     }

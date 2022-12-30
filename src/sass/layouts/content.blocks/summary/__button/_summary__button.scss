@@ -1,0 +1,13 @@
+.summary__button {
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: hsla(0,0%,94%,.26);
+    border: 1px solid #dfdfdf;
+    transition: .2s;
+    font-weight: bold;
+}
+
+.summary__button:hover {
+    background-color: #fff;
+    border-color: rgba(0,0,0,.19);
+}

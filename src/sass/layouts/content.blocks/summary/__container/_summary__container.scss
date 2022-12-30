@@ -1,0 +1,15 @@
+.summary__container {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    max-height: 250px;
+    background-color: #f6f6f6;
+    border-radius: 10px;
+    border: 1px solid #b6b6b6;
+    box-shadow: 0 2px 4px 1px rgb(27 28 29 / 11%);
+    box-sizing: border-box;
+    padding: 20px;
+    flex-direction: column;
+    row-gap: 5px;
+    font-family: 'Quicksand';
+}

@@ -37,5 +37,12 @@
 
 
 //Product page section content
-@forward "./product/product"
+@forward "./product/product";
+//
+
+//Cart page section content
+@forward "./cart/cart";
+@forward "./summary/summary";
+@forward "./products-in-cart/products-in-cart";
+
 //

@@ -1,0 +1,14 @@
+.summary__input {
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: hsla(0,0%,94%,.26);
+    border: 1px solid #dfdfdf;
+    outline: none;
+    padding: 5px;
+}
+
+.summary__input:focus {
+    background-color: #fff;
+    border-color: rgba(0,0,0,.19);
+    outline: none;
+}

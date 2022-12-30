@@ -1,0 +1,17 @@
+.cart__limit-input {
+    background-color: hsla(0,0%,94%,.26);
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    padding: 5px;
+    text-align: center;
+    width: 40px;
+    height: 10px;
+}
+
+.cart__limit-input:focus {
+    background-color: #fff;
+    border-color: rgba(0,0,0,.19);
+    outline: none;
+}
