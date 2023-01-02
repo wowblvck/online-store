@@ -1,26 +1,27 @@
 import Component from "../../../../templates/Component";
-import ProductsCategories from "../ProductsCategories/ProductsCategories";
-import { createElementWithClass } from "../../../../utils/functions";
-import { store } from "../../../../store/Store";
 import Container from "../../../Container/Container";
+import { store } from "../../../../store/Store";
+import ProductsBrands from "../ProductsBrands/ProductsBrands";
 
-class Categories extends Component {
+import { createElementWithClass } from "../../../../utils/functions";
+
+class Brands extends Component {
   constructor(tagName: string, className: string, ...subClass: string[]) {
     super(tagName, className, ...subClass);
   }
 
   createTitle = () => {
     const title = createElementWithClass("h2", "filters-content__title");
-    title.textContent = "Categories";
+    title.textContent = "Brands";
     this.container.append(title);
   };
 
-  createFormCategories = () => {
+  createFormBrands = () => {
     const container = new Container("div", "filters-form");
-    container.render().id = "categories";
-    const categories = new ProductsCategories();
+    container.render().id = "brands";
+    const categories = new ProductsBrands();
     store.$state.subscribe(() => {
-      const root: HTMLElement | null = document.getElementById("categories");
+      const root: HTMLElement | null = document.getElementById("brands");
       if (root) {
         root.innerHTML = categories.render();
       }
@@ -31,9 +32,9 @@ class Categories extends Component {
 
   render = () => {
     this.createTitle();
-    this.createFormCategories();
+    this.createFormBrands();
     return this.container;
   };
 }
 
-export default Categories;
+export default Brands;
