@@ -1,7 +1,7 @@
 import Component from "../../../../templates/Component";
 import Container from "../../../Container/Container";
 import { store } from "../../../../store/Store";
-import ProductsBrands from "../ProductsBrands/ProductsBrands";
+import ProductsBrands from "./ProductsBrands/ProductsBrands";
 
 import { createElementWithClass } from "../../../../utils/functions";
 
