@@ -27,7 +27,7 @@ class ProductsPrice {
       <h2 class="filters-content__title">Price</h2>
       ${
         this.loading
-          ? `<div class="lds-ring lds-ring_view_catalog"><div></div><div></div><div></div><div></div></div>`
+          ? `<div class="lds-ring lds-ring_view_small"><div></div><div></div><div></div><div></div></div>`
           : ""
       }
       ${
