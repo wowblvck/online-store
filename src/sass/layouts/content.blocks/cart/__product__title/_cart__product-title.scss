@@ -1,0 +1,9 @@
+.cart__product-title {
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .cart__product-title {
+        text-align: center;
+    }
+}

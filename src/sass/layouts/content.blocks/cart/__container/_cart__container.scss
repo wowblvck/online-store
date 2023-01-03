@@ -1,0 +1,28 @@
+.cart__container {
+    display: flex;
+    column-gap: 20px;
+    padding: 35px 35px 15px 35px;
+    height: 100%;
+}
+
+@media (max-width: 1065px) {
+    .cart__container {
+        flex-direction: column-reverse;
+        row-gap: 20px;
+    }
+}
+
+@media (max-width: 780px) {
+    .cart__container {
+        padding-top: 65px;
+    }
+}
+
+@media (max-width: 430px) {
+    .cart__container {
+        align-items: center;
+        padding: 35px 10px;
+        width: 300px;
+        padding-top: 65px;
+    }
+}

@@ -10,4 +10,5 @@
     @include mix.responsive(mobile) {
         color: #fff;
     }
+    pointer-events: none;
 }

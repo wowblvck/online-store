@@ -1,0 +1,15 @@
+@use "../../../../modules/mixins" as mix;
+
+.product__button {
+    background-color: transparent;
+    border: none;
+    @include mix.font("Quicksand", 16px);
+    color: rgb(53, 53, 53);
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.product__button:hover {
+    color: rgb(31, 31, 31);
+    text-shadow: 1px 1px 2px #06192c;
+}

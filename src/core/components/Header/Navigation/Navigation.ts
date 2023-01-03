@@ -3,6 +3,7 @@ import { createElementWithClass } from "../../../utils/functions";
 import { pages } from "../../../data/pages";
 
 import { images } from "../../../data/images/images";
+import { getButtons } from "../../ProductsList/ProductsList";
 
 export default class Navigation extends Component {
   private navList: HTMLUListElement | null;
