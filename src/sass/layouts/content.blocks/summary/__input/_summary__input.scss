@@ -12,3 +12,16 @@
     border-color: rgba(0,0,0,.19);
     outline: none;
 }
+
+@media (max-width: 1065px) {
+    .summary__input {
+        width: 300px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 430px) {
+    .summary__input {
+        width: 250px;
+    }
+}

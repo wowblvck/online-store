@@ -1,0 +1,15 @@
+.cart__product-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+}
+
+@media (max-width: 600px) {
+    .cart__product-controls {
+        margin-left: 0;
+        flex-direction: row;
+        column-gap: 20px;
+    }
+}

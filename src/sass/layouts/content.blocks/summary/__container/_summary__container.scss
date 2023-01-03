@@ -13,3 +13,9 @@
     row-gap: 5px;
     font-family: 'Quicksand';
 }
+
+@media (max-width: 1065px) {
+    .summary__container {
+        width: 100%;
+    }
+}

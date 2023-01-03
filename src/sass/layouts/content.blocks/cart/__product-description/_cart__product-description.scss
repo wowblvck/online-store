@@ -1,0 +1,13 @@
+.cart__product-description {
+    font-size: 14px;
+    margin: 0;
+    overflow: hidden;
+    max-height: 600px;
+}
+
+@media (max-width: 600px) {
+    .cart__product-description {
+        text-align: center;
+        height: 150px;
+    }
+}

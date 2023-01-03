@@ -9,5 +9,12 @@
     box-sizing: border-box;
     padding: 20px;
     flex-direction: column;
-    row-gap: 5px;
+    row-gap: 15px;
+    max-height: 750px;
+}
+
+@media (max-width: 1065px) {
+    .products-in-cart__container {
+        width: 100%;
+    }
 }

@@ -104,13 +104,18 @@ export const getButtons = (): Promise<HTMLButtonElement> => {
 };
 
 addEventListener("popstate", (e) => {
+  for (let i = 0; i < cartArray.length; i++) {
+    if (cartArray[i] == "null") {
+      cartArray.splice(i, 1);
+    }
+  }
   saveButtons();
   saveCart();
   getButtons();
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
-  if (localStorage.getItem("product-in-cart") === null) {
+  if (localStorage.getItem("product-in-cart") == "null") {
     productCounter.textContent = "0";
   } else {
     productCounter.textContent = `${localStorage.getItem("product-in-cart")}`;

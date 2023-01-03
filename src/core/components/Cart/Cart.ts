@@ -154,12 +154,81 @@ class Cart extends Component {
           ) as HTMLDivElement;
           const productImage = createElementWithClass(
             "img",
-            "cart__products-image"
+            "cart__product-image"
           ) as HTMLImageElement;
           productImage.style.backgroundImage = `url(${productsInfo[j].images[0]})`;
-          productImage.style.width = "100px";
-          productImage.style.height = "100px";
-          productWrapper.append(productImage);
+          const productTextWrapper = createElementWithClass(
+            "div",
+            "cart__product-text-container"
+          ) as HTMLDivElement;
+          const productTitle = createElementWithClass(
+            "h3",
+            "cart__product-title"
+          ) as HTMLTitleElement;
+          productTitle.textContent = `${productsInfo[j].title}`;
+          const productDescription = createElementWithClass(
+            "p",
+            "cart__product-description"
+          ) as HTMLParagraphElement;
+          productDescription.textContent = `${productsInfo[
+            j
+          ].description.substring(0, 150)}...`;
+          const productButton = createElementWithClass(
+            "button",
+            "cart__product-button-see-more"
+          ) as HTMLButtonElement;
+          productButton.textContent = "See more";
+          productTextWrapper.append(
+            productTitle,
+            productDescription,
+            productButton
+          );
+          const productControls = createElementWithClass(
+            "div",
+            "cart__product-controls"
+          ) as HTMLDivElement;
+          const productStock = createElementWithClass(
+            "p",
+            "cart__product-stock"
+          ) as HTMLParagraphElement;
+          productStock.textContent = `Stock: ${productsInfo[j].stock}`;
+          const productsNumBtnsWrapper = createElementWithClass(
+            "div",
+            "cart__product-buttons"
+          ) as HTMLDivElement;
+          const buttonPlus = createElementWithClass(
+            "button",
+            "cart__product-button",
+            "button-plus"
+          ) as HTMLButtonElement;
+          buttonPlus.textContent = "+";
+          const productNum = createElementWithClass(
+            "span",
+            "cart__product-num"
+          ) as HTMLSpanElement;
+          productNum.textContent = "1";
+          const buttonMinus = createElementWithClass(
+            "button",
+            "cart__product-button",
+            "button-minus"
+          ) as HTMLButtonElement;
+          buttonMinus.textContent = "-";
+          const productSumm = createElementWithClass(
+            "p",
+            "cart__product-summ"
+          ) as HTMLParagraphElement;
+          productSumm.textContent = `${productsInfo[j].price}$`;
+          productsNumBtnsWrapper.append(buttonMinus, productNum, buttonPlus);
+          productControls.append(
+            productStock,
+            productsNumBtnsWrapper,
+            productSumm
+          );
+          productWrapper.append(
+            productImage,
+            productTextWrapper,
+            productControls
+          );
           cartProducts.append(productWrapper);
         }
       }
