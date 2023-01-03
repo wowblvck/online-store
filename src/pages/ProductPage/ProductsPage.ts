@@ -1,4 +1,4 @@
-import Page from "../../core/templates/page";
+import Page from "../../core/templates/Page";
 import ProductItem from "../../core/components/ProductPage/ProductPage";
 
 class ProductPage extends Page {

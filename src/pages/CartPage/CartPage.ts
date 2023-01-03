@@ -1,4 +1,4 @@
-import Page from "../../core/templates/page";
+import Page from "../../core/templates/Page";
 import Cart from "../../core/components/Cart/Cart";
 
 class CartPage extends Page {

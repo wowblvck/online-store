@@ -80,7 +80,7 @@ const removeFromCart = (id: string) => {
 };
 
 export const getButtons = (): Promise<HTMLButtonElement> => {
-  return new Promise<HTMLButtonElement>((resolve) => {
+  return new Promise<HTMLButtonElement>(() => {
     setTimeout(() => {
       const btnArr = document.querySelectorAll(".btn__add-to-cart");
       for (let i = 0; i < btnArr.length; i++) {
@@ -104,7 +104,7 @@ export const getButtons = (): Promise<HTMLButtonElement> => {
   });
 };
 
-addEventListener("popstate", (e) => {
+addEventListener("popstate", () => {
   for (let i = 0; i < cartArray.length; i++) {
     if (cartArray[i] == "null") {
       cartArray.splice(i, 1);
