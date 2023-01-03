@@ -1,8 +1,7 @@
 @forward "./__input/filter-range__input";
 
 .filters-range {
-    display: flex;
-    justify-content: center;
+    position: relative;
     padding: 10px 0;
     width: 80%;
     margin: 0 auto;

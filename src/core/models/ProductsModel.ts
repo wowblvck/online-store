@@ -3,6 +3,7 @@
 
 import ProductData from "../interfaces/Products";
 import { getProducts } from "../db/Products.DB";
+import { store } from "../store/Store";
 
 class ProductsModel {
   //Create and check for a single instance of a class
@@ -19,8 +20,12 @@ class ProductsModel {
 
   //Getting a list of products from the database
   //Получаем список товаров из базы данных
-  getProducts(): Promise<ProductData[]> {
-    return getProducts();
+  async getProducts(): Promise<ProductData[]> {
+    const products = await getProducts();
+    store.update({
+      products,
+    });
+    return products;
   }
 }
 

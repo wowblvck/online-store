@@ -6,7 +6,7 @@ class Input extends Component {
   }
 
   render = () => {
-    return this.container;
+    return this.container as HTMLInputElement;
   };
 }
 

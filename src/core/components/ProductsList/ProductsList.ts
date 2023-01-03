@@ -10,22 +10,23 @@ export default class ProductsList {
   private products: ProductData[] = [];
   constructor() {
     this.fetchProducts();
+
+    store.$state.subscribe(({ products }) => {
+      if (products.length) {
+        this.products = products;
+        this.loading = false;
+        this.error = null;
+      }
+    });
   }
 
   fetchProducts = () => {
     this.loading = true;
-    productModel
-      .getProducts()
-      .then((products: ProductData[]) => {
-        this.products = products;
-      })
-      .catch((error) => {
-        this.error = error;
-      })
-      .finally(() => {
-        this.loading = false;
-        store.$render.next(null);
-      });
+    store.update();
+    productModel.getProducts().catch((error) => {
+      this.error = error;
+      this.loading = false;
+    });
   };
 
   render = () => {

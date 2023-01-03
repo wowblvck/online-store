@@ -23,7 +23,7 @@ class Products extends Component {
   createProductsContent = () => {
     const container = new Container("div", "products-content");
     const prodContent = new ProductsList();
-    store.$render.subscribe(() => {
+    store.$state.subscribe(() => {
       const root: HTMLElement | null =
         document.querySelector(".products-content");
       if (root) {
