@@ -4,6 +4,8 @@ import Search from "./Search/Search";
 import FiltersButtons from "./FiltersButtons/FiltersButtons";
 import Categories from "./Categories/Categories";
 import Brands from "./Brands/Brands";
+import Price from "./Price/Price";
+import Stock from "./Stock/Stock";
 
 class Filters extends Component {
   constructor(tagName: string, className: string, ...subClass: string[]) {
@@ -30,11 +32,23 @@ class Filters extends Component {
     this.container.append(brands.render());
   };
 
+  price = () => {
+    const price = new Price("div", "filters-content", "filters-content_price");
+    this.container.append(price.render());
+  };
+
+  stock = () => {
+    const stock = new Stock("div", "filters-content", "filters-content_stock");
+    this.container.append(stock.render());
+  };
+
   render = () => {
     this.searchBox();
     this.filtersButtons();
     this.categories();
     this.brands();
+    this.price();
+    this.stock();
     return this.container;
   };
 }
