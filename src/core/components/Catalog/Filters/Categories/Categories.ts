@@ -1,5 +1,5 @@
 import Component from "../../../../templates/Component";
-import ProductsCategories from "../ProductsCategories/ProductsCategories";
+import ProductsCategories from "./ProductsCategories/ProductsCategories";
 import { createElementWithClass } from "../../../../utils/functions";
 import { store } from "../../../../store/Store";
 import Container from "../../../Container/Container";
