@@ -3,6 +3,7 @@ import Container from "../Container/Container";
 import { createElementWithClass } from "../../../core/utils/functions";
 import { icons } from "../../../core/data/images/images";
 import { productsInfo } from "../../data/products/products";
+import { cartArray } from "../ProductsList/ProductsList";
 
 class Cart extends Component {
   private subContainer: Container;
@@ -143,6 +144,27 @@ class Cart extends Component {
     );
 
     cartHeader.append(cartTitle, cartLimitBlock, cartPagesBlock);
+
+    for (let i = 0; i < cartArray.length; i++) {
+      for (let j = 0; j < productsInfo.length; j++) {
+        if (cartArray[i] === (productsInfo[j].id - 1).toString()) {
+          const productWrapper = createElementWithClass(
+            "div",
+            "cart__products-item"
+          ) as HTMLDivElement;
+          const productImage = createElementWithClass(
+            "img",
+            "cart__products-image"
+          ) as HTMLImageElement;
+          productImage.style.backgroundImage = `url(${productsInfo[j].images[0]})`;
+          productImage.style.width = "100px";
+          productImage.style.height = "100px";
+          productWrapper.append(productImage);
+          cartProducts.append(productWrapper);
+        }
+      }
+    }
+    console.log(cartArray);
     this.subContainer.render().append(cartBlock, summaryBlock);
   };
 

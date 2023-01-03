@@ -59,7 +59,11 @@ export default class ProductItem {
   createButton = () => {
     const wrapper = new Container("div", "products-item__buttons-wrapper");
 
-    const btnAdd = new Button("button", "products-item__button");
+    const btnAdd = new Button(
+      "button",
+      "products-item__button",
+      "btn__add-to-cart"
+    );
     btnAdd.render().textContent = "Add to cart";
 
     const btnMore = new Button(
@@ -89,9 +93,11 @@ export default class ProductItem {
 
 setInterval(() => {
   const btnMore = document.querySelectorAll(".btn__see-more");
+  const btnAdd = document.querySelectorAll(".btn__add-to-cart");
   if (btnMore.length != 0) {
     for (let i = 0; i < btnMore.length; i++) {
       btnMore[i].setAttribute("id", `${i}`);
+      btnAdd[i].setAttribute("id", `${i}`);
     }
     btnMore.forEach((el) =>
       el.addEventListener("click", () => {

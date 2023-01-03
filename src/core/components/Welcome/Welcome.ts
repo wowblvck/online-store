@@ -2,6 +2,7 @@ import Component from "../../../core/templates/Component";
 import Container from "../../../core/components/Container/Container";
 import { images, multimedia } from "../../data/images/images";
 import { createElementWithClass } from "../../utils/functions";
+import { getButtons } from "../ProductsList/ProductsList";
 
 import { PageIds } from "../../interfaces/Page";
 
