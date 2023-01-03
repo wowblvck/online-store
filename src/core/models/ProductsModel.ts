@@ -20,13 +20,12 @@ class ProductsModel {
 
   //Getting a list of products from the database
   //Получаем список товаров из базы данных
-  getProducts(): Promise<ProductData[]> {
-    return getProducts().then((products: ProductData[]) => {
-      store.update({
-        products,
-      });
-      return products;
+  async getProducts(): Promise<ProductData[]> {
+    const products = await getProducts();
+    store.update({
+      products,
     });
+    return products;
   }
 }
 
