@@ -4,6 +4,7 @@ import { createElementWithClass } from "../../../core/utils/functions";
 import { icons } from "../../../core/data/images/images";
 import { productsInfo } from "../../data/products/products";
 import { cartArray } from "../ProductsList/ProductsList";
+import { PageIds } from "../../interfaces/Page";
 
 class Cart extends Component {
   private subContainer: Container;
@@ -178,6 +179,14 @@ class Cart extends Component {
             "cart__product-button-see-more"
           ) as HTMLButtonElement;
           productButton.textContent = "See more";
+          productButton.setAttribute("id", `${cartArray[i]}`);
+          productButton.addEventListener("click", () => {
+            localStorage.setItem(
+              "idOfItem",
+              `${productButton.getAttribute("id")}`
+            );
+            location.href = `#${PageIds.ProductPage}`;
+          });
           productTextWrapper.append(
             productTitle,
             productDescription,
@@ -230,6 +239,52 @@ class Cart extends Component {
             productControls
           );
           cartProducts.append(productWrapper);
+          let counter = 1;
+          buttonPlus.addEventListener("click", () => {
+            if (counter < Number(productStock.textContent?.substring(7))) {
+              productNum.textContent = (
+                Number(productNum.textContent) + 1
+              ).toString();
+              productSumm.textContent = `${(
+                Number(productSumm.textContent?.slice(0, -1)) +
+                Number(productsInfo[j].price)
+              ).toString()}$`;
+              counter++;
+            } else {
+              return false;
+            }
+          });
+          buttonMinus.addEventListener("click", () => {
+            if (counter > 1) {
+              productNum.textContent = (
+                Number(productNum.textContent) - 1
+              ).toString();
+              productSumm.textContent = `${(
+                Number(productSumm.textContent?.slice(0, -1)) -
+                Number(productsInfo[j].price)
+              ).toString()}$`;
+              counter--;
+            } else if (counter == 1) {
+              if (cartArray.length == 1) {
+                cartArray.pop();
+              } else if (cartArray.length > 1) {
+                cartArray.splice(productsInfo[j].id - 1, 1);
+              }
+              productWrapper.style.display = "none";
+              console.log(cartArray);
+              const cartNum = document.querySelector(
+                ".products-count"
+              ) as HTMLParagraphElement;
+              cartNum.textContent = `${cartArray.length}`;
+              console.log(productsInfo[j].id - 1);
+              localStorage.setItem(
+                `add-buttons-value${productsInfo[j].id - 1}`,
+                "Add to cart"
+              );
+            } else {
+              return false;
+            }
+          });
         }
       }
     }

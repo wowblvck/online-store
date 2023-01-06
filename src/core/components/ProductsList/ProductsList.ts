@@ -10,7 +10,7 @@ export default class ProductsList {
   private products: ProductData[] = [];
   constructor() {
     this.fetchProducts();
-
+    getButtons(2010);
     store.$state.subscribe(({ products }) => {
       if (products.length) {
         this.products = products;
@@ -57,16 +57,17 @@ setTimeout(() => {
   }
 }, 1000); */
 
-const addToCart = (id: string) => {
+export const addToCart = (id: string) => {
   cartArray.push(id);
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
+  localStorage.setItem(`add-buttons-value${id}`, `Remove`);
   console.log(cartArray);
 };
 
-const removeFromCart = (id: string) => {
+export const removeFromCart = (id: string) => {
   for (let i = 0; i < cartArray.length; i++) {
     if (cartArray[i] === `${id}`) {
       cartArray.splice(i, 1);
@@ -76,10 +77,11 @@ const removeFromCart = (id: string) => {
     ".products-count"
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
+  localStorage.setItem(`add-buttons-value${id}`, `Add to cart`);
   console.log(cartArray);
 };
 
-export const getButtons = (): Promise<HTMLButtonElement> => {
+export const getButtons = (timer: number): Promise<HTMLButtonElement> => {
   return new Promise<HTMLButtonElement>(() => {
     setTimeout(() => {
       const btnArr = document.querySelectorAll(".btn__add-to-cart");
@@ -100,7 +102,7 @@ export const getButtons = (): Promise<HTMLButtonElement> => {
         })
       );
       return btnArr;
-    }, 2010);
+    }, timer);
   });
 };
 
@@ -112,7 +114,7 @@ addEventListener("popstate", () => {
   }
   saveButtons();
   saveCart();
-  getButtons();
+  getButtons(10);
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
@@ -154,6 +156,7 @@ window.addEventListener("load", () => {
     cartArray.push(localStorage.getItem(`product-in-cart${i}`) as string);
   }
   console.log(cartArray);
+  getButtons(2010);
 });
 
 window.addEventListener("load", () => {

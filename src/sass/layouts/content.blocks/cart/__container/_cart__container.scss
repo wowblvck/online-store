@@ -9,12 +9,19 @@
     .cart__container {
         flex-direction: column-reverse;
         row-gap: 20px;
+        justify-content: flex-end;
     }
 }
 
 @media (max-width: 780px) {
     .cart__container {
-        padding-top: 65px;
+        padding-top: 35px;
+    }
+}
+
+@media (max-width: 767px) {
+    .cart__container {
+        padding-top: 95px;
     }
 }
 
@@ -23,6 +30,6 @@
         align-items: center;
         padding: 35px 10px;
         width: 300px;
-        padding-top: 65px;
+        padding-top: 95px;
     }
 }
