@@ -78,6 +78,10 @@ class Cart extends Component {
     summaryInput.placeholder = "Enter promo code (Test: 'RS', 'EPM')";
     const summaryBtn = createElementWithClass("button", "summary__button");
     summaryBtn.textContent = "BUY NOW";
+    summaryBtn.addEventListener("click", () => {
+      const modal = document.querySelector(".modal__wrapper") as HTMLDivElement;
+      modal.style.display = "flex";
+    });
     summaryMain.append(
       summaryProductsNum,
       summaryTotal,
@@ -148,9 +152,11 @@ class Cart extends Component {
 
     cartHeader.append(cartTitle, cartLimitBlock, cartPagesBlock);
 
-    for (let i = 0; i < cartArray.length; i++) {
+    const copyOfArr = cartArray.filter((x, i) => cartArray.indexOf(x) === i);
+
+    for (let i = 0; i < copyOfArr.length; i++) {
       for (let j = 0; j < productsInfo.length; j++) {
-        if (cartArray[i] === (productsInfo[j].id - 1).toString()) {
+        if (copyOfArr[i] === (productsInfo[j].id - 1).toString()) {
           const productWrapper = createElementWithClass(
             "div",
             "cart__products-item"
@@ -217,7 +223,15 @@ class Cart extends Component {
             "span",
             "cart__product-num"
           ) as HTMLSpanElement;
-          productNum.textContent = "1";
+
+          let counterOfProduct = 0;
+          for (let i = 0; i < cartArray.length; i++) {
+            if (cartArray[i] == `${productsInfo[j].id - 1}`) {
+              counterOfProduct++;
+            }
+          }
+          productNum.textContent = counterOfProduct.toString();
+
           const buttonMinus = createElementWithClass(
             "button",
             "cart__product-button",
@@ -241,9 +255,13 @@ class Cart extends Component {
             productControls
           );
           cartProducts.append(productWrapper);
-          let counter = 1;
           buttonPlus.addEventListener("click", () => {
-            if (counter < Number(productStock.textContent?.substring(7))) {
+            if (
+              Number(productNum.textContent) <
+              Number(productStock.textContent?.substring(7))
+            ) {
+              cartArray.push(`${productsInfo[j].id - 1}`);
+              console.log(cartArray);
               productNum.textContent = (
                 Number(productNum.textContent) + 1
               ).toString();
@@ -251,14 +269,13 @@ class Cart extends Component {
                 Number(productSumm.textContent?.slice(0, -1)) +
                 Number(productsInfo[j].price)
               ).toString()}$`;
-              counter++;
               updateValues();
             } else {
               return false;
             }
           });
           buttonMinus.addEventListener("click", () => {
-            if (counter > 1) {
+            if (productNum.textContent != "1") {
               productNum.textContent = (
                 Number(productNum.textContent) - 1
               ).toString();
@@ -266,9 +283,11 @@ class Cart extends Component {
                 Number(productSumm.textContent?.slice(0, -1)) -
                 Number(productsInfo[j].price)
               ).toString()}$`;
-              counter--;
+              const val = cartArray.indexOf(`${productsInfo[j].id - 1}`);
+              cartArray.splice(val, 1);
+              console.log(cartArray);
               updateValues();
-            } else if (counter == 1) {
+            } else if (productNum.textContent == "1") {
               removeFromCart(`${productsInfo[j].id - 1}`);
               productWrapper.style.display = "none";
               productNum.textContent = "0";
@@ -290,6 +309,7 @@ class Cart extends Component {
       }
     }
     console.log(cartArray);
+    setTimeout(updateValues, 10);
     this.subContainer.render().append(createModal(), cartBlock, summaryBlock);
   };
 
@@ -304,56 +324,24 @@ const updateValues = () => {
   const productNum = document.querySelector(
     ".summary__products-num"
   ) as HTMLParagraphElement;
-  const cartNums = document.querySelectorAll(".cart__product-num");
-  const values = [];
-  for (let i = 0; i < cartNums.length; i++) {
-    values.push(Number(cartNums[i].textContent));
-  }
-  productNum.textContent = `Products: ${values.reduce((a, b) => a + b)}`;
+  productNum.textContent = `Products: ${cartArray.length}`;
   const Total = document.querySelector(
     ".summary__total"
   ) as HTMLParagraphElement;
   const prices = document.querySelectorAll(".cart__product-summ");
   const pricesValues = [];
-  for (let i = 0; i < prices.length; i++) {
-    pricesValues.push(Number(prices[i].textContent?.slice(0, -1)));
+  if (prices[0]) {
+    for (let i = 0; i < prices.length; i++) {
+      pricesValues.push(Number(prices[i].textContent?.slice(0, -1)));
+      Total.textContent = `Total: ${pricesValues.reduce((a, b) => a + b)}.00$`;
+    }
+  } else {
+    Total.textContent = `Total: 0.00$`;
   }
-  Total.textContent = `Total: ${pricesValues.reduce((a, b) => a + b)}.00$`;
   const cartNum = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
-  localStorage.setItem("prod-num", `${values.reduce((a, b) => a + b)}`);
-  cartNum.textContent = localStorage.getItem("prod-num");
+  cartNum.textContent = cartArray.length.toString();
 };
-
-setInterval(() => {
-  const productNum = document.querySelector(
-    ".summary__products-num"
-  ) as HTMLParagraphElement;
-  if (productNum) {
-    const cartNums = document.querySelectorAll(".cart__product-num");
-    const values = [];
-    for (let i = 0; i < cartNums.length; i++) {
-      values.push(Number(cartNums[i].textContent));
-    }
-    productNum.textContent = `Products: ${values.reduce((a, b) => a + b)}`;
-    const Total = document.querySelector(
-      ".summary__total"
-    ) as HTMLParagraphElement;
-    const prices = document.querySelectorAll(".cart__product-summ");
-    const pricesValues = [];
-    for (let i = 0; i < prices.length; i++) {
-      pricesValues.push(Number(prices[i].textContent?.slice(0, -1)));
-    }
-    Total.textContent = `Total: ${pricesValues.reduce((a, b) => a + b)}.00$`;
-    const cartNum = document.querySelector(
-      ".products-count"
-    ) as HTMLParagraphElement;
-    localStorage.setItem("prod-num", `${values.reduce((a, b) => a + b)}`);
-    cartNum.textContent = localStorage.getItem("prod-num");
-  } else {
-    return;
-  }
-}, 500);
 
 export default Cart;

@@ -45,7 +45,7 @@ export default class ProductsList {
   };
 }
 
-export const cartArray: string[] = [];
+export let cartArray: string[] = [];
 
 export const addToCart = (id: string) => {
   cartArray.push(id);
@@ -54,9 +54,11 @@ export const addToCart = (id: string) => {
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
   localStorage.setItem(`add-buttons-value${id}`, `Remove`);
+  console.log(cartArray);
 };
 
 export const removeFromCart = (id: string) => {
+  cartArray = cartArray.filter((x, i) => cartArray.indexOf(x) === i);
   for (let i = 0; i < cartArray.length; i++) {
     if (cartArray[i] === `${id}`) {
       cartArray.splice(i, 1);
@@ -67,6 +69,7 @@ export const removeFromCart = (id: string) => {
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
   localStorage.setItem(`add-buttons-value${id}`, `Add to cart`);
+  console.log(cartArray);
 };
 
 export const getButtons = (timer: number): Promise<HTMLButtonElement> => {
@@ -106,10 +109,7 @@ addEventListener("popstate", () => {
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
-  if (localStorage.getItem("prod-num")) {
-    productCounter.textContent = `${localStorage.getItem("prod-num")}`;
-    return;
-  } else if (localStorage.getItem("product-in-cart") == "null") {
+  if (localStorage.getItem("product-in-cart") == "null") {
     productCounter.textContent = "0";
   } else {
     productCounter.textContent = `${localStorage.getItem("product-in-cart")}`;
@@ -154,10 +154,7 @@ window.addEventListener("load", () => {
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
-  if (localStorage.getItem("prod-num")) {
-    productCounter.textContent = `${localStorage.getItem("prod-num")}`;
-    return;
-  } else if (localStorage.getItem("product-in-cart") === null) {
+  if (localStorage.getItem("product-in-cart") === null) {
     productCounter.textContent = "0";
   } else {
     productCounter.textContent = `${localStorage.getItem("product-in-cart")}`;

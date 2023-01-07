@@ -8,6 +8,9 @@ export const createModal = () => {
   ) as HTMLDivElement;
 
   const bg = createElementWithClass("div", "modal__bg") as HTMLDivElement;
+  bg.addEventListener("click", () => {
+    modalWrapper.style.display = "none";
+  });
 
   const modalForm = createElementWithClass(
     "form",
