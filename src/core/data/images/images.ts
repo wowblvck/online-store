@@ -18,6 +18,7 @@ import cartLogo from "../../../assets/icons/cart-logo.svg";
 import cartMain from "../../../assets/icons/cart-home.png";
 import laptop from "../../../assets/images/laptop.png";
 import error404 from "../../../assets/images/error404.png";
+import cardLogo from "../../../assets/icons/credit-card1.png";
 
 //Multimedia Icons
 import camera from "../../../assets/icons/multimedia/camera.svg";
@@ -49,6 +50,10 @@ const images: ImagesData = {
   "error404-page": {
     name: "Error 404 Image",
     src: error404,
+  },
+  "card-logo": {
+    name: "Card Icon",
+    src: cardLogo,
   },
 };
 

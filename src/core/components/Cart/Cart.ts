@@ -5,6 +5,8 @@ import { icons } from "../../../core/data/images/images";
 import { productsInfo } from "../../data/products/products";
 import { cartArray } from "../ProductsList/ProductsList";
 import { PageIds } from "../../interfaces/Page";
+import { removeFromCart } from "../ProductsList/ProductsList";
+import { createModal } from "../Modal/Modal";
 
 class Cart extends Component {
   private subContainer: Container;
@@ -250,6 +252,7 @@ class Cart extends Component {
                 Number(productsInfo[j].price)
               ).toString()}$`;
               counter++;
+              updateValues();
             } else {
               return false;
             }
@@ -264,23 +267,21 @@ class Cart extends Component {
                 Number(productsInfo[j].price)
               ).toString()}$`;
               counter--;
+              updateValues();
             } else if (counter == 1) {
-              if (cartArray.length == 1) {
-                cartArray.pop();
-              } else if (cartArray.length > 1) {
-                cartArray.splice(productsInfo[j].id - 1, 1);
-              }
+              removeFromCart(`${productsInfo[j].id - 1}`);
               productWrapper.style.display = "none";
-              console.log(cartArray);
+              productNum.textContent = "0";
+              productSumm.textContent = "0";
               const cartNum = document.querySelector(
                 ".products-count"
               ) as HTMLParagraphElement;
               cartNum.textContent = `${cartArray.length}`;
-              console.log(productsInfo[j].id - 1);
               localStorage.setItem(
                 `add-buttons-value${productsInfo[j].id - 1}`,
                 "Add to cart"
               );
+              updateValues();
             } else {
               return false;
             }
@@ -289,7 +290,7 @@ class Cart extends Component {
       }
     }
     console.log(cartArray);
-    this.subContainer.render().append(cartBlock, summaryBlock);
+    this.subContainer.render().append(createModal(), cartBlock, summaryBlock);
   };
 
   render = () => {
@@ -298,5 +299,61 @@ class Cart extends Component {
     return this.container;
   };
 }
+
+const updateValues = () => {
+  const productNum = document.querySelector(
+    ".summary__products-num"
+  ) as HTMLParagraphElement;
+  const cartNums = document.querySelectorAll(".cart__product-num");
+  const values = [];
+  for (let i = 0; i < cartNums.length; i++) {
+    values.push(Number(cartNums[i].textContent));
+  }
+  productNum.textContent = `Products: ${values.reduce((a, b) => a + b)}`;
+  const Total = document.querySelector(
+    ".summary__total"
+  ) as HTMLParagraphElement;
+  const prices = document.querySelectorAll(".cart__product-summ");
+  const pricesValues = [];
+  for (let i = 0; i < prices.length; i++) {
+    pricesValues.push(Number(prices[i].textContent?.slice(0, -1)));
+  }
+  Total.textContent = `Total: ${pricesValues.reduce((a, b) => a + b)}.00$`;
+  const cartNum = document.querySelector(
+    ".products-count"
+  ) as HTMLParagraphElement;
+  localStorage.setItem("prod-num", `${values.reduce((a, b) => a + b)}`);
+  cartNum.textContent = localStorage.getItem("prod-num");
+};
+
+setInterval(() => {
+  const productNum = document.querySelector(
+    ".summary__products-num"
+  ) as HTMLParagraphElement;
+  if (productNum) {
+    const cartNums = document.querySelectorAll(".cart__product-num");
+    const values = [];
+    for (let i = 0; i < cartNums.length; i++) {
+      values.push(Number(cartNums[i].textContent));
+    }
+    productNum.textContent = `Products: ${values.reduce((a, b) => a + b)}`;
+    const Total = document.querySelector(
+      ".summary__total"
+    ) as HTMLParagraphElement;
+    const prices = document.querySelectorAll(".cart__product-summ");
+    const pricesValues = [];
+    for (let i = 0; i < prices.length; i++) {
+      pricesValues.push(Number(prices[i].textContent?.slice(0, -1)));
+    }
+    Total.textContent = `Total: ${pricesValues.reduce((a, b) => a + b)}.00$`;
+    const cartNum = document.querySelector(
+      ".products-count"
+    ) as HTMLParagraphElement;
+    localStorage.setItem("prod-num", `${values.reduce((a, b) => a + b)}`);
+    cartNum.textContent = localStorage.getItem("prod-num");
+  } else {
+    return;
+  }
+}, 500);
 
 export default Cart;

@@ -1,0 +1,15 @@
+.modal__button-confirm {
+    width: 100%;
+    max-width: 360px;
+    cursor: pointer;
+    transition: .2s;
+    font-weight: bold;
+    background-color: #ececec;
+    border: 1px solid #c6c6c6;
+    border-radius: 5px;
+}
+
+.modal__button-confirm:hover {
+    background-color: #fff;
+    border: 1px solid #9c9c9c;
+}

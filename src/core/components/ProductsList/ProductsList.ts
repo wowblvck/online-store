@@ -10,7 +10,6 @@ export default class ProductsList {
   private products: ProductData[] = [];
   constructor() {
     this.fetchProducts();
-    getButtons(2010);
     store.$state.subscribe(({ products }) => {
       if (products.length) {
         this.products = products;
@@ -27,6 +26,7 @@ export default class ProductsList {
       this.error = error;
       this.loading = false;
     });
+    getButtons(2010);
   };
 
   render = () => {
@@ -47,16 +47,6 @@ export default class ProductsList {
 
 export const cartArray: string[] = [];
 
-/* let productCounter;
-setTimeout(() => {
-  productCounter = document.querySelector(
-    ".products-count"
-  ) as HTMLParagraphElement;
-  if (productCounter) {
-    productCounter.textContent = localStorage.getItem("product-in-cart")?.toString();
-  }
-}, 1000); */
-
 export const addToCart = (id: string) => {
   cartArray.push(id);
   const productCounter = document.querySelector(
@@ -64,7 +54,6 @@ export const addToCart = (id: string) => {
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
   localStorage.setItem(`add-buttons-value${id}`, `Remove`);
-  console.log(cartArray);
 };
 
 export const removeFromCart = (id: string) => {
@@ -78,7 +67,6 @@ export const removeFromCart = (id: string) => {
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
   localStorage.setItem(`add-buttons-value${id}`, `Add to cart`);
-  console.log(cartArray);
 };
 
 export const getButtons = (timer: number): Promise<HTMLButtonElement> => {
@@ -118,7 +106,10 @@ addEventListener("popstate", () => {
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
-  if (localStorage.getItem("product-in-cart") == "null") {
+  if (localStorage.getItem("prod-num")) {
+    productCounter.textContent = `${localStorage.getItem("prod-num")}`;
+    return;
+  } else if (localStorage.getItem("product-in-cart") == "null") {
     productCounter.textContent = "0";
   } else {
     productCounter.textContent = `${localStorage.getItem("product-in-cart")}`;
@@ -163,7 +154,10 @@ window.addEventListener("load", () => {
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
-  if (localStorage.getItem("product-in-cart") === null) {
+  if (localStorage.getItem("prod-num")) {
+    productCounter.textContent = `${localStorage.getItem("prod-num")}`;
+    return;
+  } else if (localStorage.getItem("product-in-cart") === null) {
     productCounter.textContent = "0";
   } else {
     productCounter.textContent = `${localStorage.getItem("product-in-cart")}`;
