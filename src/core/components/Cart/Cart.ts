@@ -323,7 +323,7 @@ class Cart extends Component {
               "idOfItem",
               `${productButton.getAttribute("id")}`
             );
-            location.href = `#${PageIds.ProductPage}`;
+            location.href = `#${PageIds.ProductsPage}`;
           });
           productTextWrapper.append(
             productTitle,
