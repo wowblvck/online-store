@@ -3,52 +3,58 @@ import Component from "../../../templates/Component";
 import Search from "./Search/Search";
 import FiltersButtons from "./FiltersButtons/FiltersButtons";
 import Categories from "./Categories/Categories";
-import Brands from "./Brands/Brands";
-import Price from "./Price/Price";
-import Stock from "./Stock/Stock";
+// import Brands from "./Brands/Brands";
+// import Price from "./Price/Price";
+// import Stock from "./Stock/Stock";
 
 class Filters extends Component {
+  private search = new Search("div", "search");
+  private buttons = new FiltersButtons("div", "filters-buttons");
+  private categories = new Categories("div", "filters-content");
+  // private brands = new Brands("div", "filters-content");
+  // private price = new Price("div", "filters-content", "filters-content_price");
+  // private stock = new Stock("div", "filters-content", "filters-content_stock");
+
   constructor(tagName: string, className: string, ...subClass: string[]) {
     super(tagName, className, ...subClass);
   }
 
   searchBox = () => {
-    const search = new Search("div", "search");
-    this.container.append(search.render());
+    this.container.append(this.search.render());
   };
 
   filtersButtons = () => {
-    const buttons = new FiltersButtons("div", "filters-buttons");
-    this.container.append(buttons.render());
+    this.container.append(this.buttons.render());
   };
 
-  categories = () => {
-    const categories = new Categories("div", "filters-content");
-    this.container.append(categories.render());
+  categoriesBox = () => {
+    this.container.append(this.categories.render());
   };
 
-  brands = () => {
-    const brands = new Brands("div", "filters-content");
-    this.container.append(brands.render());
-  };
+  // brandsBox = () => {
+  //   this.container.append(this.brands.render());
+  // };
 
-  price = () => {
-    const price = new Price("div", "filters-content", "filters-content_price");
-    this.container.append(price.render());
-  };
+  // priceBox = () => {
+  //   this.container.append(this.price.render());
+  // };
 
-  stock = () => {
-    const stock = new Stock("div", "filters-content", "filters-content_stock");
-    this.container.append(stock.render());
-  };
+  // stockBox = () => {
+  //   this.container.append(this.stock.render());
+  // };
+
+  addEvents() {
+    this.categories.addEvents();
+    // this.brands.addEvents();
+  }
 
   render = () => {
     this.searchBox();
     this.filtersButtons();
-    this.categories();
-    this.brands();
-    this.price();
-    this.stock();
+    this.categoriesBox();
+    // this.brandsBox();
+    // this.priceBox();
+    // this.stockBox();
     return this.container;
   };
 }

@@ -1,6 +1,5 @@
 import Component from "../../../../templates/Component";
 import Button from "../../../Button/Button";
-// import { createElementWithClass } from "../../../../core/util/functions";
 
 class FiltersButtons extends Component {
   constructor(tagName: string, className: string, ...subClass: string[]) {

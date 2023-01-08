@@ -1,10 +1,10 @@
-import Component from "../../../core/templates/Component";
-import Container from "../../../core/components/Container/Container";
-import { createElementWithClass } from "../../../core/utils/functions";
-import { icons } from "../../../core/data/images/images";
+import Component from "../../templates/Component";
+import Container from "../Container/Container";
+import { createElementWithClass } from "../../utils/functions";
+import { icons } from "../../data/images/images";
 import { productsInfo } from "../../data/products/products";
 
-class ProductItem extends Component {
+class ProductPageItem extends Component {
   private subContainer: Container;
 
   constructor(tagName: string, className: string, ...subClass: string[]) {
@@ -107,4 +107,4 @@ class ProductItem extends Component {
   };
 }
 
-export default ProductItem;
+export default ProductPageItem;

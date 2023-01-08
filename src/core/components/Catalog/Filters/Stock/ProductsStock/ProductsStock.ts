@@ -1,4 +1,4 @@
-import ProductData from "../../../../../interfaces/Products";
+import { ProductData } from "../../../../../interfaces/Products";
 import { store } from "../../../../../store/Store";
 
 class ProductsStock {

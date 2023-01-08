@@ -2,11 +2,12 @@ import Component from "../../templates/Component";
 import Container from "../Container/Container";
 import Filters from "./Filters/Filters";
 import Products from "./Products/Products";
-// import { createElementWithClass } from "../../../core/util/functions";
 
 class Catalog extends Component {
   private subContainer: Container;
   private wrapper: Container;
+  private filters = new Filters("div", "filters");
+  private products = new Products("div", "products");
 
   constructor(tagName: string, className: string, ...subClass: string[]) {
     super(tagName, className, ...subClass);
@@ -15,14 +16,16 @@ class Catalog extends Component {
   }
 
   createFilters = () => {
-    const filters = new Filters("div", "filters");
-    this.wrapper.render().append(filters.render());
+    this.wrapper.render().append(this.filters.render());
   };
 
   createProducts = () => {
-    const products = new Products("div", "products");
-    this.wrapper.render().append(products.render());
+    this.wrapper.render().append(this.products.render());
   };
+
+  addEvents() {
+    this.filters.addEvents();
+  }
 
   render = () => {
     this.createFilters();
