@@ -4,7 +4,6 @@ abstract class Page {
 
   constructor(id: string) {
     this.container = document.createElement("main");
-    // this.container.id = id;
     this.container.className = id;
   }
 
@@ -19,7 +18,7 @@ abstract class Page {
       ?.setAttribute("content", text);
   }
 
-  render() {
+  render(): HTMLElement {
     return this.container;
   }
 }

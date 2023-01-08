@@ -1,7 +1,9 @@
 import Page from "../../core/templates/Page";
-import Error from "../../core/components/Error/Error";
+import ErrorSection from "../../core/components/Error/Error";
 
 export default class ErrorPage extends Page {
+  private error = new ErrorSection("section", "error", "main__error");
+
   static TextObject = {
     Title: "Oops! 404",
     Description: "Page error: 404",
@@ -14,8 +16,7 @@ export default class ErrorPage extends Page {
   render() {
     this.updateTitle(ErrorPage.TextObject.Title);
     this.updateDescription(ErrorPage.TextObject.Description);
-    const error = new Error("section", "error", "main__error");
-    this.container.append(error.render());
+    this.container.append(this.error.render());
     return this.container;
   }
 }

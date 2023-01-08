@@ -1,28 +1,36 @@
 import ProductItem from "../ProductItem/ProductItem";
 import { productModel } from "../../models/ProductsModel";
-import ProductData from "../../interfaces/Products";
+import { ProductData } from "../../interfaces/Products";
 import { store } from "../../store/Store";
 import { productsInfo } from "../../data/products/products";
 import { setBtns } from "../ProductItem/ProductItem";
 
 export default class ProductsList {
-  private loading = false;
+  private loading = !store.Loaded ? true : false;
   private error: Error | null = null;
-  private products: ProductData[] = [];
-  constructor() {
+  private static products: ProductData[] = [];
+
+  constructor(newProducts?: ProductData[]) {
     this.fetchProducts();
-    store.$state.subscribe(({ products }) => {
-      if (products.length) {
-        this.products = products;
-        this.loading = false;
-        this.error = null;
+    if (!store.Loaded) {
+      store.$state.subscribe(({ products }) => {
+        if (products.length && this.loading === true) {
+          this.loading = false;
+          this.error = null;
+          ProductsList.products = products;
+        }
+      });
+    } else {
+      if (newProducts) {
+        ProductsList.products = newProducts;
+      } else {
+        ProductsList.products = store.Products;
       }
-    });
+    }
   }
 
   fetchProducts = () => {
-    this.loading = true;
-    store.update();
+    // store.update();
     productModel.getProducts().catch((error) => {
       this.error = error;
       this.loading = false;
@@ -39,7 +47,7 @@ export default class ProductsList {
           : ""
       }
       ${this.error ? `${this.error.message}` : ""}
-      ${this.products
+      ${ProductsList.products
         .map((product: ProductData) => new ProductItem(product))
         .map((el: ProductItem) => el.render().outerHTML)
         .join("")}

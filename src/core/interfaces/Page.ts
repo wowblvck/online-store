@@ -2,7 +2,7 @@ const enum PageIds {
   MainPage = "main-page",
   CatalogPage = "catalog-page",
   CartPage = "cart-page",
-  ProductPage = "product-page"
+  ProductsPage = "product-page",
 }
 
 interface PagesData {

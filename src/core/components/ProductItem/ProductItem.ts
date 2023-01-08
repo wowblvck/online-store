@@ -1,7 +1,7 @@
 import Container from "../Container/Container";
 import Button from "../Button/Button";
 import { createElementWithClass } from "../../utils/functions";
-import ProductData from "../../interfaces/Products";
+import { ProductData } from "../../interfaces/Products";
 
 import { PageIds } from "../../interfaces/Page";
 
@@ -99,7 +99,7 @@ export const setBtns = (timer: number) => {
       btnMore.forEach((el) =>
         el.addEventListener("click", () => {
           localStorage.setItem("idOfItem", `${el.getAttribute("id")}`);
-          location.href = `#${PageIds.ProductPage}`;
+          location.href = `#${PageIds.ProductsPage}`;
         })
       );
       return;

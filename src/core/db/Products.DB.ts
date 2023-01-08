@@ -1,15 +1,66 @@
 //Loading a list of products from .json files. Create a simulation of loading the database using Promise
 //Загружаем список товаров из файлы .json. Создаем имитацию загрузки базы с помощью Promise
 
-import ProductData from "../interfaces/Products";
+import { ProductData, ProductCategories } from "../interfaces/Products";
 import { productsInfo } from "../data/products/products";
 
-const PRODUCTS: ProductData[] = productsInfo;
-
-export const getProducts = (): Promise<ProductData[]> => {
+const getProducts = (products: ProductData[]): Promise<ProductData[]> => {
   return new Promise<ProductData[]>((resolve) => {
     setTimeout(() => {
-      resolve(PRODUCTS);
+      resolve(products);
+      localStorage.setItem("allProducts", JSON.stringify(products));
     }, 2000);
   });
 };
+
+export async function getProductsFromStorage(): Promise<ProductData[]> {
+  const PRODUCTS: ProductData[] = productsInfo;
+  return await new Promise((resolve, reject) => {
+    try {
+      const products = localStorage.getItem("allProducts");
+      if (products === null) {
+        resolve(getProducts(PRODUCTS));
+      } else {
+        const arrayProducts = JSON.parse(products);
+        if (JSON.stringify(arrayProducts) === JSON.stringify(PRODUCTS)) {
+          resolve(arrayProducts);
+        } else {
+          resolve(getProducts(PRODUCTS));
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+export async function getCategoriesFromStorage(
+  products: ProductData[]
+): Promise<ProductCategories[]> {
+  return await new Promise((resolve, reject) => {
+    try {
+      const filters = localStorage.getItem("filters-categories");
+      if (filters !== null) {
+        const arrayFilters = JSON.parse(filters);
+        resolve(arrayFilters);
+      } else {
+        const categories = Array.from(
+          new Set(products.map((product: ProductData) => product.category))
+        );
+        const productCategories: ProductCategories[] = categories.map(
+          (category) => ({
+            name: category,
+            state: false,
+          })
+        );
+        localStorage.setItem(
+          "filters-categories",
+          JSON.stringify(productCategories.sort())
+        );
+        resolve(productCategories);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+}

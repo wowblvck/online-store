@@ -1,25 +1,27 @@
-import Page from "../../core/templates/Page";
-import CatalogPage from "../CatalogPage/CatalogPage";
-import MainPage from "../MainPage/MainPage";
-import ErrorPage from "../ErrorPage/ErrorPage";
-import ProductPage from "../ProductPage/ProductsPage";
-import CartPage from "../CartPage/CartPage";
+import Page from "../core/templates/Page";
+import CatalogPage from "../pages/CatalogPage/CatalogPage";
+import MainPage from "../pages/MainPage/MainPage";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import ProductsPage from "../pages/ProductsPage/ProductsPage";
+import CartPage from "../pages/CartPage/CartPage";
 
-import Header from "../../core/components/Header/Header";
-import Footer from "../../core/components/Footer/Footer";
+import Header from "../core/components/Header/Header";
+import Footer from "../core/components/Footer/Footer";
 
-import { PageIds } from "../../core/interfaces/Page";
-import { pages } from "../../core/data/pages";
+import { PageIds } from "../core/interfaces/Page";
+import { pages } from "../core/data/pages";
+import { store } from "../core/store/Store";
 
 class App {
   //Default container
   //Контейнер по умолчанию
-  private static container = document.body as HTMLElement;
+  private static container: HTMLElement = document.body;
   //
   private static defaultPageId = "currentPageID";
   private initialPage: MainPage;
   private header: Header;
   private footer: Footer;
+  private static page: Page | null = null;
 
   static renderNewPage(idPage: string) {
     //Get default page ID selector and remove them (before insert next url page content)
@@ -32,28 +34,35 @@ class App {
 
     //We check the received ID value with the ID of the created pages, if it matches, create Class Instances
     //Проверяем полученное значение ID с ID созданных страниц, если совпадает, создаем инстанс класса
-    let page: Page | null = null;
+    // let page: Page | null = null;
 
     if (idPage === PageIds.MainPage) {
-      page = new MainPage(idPage);
+      App.page = new MainPage(idPage);
     } else if (idPage === PageIds.CatalogPage) {
-      page = new CatalogPage(idPage);
-      // console.log(page.render());
-    } else if (idPage === PageIds.ProductPage) {
-      page = new ProductPage(idPage);
+      App.page = new CatalogPage(idPage);
+    } else if (idPage === PageIds.ProductsPage) {
+      App.page = new ProductsPage(idPage);
     } else if (idPage === PageIds.CartPage) {
-      page = new CartPage(idPage);
+      App.page = new CartPage(idPage);
     } else {
-      page = new ErrorPage(idPage);
+      App.page = new ErrorPage(idPage);
     }
     //
 
     //If the class value of the required page is received, we render the page
     //Если значение класса необходимой страницы получено, отрисовываем страницу
-    if (page) {
-      const pageHTML = page.render();
+    if (App.page) {
+      const pageHTML = App.page.render();
       pageHTML.id = App.defaultPageId;
       App.container.append(pageHTML);
+
+      store.$state.subscribe(() => {
+        if (store.Loaded) {
+          if (idPage === PageIds.CatalogPage) {
+            (App.page as CatalogPage).addEvents();
+          }
+        }
+      });
     }
 
     const links = document.querySelectorAll(".nav__item");
@@ -111,11 +120,6 @@ class App {
     const current = document.getElementById("currentPageID");
     return current;
   };
-
-  render = () => {
-    return App.container;
-  };
-  //
 }
 
 export default App;
