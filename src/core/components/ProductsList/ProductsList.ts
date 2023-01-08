@@ -3,6 +3,7 @@ import { productModel } from "../../models/ProductsModel";
 import ProductData from "../../interfaces/Products";
 import { store } from "../../store/Store";
 import { productsInfo } from "../../data/products/products";
+import { setBtns } from "../ProductItem/ProductItem";
 
 export default class ProductsList {
   private loading = false;
@@ -27,6 +28,7 @@ export default class ProductsList {
       this.loading = false;
     });
     getButtons(2010);
+    setBtns(2015);
   };
 
   render = () => {
@@ -58,7 +60,17 @@ export const addToCart = (id: string) => {
 };
 
 export const removeFromCart = (id: string) => {
-  cartArray = cartArray.filter((x, i) => cartArray.indexOf(x) === i);
+  cartArray = cartArray.filter((el) => el != `${id}`);
+  const productCounter = document.querySelector(
+    ".products-count"
+  ) as HTMLParagraphElement;
+  productCounter.textContent = `${cartArray.length}`;
+  localStorage.setItem(`add-buttons-value${id}`, `Add to cart`);
+  console.log(cartArray);
+};
+
+export const removeFromCart1 = (id: string) => {
+  cartArray = cartArray.filter((x) => cartArray.indexOf(x));
   for (let i = 0; i < cartArray.length; i++) {
     if (cartArray[i] === `${id}`) {
       cartArray.splice(i, 1);
@@ -106,6 +118,7 @@ addEventListener("popstate", () => {
   saveButtons();
   saveCart();
   getButtons(10);
+  setBtns(15);
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
@@ -148,6 +161,7 @@ window.addEventListener("load", () => {
   }
   console.log(cartArray);
   getButtons(2010);
+  setBtns(2015);
 });
 
 window.addEventListener("load", () => {

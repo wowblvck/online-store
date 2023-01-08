@@ -5,8 +5,9 @@ import { icons } from "../../../core/data/images/images";
 import { productsInfo } from "../../data/products/products";
 import { cartArray } from "../ProductsList/ProductsList";
 import { PageIds } from "../../interfaces/Page";
-import { removeFromCart } from "../ProductsList/ProductsList";
+import { removeFromCart1 } from "../ProductsList/ProductsList";
 import { createModal } from "../Modal/Modal";
+import { promoCodes } from "../../data/promo/promoCodes";
 
 class Cart extends Component {
   private subContainer: Container;
@@ -66,16 +67,143 @@ class Cart extends Component {
       "summary__products-num"
     ) as HTMLParagraphElement;
     summaryProductsNum.textContent = "Products: 0";
-    const summaryTotal = createElementWithClass(
-      "p",
-      "summary__total"
+
+    const summaryPricesContainer = createElementWithClass(
+      "div",
+      "summary__total-container"
+    ) as HTMLDivElement;
+
+    for (let i = 0; i <= promoCodes.length; i++) {
+      const summaryTotal = createElementWithClass(
+        "p",
+        "summary__total-wrapper"
+      ) as HTMLParagraphElement;
+      const totalSpan = createElementWithClass(
+        "span",
+        "summary__total-subtitle"
+      ) as HTMLSpanElement;
+      totalSpan.textContent = "Total:";
+      const totalNum = createElementWithClass(
+        "span",
+        "summary__total"
+      ) as HTMLSpanElement;
+      totalNum.textContent = "0.00$";
+      totalNum.setAttribute("id", `total${i}`);
+      if (i != 0) {
+        summaryTotal.classList.add("hidden");
+      }
+      summaryTotal.append(totalSpan, totalNum);
+      summaryTotal.setAttribute("id", `${i}`);
+      summaryPricesContainer.append(summaryTotal);
+    }
+
+    /*const summaryDiscount_10 = createElementWithClass(
+      "div",
+      "summary__total",
+      "summary__discount-10p"
     ) as HTMLParagraphElement;
-    summaryTotal.textContent = "Total: 0.00$";
+    const summaryDiscount_20 = createElementWithClass(
+      "div",
+      "summary__total",
+      "summary__discount-20p"
+    ) as HTMLParagraphElement; */
+    const discountBlock = createElementWithClass(
+      "div",
+      "summary__discounts"
+    ) as HTMLDivElement;
     const summaryInput = createElementWithClass(
       "input",
       "summary__input"
     ) as HTMLInputElement;
     summaryInput.placeholder = "Enter promo code (Test: 'RS', 'EPM')";
+    summaryInput.addEventListener("input", () => {
+      for (let i = 0; i < promoCodes.length; i++) {
+        if (summaryInput.value.toUpperCase() == promoCodes[i].name) {
+          const discountInfo = document.querySelector(
+            `.id${i}`
+          ) as HTMLDivElement;
+          discountInfo.classList.add("visible");
+        } else {
+          const discountInfo = document.querySelector(
+            `.id${i}`
+          ) as HTMLDivElement;
+          discountInfo.classList.remove("visible");
+        }
+      }
+    });
+    discountBlock.append(summaryInput);
+    let btnCount = 0;
+    for (let i = 0; i < promoCodes.length; i++) {
+      const discountInfo = createElementWithClass(
+        "div",
+        "summary__discount-item",
+        `id${i}`
+      ) as HTMLDivElement;
+      const discountText = createElementWithClass(
+        "span",
+        "summary__discount-info"
+      ) as HTMLDivElement;
+      discountText.textContent = `${promoCodes[i].description}`;
+      const discountButton = createElementWithClass(
+        "button",
+        "summary__discount-button"
+      ) as HTMLButtonElement;
+      discountButton.textContent = "Add";
+      discountInfo.append(discountText, discountButton);
+      discountBlock.append(discountInfo);
+      discountButton.addEventListener("click", () => {
+        if (discountButton.textContent == "Add") {
+          discountButton.textContent = "Drop";
+          discountInfo.setAttribute("style", "display: flex");
+          if (btnCount == 0) {
+            const sum0 = document.querySelectorAll(
+              ".summary__total"
+            )[0] as HTMLSpanElement;
+            const sumContainer = document.querySelectorAll(
+              ".summary__total-wrapper"
+            )[1] as HTMLDivElement;
+            sum0.style.textDecoration = "line-through";
+            sumContainer.classList.remove("hidden");
+            btnCount++;
+          } else if (btnCount == 1) {
+            const sum0 = document.querySelectorAll(
+              ".summary__total"
+            )[1] as HTMLSpanElement;
+            const sumContainer = document.querySelectorAll(
+              ".summary__total-wrapper"
+            )[2] as HTMLDivElement;
+            sum0.style.textDecoration = "line-through";
+            sumContainer.classList.remove("hidden");
+            btnCount++;
+          }
+        } else {
+          discountButton.textContent = "Add";
+          discountInfo.removeAttribute("style");
+          if (btnCount == 1) {
+            const sum0 = document.querySelectorAll(
+              ".summary__total"
+            )[0] as HTMLSpanElement;
+            const sumContainer = document.querySelectorAll(
+              ".summary__total-wrapper"
+            )[1] as HTMLDivElement;
+            sum0.style.textDecoration = "auto";
+            sumContainer.classList.add("hidden");
+            btnCount--;
+          } else if (btnCount == 2) {
+            const sum0 = document.querySelectorAll(
+              ".summary__total"
+            )[1] as HTMLSpanElement;
+            const sumContainer = document.querySelectorAll(
+              ".summary__total-wrapper"
+            )[2] as HTMLDivElement;
+            sum0.style.textDecoration = "auto";
+            sumContainer.classList.add("hidden");
+            btnCount--;
+          }
+        }
+      });
+    }
+
     const summaryBtn = createElementWithClass("button", "summary__button");
     summaryBtn.textContent = "BUY NOW";
     summaryBtn.addEventListener("click", () => {
@@ -84,8 +212,10 @@ class Cart extends Component {
     });
     summaryMain.append(
       summaryProductsNum,
-      summaryTotal,
-      summaryInput,
+      summaryPricesContainer,
+      //summaryDiscount_10,
+      //summaryDiscount_20,
+      discountBlock,
       summaryBtn
     );
 
@@ -242,7 +372,9 @@ class Cart extends Component {
             "p",
             "cart__product-summ"
           ) as HTMLParagraphElement;
-          productSumm.textContent = `${productsInfo[j].price}$`;
+          productSumm.textContent = `${
+            productsInfo[j].price * counterOfProduct
+          }$`;
           productsNumBtnsWrapper.append(buttonMinus, productNum, buttonPlus);
           productControls.append(
             productStock,
@@ -288,7 +420,7 @@ class Cart extends Component {
               console.log(cartArray);
               updateValues();
             } else if (productNum.textContent == "1") {
-              removeFromCart(`${productsInfo[j].id - 1}`);
+              removeFromCart1(`${productsInfo[j].id - 1}`);
               productWrapper.style.display = "none";
               productNum.textContent = "0";
               productSumm.textContent = "0";
@@ -325,18 +457,22 @@ const updateValues = () => {
     ".summary__products-num"
   ) as HTMLParagraphElement;
   productNum.textContent = `Products: ${cartArray.length}`;
-  const Total = document.querySelector(
-    ".summary__total"
-  ) as HTMLParagraphElement;
+  const Total = document.querySelectorAll(".summary__total");
   const prices = document.querySelectorAll(".cart__product-summ");
   const pricesValues = [];
+  let total = 0;
   if (prices[0]) {
     for (let i = 0; i < prices.length; i++) {
       pricesValues.push(Number(prices[i].textContent?.slice(0, -1)));
-      Total.textContent = `Total: ${pricesValues.reduce((a, b) => a + b)}.00$`;
+      total = pricesValues.reduce((a, b) => a + b);
+      Total[0].textContent = `${total}.00$`;
+      Total[1].textContent = `${total * 0.9}.00$`;
+      Total[2].textContent = `${total * 0.8}.00$`;
     }
   } else {
-    Total.textContent = `Total: 0.00$`;
+    Total.forEach((el) => {
+      el.textContent = `0.00$`;
+    });
   }
   const cartNum = document.querySelector(
     ".products-count"

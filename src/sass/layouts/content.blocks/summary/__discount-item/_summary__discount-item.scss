@@ -1,0 +1,10 @@
+.summary__discount-item {
+    display: none;
+    align-items: center;
+    width: 95%;
+    justify-content: space-between;
+}
+
+.visible {
+    display: flex;
+}

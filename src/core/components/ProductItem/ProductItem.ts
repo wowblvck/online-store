@@ -73,10 +73,6 @@ export default class ProductItem {
     );
     btnMore.render().textContent = "See more";
 
-    /* btnMore.render().addEventListener("click", () => {
-      location.href = `#${PageIds.ProductPage}`;
-    }); */
-
     wrapper.render().append(btnAdd.render(), btnMore.render());
 
     return this.wrapper.render().append(wrapper.render());
@@ -91,20 +87,22 @@ export default class ProductItem {
   };
 }
 
-setInterval(() => {
-  const btnMore = document.querySelectorAll(".btn__see-more");
-  const btnAdd = document.querySelectorAll(".btn__add-to-cart");
-  if (btnMore.length != 0) {
-    for (let i = 0; i < btnMore.length; i++) {
-      btnMore[i].setAttribute("id", `${i}`);
-      btnAdd[i].setAttribute("id", `${i}`);
+export const setBtns = (timer: number) => {
+  setTimeout(() => {
+    const btnMore = document.querySelectorAll(".btn__see-more");
+    const btnAdd = document.querySelectorAll(".btn__add-to-cart");
+    if (btnMore.length != 0) {
+      for (let i = 0; i < btnMore.length; i++) {
+        btnMore[i].setAttribute("id", `${i}`);
+        btnAdd[i].setAttribute("id", `${i}`);
+      }
+      btnMore.forEach((el) =>
+        el.addEventListener("click", () => {
+          localStorage.setItem("idOfItem", `${el.getAttribute("id")}`);
+          location.href = `#${PageIds.ProductPage}`;
+        })
+      );
+      return;
     }
-    btnMore.forEach((el) =>
-      el.addEventListener("click", () => {
-        localStorage.setItem("idOfItem", `${el.getAttribute("id")}`);
-        location.href = `#${PageIds.ProductPage}`;
-      })
-    );
-    return;
-  }
-}, 1000);
+  }, timer);
+};
