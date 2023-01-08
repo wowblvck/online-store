@@ -1,10 +1,12 @@
 import Component from "../../../../templates/Component";
-import ProductsCategories from "./ProductsCategories/ProductsCategories";
+import CategoriesList from "./CategoriesList/CategoriesList";
 import { createElementWithClass } from "../../../../utils/functions";
 import { store } from "../../../../store/Store";
 import Container from "../../../Container/Container";
 
 class Categories extends Component {
+  private categories = new CategoriesList();
+
   constructor(tagName: string, className: string, ...subClass: string[]) {
     super(tagName, className, ...subClass);
   }
@@ -18,16 +20,19 @@ class Categories extends Component {
   createFormCategories = () => {
     const container = new Container("div", "filters-form");
     container.render().id = "categories";
-    const categories = new ProductsCategories();
     store.$state.subscribe(() => {
       const root: HTMLElement | null = document.getElementById("categories");
       if (root) {
-        root.innerHTML = categories.render();
+        root.innerHTML = this.categories.render();
       }
     });
-    container.render().innerHTML = categories.render();
+    container.render().innerHTML = this.categories.render();
     this.container.append(container.render());
   };
+
+  addEvents() {
+    this.categories.addEvents();
+  }
 
   render = () => {
     this.createTitle();

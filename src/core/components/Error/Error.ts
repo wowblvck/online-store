@@ -3,7 +3,7 @@ import Container from "../Container/Container";
 import { images } from "../../data/images/images";
 import { createElementWithClass } from "../../utils/functions";
 
-class Error extends Component {
+class ErrorSection extends Component {
   private subContainer: Container;
 
   constructor(tagName: string, className: string, ...subClass: string[]) {
@@ -29,4 +29,4 @@ class Error extends Component {
   };
 }
 
-export default Error;
+export default ErrorSection;

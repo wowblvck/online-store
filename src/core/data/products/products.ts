@@ -1,4 +1,4 @@
-import ProductData from "../../interfaces/Products";
+import { ProductData } from "../../interfaces/Products";
 
 import { ImageMap } from "../../interfaces/Images";
 import { importAll } from "../../utils/functions";
@@ -214,6 +214,17 @@ export const productsInfo: ProductData[] = [
     stock: 2,
     brand: "Haier",
     images: [images["19/1.jpg"], images["19/2.jpg"]],
+  },
+  {
+    id: 20,
+    title: "LED LG 43UQ81009LC",
+    category: "TV",
+    description:
+      "Crystal clear 4K resolution. LG UHD TVs give you an unforgettable viewing experience. Enjoy vibrant colors and incredible detail on Real 4K TVs.",
+    price: 820,
+    stock: 5,
+    brand: "LG",
+    images: [images["20/1.jpg"], images["20/2.jpg"]],
   },
   {
     id: 20,

@@ -12,4 +12,9 @@ interface ProductData {
   images: string[];
 }
 
-export default ProductData;
+interface ProductCategories {
+  name: string;
+  state: boolean;
+}
+
+export { ProductData, ProductCategories };

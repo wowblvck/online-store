@@ -1,4 +1,4 @@
-import ProductData from "./Products";
+import { ProductData } from "./Products";
 
 interface CardData {
   [key: string]: {
