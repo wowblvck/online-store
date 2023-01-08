@@ -3,6 +3,9 @@ import Container from "../Container/Container";
 import { createElementWithClass } from "../../utils/functions";
 import { icons } from "../../data/images/images";
 import { productsInfo } from "../../data/products/products";
+import { addToCart } from "../ProductsList/ProductsList";
+import { removeFromCart } from "../ProductsList/ProductsList";
+import { cartArray } from "../ProductsList/ProductsList";
 
 class ProductPageItem extends Component {
   private subContainer: Container;
@@ -69,7 +72,24 @@ class ProductPageItem extends Component {
       "button",
       "product__button"
     ) as HTMLButtonElement;
-    buttonAdd.textContent = "Add to cart";
+    if (cartArray.includes(idOfItem.toString())) {
+      buttonAdd.textContent = "Remove";
+      console.log(cartArray, idOfItem);
+    } else {
+      buttonAdd.textContent = "Add to cart";
+      console.log(cartArray, idOfItem);
+    }
+    buttonAdd.addEventListener("click", () => {
+      if (buttonAdd.textContent === "Add to cart") {
+        buttonAdd.textContent = "Remove";
+        addToCart(`${idOfItem}`);
+        localStorage.setItem(`add-buttons-value${idOfItem}`, "Remove");
+      } else {
+        buttonAdd.textContent = "Add to cart";
+        removeFromCart(`${idOfItem}`);
+        localStorage.setItem(`add-buttons-value${idOfItem}`, "Add to cart");
+      }
+    });
 
     const buttonBuyNow = createElementWithClass(
       "button",

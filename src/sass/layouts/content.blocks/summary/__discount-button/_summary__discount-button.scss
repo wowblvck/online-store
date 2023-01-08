@@ -1,0 +1,11 @@
+.summary__discount-button {
+    border: none;
+    color: rgb(109, 109, 109);
+    transition: .1s;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.summary__discount-button:hover {
+    color: rgb(0, 0, 0);
+}

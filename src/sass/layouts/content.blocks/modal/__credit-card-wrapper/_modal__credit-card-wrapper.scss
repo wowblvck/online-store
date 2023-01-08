@@ -1,0 +1,15 @@
+.modal__credit-card-wrapper {
+    height: 200px;
+    background: linear-gradient(45deg, rgb(195, 195, 195) 14%, rgb(238, 238, 238) 76%);
+    border-radius: 10px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    /* align-items: center; */
+    justify-content: center;
+    box-shadow: 0 5px 10px 2px rgb(27 28 29 / 62%);
+    max-width: 360px;
+    box-sizing: border-box;
+    row-gap: 30px;
+}
