@@ -226,15 +226,4 @@ export const productsInfo: ProductData[] = [
     brand: "LG",
     images: [images["20/1.jpg"], images["20/2.jpg"]],
   },
-  {
-    id: 20,
-    title: "LED LG 43UQ81009LC",
-    category: "TV",
-    description:
-      "Crystal clear 4K resolution. LG UHD TVs give you an unforgettable viewing experience. Enjoy vibrant colors and incredible detail on Real 4K TVs.",
-    price: 820,
-    stock: 5,
-    brand: "LG",
-    images: [images["20/1.jpg"], images["20/2.jpg"]],
-  },
 ];
