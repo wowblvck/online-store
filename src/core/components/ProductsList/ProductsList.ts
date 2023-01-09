@@ -4,6 +4,7 @@ import { ProductData } from "../../interfaces/Products";
 import { store } from "../../store/Store";
 import { AppComponent } from "../../interfaces/AppComponent";
 import { productsInfo } from "../../data/products/products";
+import { updateTotal } from "../Header/Total/Total";
 
 export default class ProductsList implements AppComponent {
   private loading = !store.Loaded ? true : false;
@@ -97,18 +98,25 @@ export default class ProductsList implements AppComponent {
 }
 
 export let cartArray: string[] = [];
+export let totalSum = 0;
 
 export const addToCart = (id: string) => {
   cartArray.push(id);
+  totalSum = totalSum + productsInfo[Number(id)].price;
+  localStorage.setItem("total", `${totalSum}`);
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
   localStorage.setItem(`add-buttons-value${id}`, `Remove`);
   console.log(cartArray);
+  updateTotal();
 };
 
 export const removeFromCart = (id: string) => {
+  totalSum = totalSum - productsInfo[Number(id)].price;
+  localStorage.setItem("total", `${totalSum}`);
+  console.log(totalSum);
   cartArray = cartArray.filter((el) => el != `${id}`);
   const productCounter = document.querySelector(
     ".products-count"
@@ -116,21 +124,25 @@ export const removeFromCart = (id: string) => {
   productCounter.textContent = `${cartArray.length}`;
   localStorage.setItem(`add-buttons-value${id}`, `Add to cart`);
   console.log(cartArray);
+  updateTotal();
 };
 
 export const removeFromCart1 = (id: string) => {
   cartArray = cartArray.filter((x) => cartArray.indexOf(x));
   for (let i = 0; i < cartArray.length; i++) {
     if (cartArray[i] === `${id}`) {
+      totalSum - productsInfo[Number(id)].price;
       cartArray.splice(i, 1);
     }
   }
+  localStorage.setItem("total", `${totalSum}`);
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
   localStorage.setItem(`add-buttons-value${id}`, `Add to cart`);
   console.log(cartArray);
+  updateTotal();
 };
 
 export const getButtons = (timer: number): Promise<HTMLButtonElement> => {
@@ -193,14 +205,19 @@ const saveCart = () => {
 };
 
 window.addEventListener("beforeunload", saveCart);
+window.addEventListener("beforeunload", () => {
+  localStorage.setItem("total", `${totalSum}`);
+});
 
 window.addEventListener("load", () => {
   for (let i = 0; i < Number(localStorage.getItem("product-in-cart")); i++) {
     cartArray.push(localStorage.getItem(`product-in-cart${i}`) as string);
   }
+  if (localStorage.getItem("total")) {
+    totalSum = Number(localStorage.getItem("total"));
+  }
   console.log(cartArray);
-  // getButtons(2010);
-  // setBtns(2015);
+  updateTotal;
 });
 
 window.addEventListener("load", () => {
