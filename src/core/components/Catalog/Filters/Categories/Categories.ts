@@ -3,6 +3,7 @@ import CategoriesList from "./CategoriesList/CategoriesList";
 import { createElementWithClass } from "../../../../utils/functions";
 import { store } from "../../../../store/Store";
 import Container from "../../../Container/Container";
+import { changeView } from "../../Products/ProductsHeader/ProductsHeader";
 
 class Categories extends Component {
   private categories = new CategoriesList();

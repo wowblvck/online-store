@@ -4,6 +4,7 @@ import { store } from "../../../../../store/Store";
 import { toggleObjects } from "../../../../../utils/functions";
 import ProductsList from "../../../../ProductsList/ProductsList";
 import FoundItems from "../../../Products/ProductsHeader/FoundItems/FoundItems";
+import { updateView } from "../../../Products/ProductsHeader/ProductsHeader";
 
 export default class CategoriesItem implements AppComponent {
   private category: string;
@@ -117,6 +118,7 @@ export default class CategoriesItem implements AppComponent {
       if (wrapper) {
         wrapper.innerHTML = productList.render();
       }
+      updateView();
     });
   }
 }

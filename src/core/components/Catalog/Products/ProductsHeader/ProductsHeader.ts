@@ -79,14 +79,19 @@ class ProductsHeader extends Component {
       "view-items__button_active",
       "view-items__button_grid"
     );
+    btnGrid.render().addEventListener("click", changeView);
 
     const btnList = new Button(
       "button",
       "view-items__button",
       "view-items__button_list"
     );
+
+    btnList.render().addEventListener("click", changeView);
     this.viewItems.render().append(btnGrid.render(), btnList.render());
     this.container.append(this.viewItems.render());
+
+    localStorage.setItem("view", "grid");
   };
 
   render = () => {
@@ -98,3 +103,45 @@ class ProductsHeader extends Component {
 }
 
 export default ProductsHeader;
+
+export const changeView = () => {
+  if (localStorage.getItem("view") == "grid") {
+    const btns = document.querySelectorAll(".view-items__button");
+    btns[0].classList.remove("view-items__button_active");
+    btns[1].classList.add("view-items__button_active");
+    const items = document.querySelectorAll(".products-item");
+    for (let i = 0; i < items.length; i++) {
+      items[i].classList.add("list");
+    }
+    localStorage.setItem("view", "list");
+  } else if (localStorage.getItem("view") == "list") {
+    const btns = document.querySelectorAll(".view-items__button");
+    btns[0].classList.add("view-items__button_active");
+    btns[1].classList.remove("view-items__button_active");
+    const items = document.querySelectorAll(".products-item");
+    for (let i = 0; i < items.length; i++) {
+      items[i].classList.remove("list");
+    }
+    localStorage.setItem("view", "grid");
+  }
+};
+
+export const updateView = () => {
+  if (localStorage.getItem("view") == "list") {
+    const btns = document.querySelectorAll(".view-items__button");
+    btns[0].classList.remove("view-items__button_active");
+    btns[1].classList.add("view-items__button_active");
+    const items = document.querySelectorAll(".products-item");
+    for (let i = 0; i < items.length; i++) {
+      items[i].classList.add("list");
+    }
+  } else if (localStorage.getItem("view") == "grid") {
+    const btns = document.querySelectorAll(".view-items__button");
+    btns[0].classList.add("view-items__button_active");
+    btns[1].classList.remove("view-items__button_active");
+    const items = document.querySelectorAll(".products-item");
+    for (let i = 0; i < items.length; i++) {
+      items[i].classList.remove("list");
+    }
+  }
+};

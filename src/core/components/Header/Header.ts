@@ -4,6 +4,7 @@ import Burger from "./Burger/Burger";
 import { BurgerController } from "../../controllers/BurgerController";
 import Container from "../Container/Container";
 import Logo from "./Logo/Logo";
+import Total from "./Total/Total";
 
 class Header extends Component {
   private subContainer: Container;
@@ -16,6 +17,11 @@ class Header extends Component {
   private renderLogo = () => {
     const logo = new Logo("div", "logo");
     this.subContainer.render().append(logo.render());
+  };
+
+  private renderTotal = () => {
+    const total = new Total("div", "total");
+    this.subContainer.render().append(total.render());
   };
 
   private renderNavigation = () => {
@@ -33,6 +39,7 @@ class Header extends Component {
 
   render = () => {
     this.renderLogo();
+    this.renderTotal();
     this.renderNavigation();
     this.container.append(this.subContainer.render());
     return this.container;
