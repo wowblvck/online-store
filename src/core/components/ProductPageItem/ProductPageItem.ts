@@ -6,6 +6,8 @@ import { productsInfo } from "../../data/products/products";
 import { addToCart } from "../ProductsList/ProductsList";
 import { removeFromCart } from "../ProductsList/ProductsList";
 import { cartArray } from "../ProductsList/ProductsList";
+import { createModal } from "../Modal/Modal";
+import { PageIds } from "../../interfaces/Page";
 
 class ProductPageItem extends Component {
   private subContainer: Container;
@@ -23,10 +25,73 @@ class ProductPageItem extends Component {
       "product__wrapper"
     ) as HTMLDivElement;
 
+    const pathWrapper = createElementWithClass(
+      "div",
+      "product__path-wrapper"
+    ) as HTMLDivElement;
+    const pathStore = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathStore.textContent = "Catalog";
+    const pathCategory = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathStore.style.cursor = "pointer";
+    pathStore.addEventListener("click", () => {
+      location.href = `#${PageIds.CatalogPage}`;
+    });
+    const category = productsInfo[idOfItem].category.split("");
+    const arr = [];
+    for (let i = 0; i < category.length; i++) {
+      if (i == 0) {
+        arr.push(category[i].toUpperCase());
+      } else {
+        arr.push(category[i]);
+      }
+    }
+    pathCategory.textContent = arr.join("");
+    const pathBrand = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathBrand.textContent = `${productsInfo[idOfItem].brand}`;
+    const pathTitle = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathTitle.textContent = `${productsInfo[idOfItem].title}`;
+    const pathSeparator = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathSeparator.textContent = "●";
+    const pathSeparator_1 = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathSeparator_1.textContent = "●";
+    const pathSeparator_2 = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathSeparator_2.textContent = "●";
+    pathWrapper.append(
+      pathStore,
+      pathSeparator,
+      pathCategory,
+      pathSeparator_1,
+      pathBrand,
+      pathSeparator_2,
+      pathTitle
+    );
+
     const productSlider = createElementWithClass("div", "product__slider");
     const arrowLeft = createElementWithClass(
       "img",
-      "arrow__left"
+      "arrow__left",
+      "disabled"
     ) as HTMLImageElement;
     const arrowRight = createElementWithClass(
       "img",
@@ -96,6 +161,10 @@ class ProductPageItem extends Component {
       "product__button"
     ) as HTMLButtonElement;
     buttonBuyNow.textContent = "Buy now";
+    buttonBuyNow.addEventListener("click", () => {
+      const modal = document.querySelector(".modal__wrapper") as HTMLDivElement;
+      modal.style.display = "flex";
+    });
 
     arrowLeft.addEventListener("click", () => {
       sliderImages.style.backgroundImage = `url("${productsInfo[idOfItem].images[0]}")`;
@@ -104,11 +173,13 @@ class ProductPageItem extends Component {
     });
     arrowRight.addEventListener("click", () => {
       sliderImages.style.backgroundImage = `url("${productsInfo[idOfItem].images[1]}")`;
+      arrowLeft.classList.remove("disabled");
       arrowRight.style.opacity = "0.2";
       arrowLeft.style.opacity = "1";
     });
 
     productWrapper.append(
+      pathWrapper,
       productSlider,
       productBrand,
       productTitle,
@@ -117,7 +188,7 @@ class ProductPageItem extends Component {
     );
     productSlider.append(arrowLeft, sliderImages, arrowRight);
     productButtons.append(buttonAdd, buttonBuyNow);
-    this.subContainer.render().append(productWrapper);
+    this.subContainer.render().append(createModal(), productWrapper);
   };
 
   render = () => {

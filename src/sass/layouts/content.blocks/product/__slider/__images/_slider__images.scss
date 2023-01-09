@@ -10,7 +10,8 @@
     background-repeat: no-repeat;
     background-position: center;
     background-color: #fff;
-    transition: 0.2s;
+    transition: 0.3s;
+    cursor: pointer;
 
     @include mix.responsive(tablet-m) {
         width: 300px;
@@ -27,4 +28,8 @@
         width: 250px;
         height: 100px;
     }
+}
+
+.slider__images:hover {
+    transform: scale(1.1);
 }

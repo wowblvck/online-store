@@ -3,4 +3,12 @@
     border-radius: 5px;
     padding: 5px;
     width: 30%;
+    text-align: center;
+}
+
+.modal__credit-card-cvv::-webkit-outer-spin-button,
+.modal__credit-card-cvv::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+    margin: 0;
 }
