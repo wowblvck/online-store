@@ -8,6 +8,10 @@ import { PageIds } from "../../interfaces/Page";
 import { removeFromCart1 } from "../ProductsList/ProductsList";
 import { createModal } from "../Modal/Modal";
 import { promoCodes } from "../../data/promo/promoCodes";
+import ProductPageItem from "../ProductPageItem/ProductPageItem";
+import { sortProducts } from "../../Pagination/Pagination";
+import { goNextPage } from "../../Pagination/Pagination";
+import { goPrevPage } from "../../Pagination/Pagination";
 
 class Cart extends Component {
   private subContainer: Container;
@@ -241,7 +245,8 @@ class Cart extends Component {
       "input",
       "cart__limit-input"
     ) as HTMLInputElement;
-    cartLimitInput.value = "10";
+    cartLimitInput.type = "number";
+    cartLimitInput.addEventListener("input", sortProducts);
     const cartPagesTitle = createElementWithClass(
       "h2",
       "cart__pages-title"
@@ -256,27 +261,53 @@ class Cart extends Component {
       "arrow__left",
       "cart__pages-arrow"
     ) as HTMLImageElement;
+    cartPagesArrowLeft.addEventListener("click", goPrevPage);
     const cartPagesArrowRight = createElementWithClass(
       "img",
       "arrow__right",
       "cart__pages-arrow"
     ) as HTMLImageElement;
-    const cartPagesPageNum = createElementWithClass(
+    cartPagesArrowRight.addEventListener("click", goNextPage);
+    const cartPagesNums = createElementWithClass(
+      "div",
+      "cart__pages-nums"
+    ) as HTMLDivElement;
+    const cartPagesPageNumCurrent = createElementWithClass(
       "span",
-      "cart__pages-num"
+      "cart__pages-num",
+      "pages__current"
     ) as HTMLSpanElement;
-    cartPagesPageNum.textContent = "1";
+    cartPagesPageNumCurrent.textContent = "1";
+    const cartPagesPageNumSep = createElementWithClass(
+      "span",
+      "cart__pages-num",
+      "pages__separator"
+    ) as HTMLSpanElement;
+    cartPagesPageNumSep.textContent = "/";
+    const cartPagesPageNumCommon = createElementWithClass(
+      "span",
+      "cart__pages-num",
+      "pages__common"
+    ) as HTMLSpanElement;
+    cartPagesPageNumCommon.textContent = "1";
 
+    cartPagesNums.append(
+      cartPagesPageNumCurrent,
+      cartPagesPageNumSep,
+      cartPagesPageNumCommon
+    );
     cartPagesArrowLeft.src = icons[0].src;
     cartPagesArrowLeft.alt = icons[0].name;
+    cartPagesArrowLeft.setAttribute("style", "pointer-events: none");
     cartPagesArrowRight.src = icons[1].src;
     cartPagesArrowRight.alt = icons[1].name;
+    cartPagesArrowRight.setAttribute("style", "pointer-events: none");
 
     cartLimitBlock.append(cartLimitTitle, cartLimitInput);
     cartPagesBlock.append(cartPagesControls);
     cartPagesControls.append(
       cartPagesArrowLeft,
-      cartPagesPageNum,
+      cartPagesNums,
       cartPagesArrowRight
     );
 
@@ -421,6 +452,7 @@ class Cart extends Component {
               updateValues();
             } else if (productNum.textContent == "1") {
               removeFromCart1(`${productsInfo[j].id - 1}`);
+              cartProducts.removeChild(productWrapper);
               productWrapper.style.display = "none";
               productNum.textContent = "0";
               productSumm.textContent = "0";

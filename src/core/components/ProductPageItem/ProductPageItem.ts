@@ -26,7 +26,8 @@ class ProductPageItem extends Component {
     const productSlider = createElementWithClass("div", "product__slider");
     const arrowLeft = createElementWithClass(
       "img",
-      "arrow__left"
+      "arrow__left",
+      "disabled"
     ) as HTMLImageElement;
     const arrowRight = createElementWithClass(
       "img",
@@ -104,6 +105,7 @@ class ProductPageItem extends Component {
     });
     arrowRight.addEventListener("click", () => {
       sliderImages.style.backgroundImage = `url("${productsInfo[idOfItem].images[1]}")`;
+      arrowLeft.classList.remove("disabled");
       arrowRight.style.opacity = "0.2";
       arrowLeft.style.opacity = "1";
     });
