@@ -2,14 +2,15 @@ import ProductItem from "../ProductItem/ProductItem";
 import { productModel } from "../../models/ProductsModel";
 import { ProductData } from "../../interfaces/Products";
 import { store } from "../../store/Store";
+import { AppComponent } from "../../interfaces/AppComponent";
 import { productsInfo } from "../../data/products/products";
-import { setBtns } from "../ProductItem/ProductItem";
 import { updateTotal } from "../Header/Total/Total";
 
-export default class ProductsList {
+export default class ProductsList implements AppComponent {
   private loading = !store.Loaded ? true : false;
   private error: Error | null = null;
   private static products: ProductData[] = [];
+  private static productsComponents: ProductItem[] = [];
 
   constructor() {
     this.fetchProducts();
@@ -21,27 +22,42 @@ export default class ProductsList {
           ProductsList.products = filterProducts.length
             ? filterProducts
             : products;
+          ProductsList.productsComponents = ProductsList.products.map(
+            (product: ProductData) => new ProductItem(product)
+          );
         }
       });
     } else {
       if (store.SearchedProducts.length !== 0) {
         ProductsList.products = store.SearchedProducts;
+        ProductsList.productsComponents = ProductsList.products.map(
+          (product: ProductData) => new ProductItem(product)
+        );
       } else {
         const searchInput = document.querySelector(
           ".search__input"
         ) as HTMLInputElement;
         if (searchInput) {
-          if (searchInput.value.length) {
+          if (searchInput.value.length !== 0) {
             ProductsList.products = [];
+            ProductsList.productsComponents = ProductsList.products.map(
+              (product: ProductData) => new ProductItem(product)
+            );
           } else {
             ProductsList.products = store.FilterProducts.length
               ? store.FilterProducts
               : store.Products;
+            ProductsList.productsComponents = ProductsList.products.map(
+              (product: ProductData) => new ProductItem(product)
+            );
           }
         } else {
           ProductsList.products = store.FilterProducts.length
             ? store.FilterProducts
             : store.Products;
+          ProductsList.productsComponents = ProductsList.products.map(
+            (product: ProductData) => new ProductItem(product)
+          );
         }
       }
     }
@@ -52,8 +68,6 @@ export default class ProductsList {
       this.error = error;
       this.loading = false;
     });
-    getButtons(2010);
-    setBtns(2015);
   };
 
   render = () => {
@@ -65,15 +79,21 @@ export default class ProductsList {
       }
       ${this.error ? `${this.error.message}` : ""}
       ${
-        !ProductsList.products.length && this.loading !== true
+        !ProductsList.productsComponents.length && this.loading !== true
           ? `<p class="products-content__no-items">Not items found</p>`
-          : ProductsList.products
-              .sort((a, b) => a.title.localeCompare(b.title))
-              .map((product: ProductData) => new ProductItem(product))
-              .map((el: ProductItem) => el.render().outerHTML)
+          : ProductsList.productsComponents
+              .map((product) => {
+                return product.render();
+              })
               .join("")
       }
     `;
+  };
+
+  addEvents = () => {
+    ProductsList.productsComponents.forEach((product) => {
+      product.addEvents();
+    });
   };
 }
 
@@ -158,16 +178,6 @@ addEventListener("popstate", () => {
   }
   saveButtons();
   saveCart();
-  getButtons(10);
-  setBtns(15);
-  const productCounter = document.querySelector(
-    ".products-count"
-  ) as HTMLParagraphElement;
-  if (localStorage.getItem("product-in-cart") == "null") {
-    productCounter.textContent = "0";
-  } else {
-    productCounter.textContent = `${localStorage.getItem("product-in-cart")}`;
-  }
 });
 
 const saveButtons = () => {
@@ -207,8 +217,6 @@ window.addEventListener("load", () => {
     totalSum = Number(localStorage.getItem("total"));
   }
   console.log(cartArray);
-  getButtons(2010);
-  setBtns(2015);
   updateTotal;
 });
 

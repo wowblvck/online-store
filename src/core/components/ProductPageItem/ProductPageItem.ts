@@ -6,11 +6,13 @@ import { productsInfo } from "../../data/products/products";
 import { addToCart } from "../ProductsList/ProductsList";
 import { removeFromCart } from "../ProductsList/ProductsList";
 import { cartArray } from "../ProductsList/ProductsList";
-import { createModal } from "../Modal/Modal";
+import { Modal } from "../Cart/Modal/Modal";
 import { PageIds } from "../../interfaces/Page";
 
 class ProductPageItem extends Component {
   private subContainer: Container;
+
+  private modal = new Modal("div", "modal__wrapper");
 
   constructor(tagName: string, className: string, ...subClass: string[]) {
     super(tagName, className, ...subClass);
@@ -188,7 +190,7 @@ class ProductPageItem extends Component {
     );
     productSlider.append(arrowLeft, sliderImages, arrowRight);
     productButtons.append(buttonAdd, buttonBuyNow);
-    this.subContainer.render().append(createModal(), productWrapper);
+    this.subContainer.render().append(this.modal.render(), productWrapper);
   };
 
   render = () => {

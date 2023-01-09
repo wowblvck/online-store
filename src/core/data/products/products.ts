@@ -7,7 +7,7 @@ const images: ImageMap = importAll(require.context("./images", true, /\.jpg/));
 
 export const productsInfo: ProductData[] = [
   {
-    id: 1,
+    id: 0,
     title: "iPhone 11",
     category: "smartphone",
     description:
@@ -18,7 +18,7 @@ export const productsInfo: ProductData[] = [
     images: [images["1/1.jpg"], images["1/2.jpg"]],
   },
   {
-    id: 2,
+    id: 1,
     title: "iPhone 12",
     category: "smartphone",
     description:
@@ -29,7 +29,7 @@ export const productsInfo: ProductData[] = [
     images: [images["2/1.jpg"], images["2/2.jpg"]],
   },
   {
-    id: 3,
+    id: 2,
     title: "iPhone 13",
     category: "smartphone",
     description:
@@ -40,7 +40,7 @@ export const productsInfo: ProductData[] = [
     images: [images["3/1.jpg"], images["3/2.jpg"]],
   },
   {
-    id: 4,
+    id: 3,
     title: "HUAWEI nova Y70",
     category: "smartphone",
     description:
@@ -51,7 +51,7 @@ export const productsInfo: ProductData[] = [
     images: [images["4/1.jpg"], images["4/2.jpg"]],
   },
   {
-    id: 5,
+    id: 4,
     title: "HUAWEI nova 9 SE",
     category: "smartphone",
     description:
@@ -62,7 +62,7 @@ export const productsInfo: ProductData[] = [
     images: [images["5/1.jpg"], images["5/2.jpg"]],
   },
   {
-    id: 6,
+    id: 5,
     title: "Samsung Galaxy A73",
     category: "smartphone",
     description:
@@ -73,7 +73,7 @@ export const productsInfo: ProductData[] = [
     images: [images["6/1.jpg"], images["6/2.jpg"]],
   },
   {
-    id: 7,
+    id: 6,
     title: "Samsung Galaxy Z Flip3",
     category: "smartphone",
     description:
@@ -84,7 +84,7 @@ export const productsInfo: ProductData[] = [
     images: [images["7/1.jpg"], images["7/2.jpg"]],
   },
   {
-    id: 8,
+    id: 7,
     title: "Acer Extensa 15",
     category: "laptop",
     description:
@@ -95,7 +95,7 @@ export const productsInfo: ProductData[] = [
     images: [images["8/1.jpg"], images["8/2.jpg"]],
   },
   {
-    id: 9,
+    id: 8,
     title: "ASUS Laptop 15",
     category: "laptop",
     description:
@@ -106,7 +106,7 @@ export const productsInfo: ProductData[] = [
     images: [images["9/1.jpg"], images["9/2.jpg"]],
   },
   {
-    id: 10,
+    id: 9,
     title: "ASUS ExpertBook P1",
     category: "laptop",
     description:
@@ -117,7 +117,7 @@ export const productsInfo: ProductData[] = [
     images: [images["10/1.jpg"], images["10/2.jpg"]],
   },
   {
-    id: 11,
+    id: 10,
     title: "HP 255 Laptop",
     category: "laptop",
     description:
@@ -128,7 +128,7 @@ export const productsInfo: ProductData[] = [
     images: [images["11/1.jpg"], images["11/2.jpg"]],
   },
   {
-    id: 12,
+    id: 11,
     title: "Samsung Galaxy Tab A8",
     category: "tablet",
     description:
@@ -139,7 +139,7 @@ export const productsInfo: ProductData[] = [
     images: [images["12/1.jpg"], images["12/2.jpg"]],
   },
   {
-    id: 13,
+    id: 12,
     title: "Realme Pad",
     category: "tablet",
     description:
@@ -150,7 +150,7 @@ export const productsInfo: ProductData[] = [
     images: [images["13/1.jpg"], images["13/2.jpg"]],
   },
   {
-    id: 14,
+    id: 13,
     title: "HUAWEI MatePad Pro",
     category: "tablet",
     description:
@@ -161,7 +161,7 @@ export const productsInfo: ProductData[] = [
     images: [images["14/1.jpg"], images["14/2.jpg"]],
   },
   {
-    id: 15,
+    id: 14,
     title: "Apple Watch Series 7",
     category: "watches",
     description:
@@ -172,7 +172,7 @@ export const productsInfo: ProductData[] = [
     images: [images["15/1.jpg"], images["15/2.jpg"]],
   },
   {
-    id: 16,
+    id: 15,
     title: "Garmin Venu Sq 2",
     category: "watches",
     description:
@@ -183,7 +183,7 @@ export const productsInfo: ProductData[] = [
     images: [images["16/1.jpg"], images["16/2.jpg"]],
   },
   {
-    id: 17,
+    id: 16,
     title: "LED LG 50NANO829QB",
     category: "TV",
     description:
@@ -194,7 +194,7 @@ export const productsInfo: ProductData[] = [
     images: [images["17/1.jpg"], images["17/2.jpg"]],
   },
   {
-    id: 18,
+    id: 17,
     title: "LED Polarline 58PU55STC-SM",
     category: "TV",
     description:
@@ -205,7 +205,7 @@ export const productsInfo: ProductData[] = [
     images: [images["18/1.jpg"], images["18/2.jpg"]],
   },
   {
-    id: 19,
+    id: 18,
     title: "LED Haier 55 Smart TV DX2",
     category: "TV",
     description:
@@ -216,7 +216,7 @@ export const productsInfo: ProductData[] = [
     images: [images["19/1.jpg"], images["19/2.jpg"]],
   },
   {
-    id: 20,
+    id: 19,
     title: "LED LG 43UQ81009LC",
     category: "TV",
     description:

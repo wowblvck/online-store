@@ -1,5 +1,6 @@
 import Page from "../../core/templates/Page";
 import Cart from "../../core/components/Cart/Cart";
+// import { Cart } from "../../core/components/Cart/NewCart";
 
 class CartPage extends Page {
   private cart = new Cart("section", "product", "main__cart");
@@ -11,6 +12,10 @@ class CartPage extends Page {
   constructor(id: string) {
     super(id);
   }
+
+  // addEvents = () => {
+  //   this.cart.addEvents();
+  // };
 
   render() {
     this.updateTitle(CartPage.TextObject.Title);

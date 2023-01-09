@@ -6,6 +6,8 @@ import { store } from "../../../store/Store";
 import Container from "../../Container/Container";
 
 class Products extends Component {
+  private products = new ProductsList();
+
   constructor(tagName: string, className: string, ...subClass: string[]) {
     super(tagName, className, ...subClass);
   }
@@ -22,16 +24,19 @@ class Products extends Component {
 
   createProductsContent = () => {
     const container = new Container("div", "products-content");
-    const prodContent = new ProductsList();
     store.$state.subscribe(() => {
       const root: HTMLElement | null =
         document.querySelector(".products-content");
       if (root) {
-        root.innerHTML = prodContent.render();
+        root.innerHTML = this.products.render();
       }
     });
-    container.render().innerHTML = prodContent.render();
+    container.render().innerHTML = this.products.render();
     this.container.append(container.render());
+  };
+
+  addEvents = () => {
+    this.products.addEvents();
   };
 
   render = () => {

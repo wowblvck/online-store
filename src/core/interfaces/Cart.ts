@@ -1,14 +1,15 @@
 import { ProductData } from "./Products";
 
-interface CardData {
+interface CartData {
   [key: string]: {
     amount: number;
+    price: number;
     product: ProductData;
   };
 }
 
 interface Cart {
-  products: CardData;
+  products: CartData;
 }
 
 export { Cart };
