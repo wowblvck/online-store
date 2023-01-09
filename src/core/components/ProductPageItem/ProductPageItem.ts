@@ -7,6 +7,7 @@ import { addToCart } from "../ProductsList/ProductsList";
 import { removeFromCart } from "../ProductsList/ProductsList";
 import { cartArray } from "../ProductsList/ProductsList";
 import { createModal } from "../Modal/Modal";
+import { PageIds } from "../../interfaces/Page";
 
 class ProductPageItem extends Component {
   private subContainer: Container;
@@ -23,6 +24,68 @@ class ProductPageItem extends Component {
       "div",
       "product__wrapper"
     ) as HTMLDivElement;
+
+    const pathWrapper = createElementWithClass(
+      "div",
+      "product__path-wrapper"
+    ) as HTMLDivElement;
+    const pathStore = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathStore.textContent = "Catalog";
+    const pathCategory = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathStore.style.cursor = "pointer";
+    pathStore.addEventListener("click", () => {
+      location.href = `#${PageIds.CatalogPage}`;
+    });
+    const category = productsInfo[idOfItem].category.split("");
+    const arr = [];
+    for (let i = 0; i < category.length; i++) {
+      if (i == 0) {
+        arr.push(category[i].toUpperCase());
+      } else {
+        arr.push(category[i]);
+      }
+    }
+    pathCategory.textContent = arr.join("");
+    const pathBrand = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathBrand.textContent = `${productsInfo[idOfItem].brand}`;
+    const pathTitle = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathTitle.textContent = `${productsInfo[idOfItem].title}`;
+    const pathSeparator = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathSeparator.textContent = "●";
+    const pathSeparator_1 = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathSeparator_1.textContent = "●";
+    const pathSeparator_2 = createElementWithClass(
+      "span",
+      "product__path-item"
+    ) as HTMLSpanElement;
+    pathSeparator_2.textContent = "●";
+    pathWrapper.append(
+      pathStore,
+      pathSeparator,
+      pathCategory,
+      pathSeparator_1,
+      pathBrand,
+      pathSeparator_2,
+      pathTitle
+    );
 
     const productSlider = createElementWithClass("div", "product__slider");
     const arrowLeft = createElementWithClass(
@@ -116,6 +179,7 @@ class ProductPageItem extends Component {
     });
 
     productWrapper.append(
+      pathWrapper,
       productSlider,
       productBrand,
       productTitle,
