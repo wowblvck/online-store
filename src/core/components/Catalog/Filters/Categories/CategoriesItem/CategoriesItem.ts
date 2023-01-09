@@ -94,9 +94,10 @@ export default class CategoriesItem implements AppComponent {
                 product.title.toLowerCase().includes(searchTerm)
               );
             });
-
             store.SearchedProducts = foundProducts;
           }
+        } else {
+          store.SearchedProducts = [];
         }
       }
 
@@ -116,6 +117,7 @@ export default class CategoriesItem implements AppComponent {
       const productList = new ProductsList();
       if (wrapper) {
         wrapper.innerHTML = productList.render();
+        productList.addEvents();
       }
     });
   }

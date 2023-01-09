@@ -25,6 +25,7 @@ class Catalog extends Component {
 
   addEvents() {
     this.filters.addEvents();
+    this.products.addEvents();
   }
 
   render = () => {

@@ -62,6 +62,9 @@ class App {
             (App.page as CatalogPage).addEvents();
           }
         }
+        // if (idPage === PageIds.CartPage) {
+        //   (App.page as CartPage).addEvents();
+        // }
       });
     }
 

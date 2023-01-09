@@ -55,6 +55,7 @@ class Search extends Component {
       const productList = new ProductsList();
       if (wrapper) {
         wrapper.innerHTML = productList.render();
+        productList.addEvents();
       }
 
       const foundWrapper = document.querySelector(

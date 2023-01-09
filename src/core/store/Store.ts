@@ -31,7 +31,10 @@ class Store {
   }
 
   update = (state: Partial<State> = {}) => {
-    this.$state.next({ ...this.state, ...state });
+    this.$state.next({
+      ...this.state,
+      ...state,
+    });
   };
 
   get Products() {
@@ -64,6 +67,10 @@ class Store {
 
   set SearchedProducts(products: ProductData[]) {
     this.state.searchedProducts = products;
+  }
+
+  get CartProducts() {
+    return this.state.cart;
   }
 
   get FilterProducts() {

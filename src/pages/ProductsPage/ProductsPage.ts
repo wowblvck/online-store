@@ -1,8 +1,8 @@
 import Page from "../../core/templates/Page";
-import ProductItem from "../../core/components/ProductPageItem/ProductPageItem";
+import ProductPageItem from "../../core/components/ProductPageItem/ProductPageItem";
 
 class ProductsPage extends Page {
-  private productItem = new ProductItem("section", "product", "main");
+  private productItem = new ProductPageItem("section", "product", "main");
 
   static TextObject = {
     Title: "Product | Online Store",

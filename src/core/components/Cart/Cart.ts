@@ -1,12 +1,12 @@
 import Component from "../../templates/Component";
 import Container from "../Container/Container";
-import { createElementWithClass } from "../../../core/utils/functions";
-import { icons } from "../../../core/data/images/images";
+import { createElementWithClass } from "../../utils/functions";
+import { icons } from "../../data/images/images";
 import { productsInfo } from "../../data/products/products";
 import { cartArray } from "../ProductsList/ProductsList";
 import { PageIds } from "../../interfaces/Page";
-import { removeFromCart1 } from "../ProductsList/ProductsList";
-import { createModal } from "../Modal/Modal";
+// import { removeFromCart1 } from "../ProductsList/ProductsList";
+import { Modal } from "./Modal/Modal";
 import { promoCodes } from "../../data/promo/promoCodes";
 import { sortProducts } from "../../Pagination/Pagination";
 import { goNextPage } from "../../Pagination/Pagination";
@@ -14,6 +14,8 @@ import { goPrevPage } from "../../Pagination/Pagination";
 
 class Cart extends Component {
   private subContainer: Container;
+
+  private modal = new Modal("div", "modal__wrapper");
 
   constructor(tagName: string, className: string, ...subClass: string[]) {
     super(tagName, className, ...subClass);
@@ -69,7 +71,7 @@ class Cart extends Component {
       "p",
       "summary__products-num"
     ) as HTMLParagraphElement;
-    summaryProductsNum.textContent = "Products: 0";
+    summaryProductsNum.textContent = `Products: 0`;
 
     const summaryPricesContainer = createElementWithClass(
       "div",
@@ -437,7 +439,7 @@ class Cart extends Component {
               console.log(cartArray);
               updateValues();
             } else if (productNum.textContent == "1") {
-              removeFromCart1(`${productsInfo[j].id - 1}`);
+              // removeFromCart1(`${productsInfo[j].id - 1}`);
               cartProducts.removeChild(productWrapper);
               productWrapper.style.display = "none";
               productNum.textContent = "0";
@@ -461,7 +463,9 @@ class Cart extends Component {
     }
     console.log(cartArray);
     setTimeout(updateValues, 10);
-    this.subContainer.render().append(createModal(), cartBlock, summaryBlock);
+    this.subContainer
+      .render()
+      .append(this.modal.render(), cartBlock, summaryBlock);
   };
 
   render = () => {

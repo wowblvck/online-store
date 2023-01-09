@@ -1,108 +1,74 @@
-import Container from "../Container/Container";
-import Button from "../Button/Button";
-import { createElementWithClass } from "../../utils/functions";
-import { ProductData } from "../../interfaces/Products";
-
+import { AppComponent } from "../../interfaces/AppComponent";
 import { PageIds } from "../../interfaces/Page";
+import { ProductData } from "../../interfaces/Products";
+import { cartModel } from "../../models/CartModel";
 
-export default class ProductItem {
-  private container: Container;
-  private wrapper: Container;
+export default class ProductItem implements AppComponent {
+  private product: ProductData;
 
-  constructor(private product: ProductData) {
-    this.container = new Container("div", "products-item");
-    this.wrapper = new Container("div", "products-item__wrapper");
+  constructor(product: ProductData) {
+    this.product = product;
   }
 
-  createTitle = () => {
-    const title = createElementWithClass(
-      "h3",
-      "products-item__title"
-    ) as HTMLHeadingElement;
-    this.container.render().style.backgroundImage = `url(${this.product.images[0]})`;
-    title.textContent = this.product.title;
-    return this.container.render().append(title);
-  };
-
-  createWrapper = () => {
-    const category = createElementWithClass(
-      "p",
-      "products-item__category"
-    ) as HTMLParagraphElement;
-    category.textContent = `Category: ${
-      this.product.category.charAt(0).toUpperCase() +
-      this.product.category.slice(1)
-    }`;
-
-    const brand = createElementWithClass(
-      "p",
-      "products-item__brand"
-    ) as HTMLParagraphElement;
-    brand.textContent = `Brand: ${
-      this.product.brand.charAt(0).toUpperCase() + this.product.brand.slice(1)
-    }`;
-
-    const price = createElementWithClass(
-      "p",
-      "products-item__price"
-    ) as HTMLParagraphElement;
-    price.textContent = `Price: ${this.product.price}$`;
-
-    const stock = createElementWithClass(
-      "p",
-      "products-item__stock"
-    ) as HTMLParagraphElement;
-    stock.textContent = `Stock: ${this.product.stock}`;
-    return this.wrapper.render().append(category, brand, price, stock);
-  };
-
-  createButton = () => {
-    const wrapper = new Container("div", "products-item__buttons-wrapper");
-
-    const btnAdd = new Button(
-      "button",
-      "products-item__button",
-      "btn__add-to-cart"
-    );
-    btnAdd.render().textContent = "Add to cart";
-
-    const btnMore = new Button(
-      "button",
-      "products-item__button",
-      "btn__see-more"
-    );
-    btnMore.render().textContent = "See more";
-
-    wrapper.render().append(btnAdd.render(), btnMore.render());
-
-    return this.wrapper.render().append(wrapper.render());
-  };
+  private getAddHtmlID = () => `add_${this.product.id}`;
+  private getSeeHtmlID = () => `see_${this.product.id}`;
 
   render = () => {
-    this.createTitle();
-    this.createWrapper();
-    this.createButton();
-    this.container.render().append(this.wrapper.render());
-    return this.container.render();
+    return `
+      <div class="products-item" style="background-image: url(${
+        this.product.images[0]
+      })">
+        <h3 class="products-item__title">${this.product.title}</h3>
+        <div class="products-item__wrapper">
+          <p class="products-item__category">Category: ${
+            this.product.category.charAt(0).toUpperCase() +
+            this.product.category.slice(1)
+          }
+          </p>
+          <p class="products-item__brand">Brand: ${
+            this.product.brand.charAt(0).toUpperCase() +
+            this.product.brand.slice(1)
+          }
+          </p>
+          <p class="products-item__price">Price: ${this.product.price}$</p>
+          <p class="products-item__stock">Stock: ${this.product.stock}</p>
+          <div class="products-item__buttons-wrapper">
+            <button class="products-item__button btn__add-to-cart" id="${this.getAddHtmlID()}">${
+      cartModel.checkProduct(this.product) ? "Remove" : "Add to cart"
+    }</button>
+            <button class="products-item__button btn__see-more" id="${this.getSeeHtmlID()}">See more</button>
+          </div>
+        </div>
+      </div>
+    `;
   };
-}
 
-export const setBtns = (timer: number) => {
-  setTimeout(() => {
-    const btnMore = document.querySelectorAll(".btn__see-more");
-    const btnAdd = document.querySelectorAll(".btn__add-to-cart");
-    if (btnMore.length != 0) {
-      for (let i = 0; i < btnMore.length; i++) {
-        btnMore[i].setAttribute("id", `${i}`);
-        btnAdd[i].setAttribute("id", `${i}`);
+  addEvents() {
+    const seeButton = document.getElementById(this.getSeeHtmlID());
+    if (!seeButton) throw new Error("Button is undefined");
+    seeButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      const btn = e.currentTarget as HTMLButtonElement;
+      const btnID = btn.getAttribute("id")?.replace(/\D/g, "");
+      location.href = `#${PageIds.ProductsPage}`;
+      localStorage.setItem("idOfItem", btnID as string);
+    });
+
+    const addButton = document.getElementById(this.getAddHtmlID());
+    if (!addButton) throw new Error("Button is undefined");
+    addButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (cartModel.checkProduct(this.product)) {
+        cartModel.removeProduct(this.product);
+      } else {
+        cartModel.addProduct(this.product);
       }
-      btnMore.forEach((el) =>
-        el.addEventListener("click", () => {
-          localStorage.setItem("idOfItem", `${el.getAttribute("id")}`);
-          location.href = `#${PageIds.ProductsPage}`;
-        })
-      );
-      return;
-    }
-  }, timer);
-};
+      const productsCount = document.querySelector(
+        ".products-count"
+      ) as HTMLParagraphElement;
+      if (productsCount) {
+        productsCount.textContent = cartModel.getTotalAmount().toString();
+      }
+    });
+  }
+}
