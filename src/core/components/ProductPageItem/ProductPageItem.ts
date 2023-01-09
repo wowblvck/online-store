@@ -6,6 +6,7 @@ import { productsInfo } from "../../data/products/products";
 import { addToCart } from "../ProductsList/ProductsList";
 import { removeFromCart } from "../ProductsList/ProductsList";
 import { cartArray } from "../ProductsList/ProductsList";
+import { createModal } from "../Modal/Modal";
 
 class ProductPageItem extends Component {
   private subContainer: Container;
@@ -97,6 +98,10 @@ class ProductPageItem extends Component {
       "product__button"
     ) as HTMLButtonElement;
     buttonBuyNow.textContent = "Buy now";
+    buttonBuyNow.addEventListener("click", () => {
+      const modal = document.querySelector(".modal__wrapper") as HTMLDivElement;
+      modal.style.display = "flex";
+    });
 
     arrowLeft.addEventListener("click", () => {
       sliderImages.style.backgroundImage = `url("${productsInfo[idOfItem].images[0]}")`;
@@ -119,7 +124,7 @@ class ProductPageItem extends Component {
     );
     productSlider.append(arrowLeft, sliderImages, arrowRight);
     productButtons.append(buttonAdd, buttonBuyNow);
-    this.subContainer.render().append(productWrapper);
+    this.subContainer.render().append(createModal(), productWrapper);
   };
 
   render = () => {

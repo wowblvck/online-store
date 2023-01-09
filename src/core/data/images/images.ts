@@ -22,6 +22,7 @@ import cardLogo from "../../../assets/icons/credit-card1.png";
 import visa from "../../../assets/icons/visa.png";
 import masterCard from "../../../assets/icons/mastercard.png";
 import americanExpress from "../../../assets/icons/americanexpress.png";
+import successLogo from "../../../assets/icons/ok.png";
 
 //Multimedia Icons
 import camera from "../../../assets/icons/multimedia/camera.svg";
@@ -69,6 +70,10 @@ const images: ImagesData = {
   "american-express": {
     name: "American Express",
     src: americanExpress,
+  },
+  "success-logo": {
+    name: "Success logo",
+    src: successLogo,
   },
 };
 

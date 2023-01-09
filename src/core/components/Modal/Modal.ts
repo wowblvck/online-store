@@ -1,5 +1,7 @@
 import { createElementWithClass } from "../../utils/functions";
 import { images } from "../../data/images/images";
+import { PageIds } from "../../interfaces/Page";
+import { cartArray } from "../ProductsList/ProductsList";
 
 export const createModal = () => {
   const modalWrapper = createElementWithClass(
@@ -37,16 +39,22 @@ export const createModal = () => {
           modalNameErr.style.opacity = "0";
           modalNameErr.style.visibility = "hidden";
           modalName.style.border = "1px solid gray";
+          modalNameErr.removeAttribute("id");
+          modalNameErr.setAttribute("id", "success");
         } else {
           modalNameErr.style.opacity = "1";
           modalNameErr.style.visibility = "visible";
           modalName.style.border = "1px solid red";
+          modalNameErr.removeAttribute("id");
+          modalNameErr.setAttribute("id", "error");
         }
       }
     } else {
       modalNameErr.style.opacity = "1";
       modalNameErr.style.visibility = "visible";
       modalName.style.border = "1px solid red";
+      modalNameErr.removeAttribute("id");
+      modalNameErr.setAttribute("id", "error");
     }
   });
 
@@ -85,10 +93,14 @@ export const createModal = () => {
       modalPhoneErr.style.opacity = "0";
       modalPhoneErr.style.visibility = "hidden";
       modalPhone.style.border = "1px solid gray";
+      modalPhoneErr.removeAttribute("id");
+      modalPhoneErr.setAttribute("id", "success");
     } else {
       modalPhoneErr.style.opacity = "1";
       modalPhoneErr.style.visibility = "visible";
       modalPhone.style.border = "1px solid red";
+      modalPhoneErr.removeAttribute("id");
+      modalPhoneErr.setAttribute("id", "error");
     }
   });
 
@@ -115,16 +127,22 @@ export const createModal = () => {
           modalAddressErr.style.opacity = "0";
           modalAddressErr.style.visibility = "hidden";
           modalAddress.style.border = "1px solid gray";
+          modalAddressErr.removeAttribute("id");
+          modalAddressErr.setAttribute("id", "success");
         } else {
           modalAddressErr.style.opacity = "1";
           modalAddressErr.style.visibility = "visible";
           modalAddress.style.border = "1px solid red";
+          modalAddressErr.removeAttribute("id");
+          modalAddressErr.setAttribute("id", "error");
         }
       }
     } else {
       modalAddressErr.style.opacity = "1";
       modalAddressErr.style.visibility = "visible";
       modalAddress.style.border = "1px solid red";
+      modalAddressErr.removeAttribute("id");
+      modalAddressErr.setAttribute("id", "error");
     }
   });
 
@@ -151,16 +169,22 @@ export const createModal = () => {
           modalEmailErr.style.opacity = "0";
           modalEmailErr.style.visibility = "hidden";
           modalEmail.style.border = "1px solid gray";
+          modalEmailErr.removeAttribute("id");
+          modalEmailErr.setAttribute("id", "success");
         } else if (val[0].length < 5) {
           modalEmailErr.style.opacity = "1";
           modalEmailErr.style.visibility = "visible";
           modalEmail.style.border = "1px solid red";
+          modalEmailErr.removeAttribute("id");
+          modalEmailErr.setAttribute("id", "error");
         }
       }
     } else {
       modalEmailErr.style.opacity = "1";
       modalEmailErr.style.visibility = "visible";
       modalEmail.style.border = "1px solid red";
+      modalEmailErr.removeAttribute("id");
+      modalEmailErr.setAttribute("id", "error");
     }
   });
 
@@ -219,10 +243,14 @@ export const createModal = () => {
       cardNumberError.style.opacity = "0";
       cardNumberError.style.visibility = "hidden";
       cardNumberInput.style.border = "1px solid gray";
+      cardNumberError.removeAttribute("id");
+      cardNumberError.setAttribute("id", "success");
     } else {
       cardNumberError.style.opacity = "1";
       cardNumberError.style.visibility = "visible";
       cardNumberInput.style.border = "1px solid red";
+      cardNumberError.removeAttribute("id");
+      cardNumberError.setAttribute("id", "error");
     }
   });
 
@@ -247,6 +275,44 @@ export const createModal = () => {
     "modal__credit-card-date"
   ) as HTMLInputElement;
   cardDateInput.placeholder = "Valid Thru";
+  cardDateInput.maxLength = 5;
+  cardDateInput.addEventListener("input", () => {
+    const val = cardDateInput.value;
+    if (val.length == 2) {
+      cardDateInput.value = `${val}/`;
+    }
+    if (val.length == 3) {
+      cardDateInput.value = `${val[0] + val[1]}`;
+    }
+    if (Number(val[0] + val[1]) > 12) {
+      cardDateInputError.style.opacity = "1";
+      cardDateInputError.style.visibility = "visible";
+      cardDateInput.style.border = "1px solid red";
+      cardDateInputError.removeAttribute("id");
+      cardDateInputError.setAttribute("id", "success");
+    } else if (val.length < 5) {
+      cardDateInputError.style.opacity = "1";
+      cardDateInputError.style.visibility = "visible";
+      cardDateInput.style.border = "1px solid red";
+      cardDateInputError.removeAttribute("id");
+      cardDateInputError.setAttribute("id", "error");
+    } else {
+      cardDateInputError.style.opacity = "0";
+      cardDateInputError.style.visibility = "hidden";
+      cardDateInput.style.border = "1px solid gray";
+      cardDateInputError.removeAttribute("id");
+      cardDateInputError.setAttribute("id", "success");
+    }
+    for (let i = 0; i < val.length; i++) {
+      if (val[i].match(/[a-z]/i)) {
+        cardDateInputError.style.opacity = "1";
+        cardDateInputError.style.visibility = "visible";
+        cardDateInput.style.border = "1px solid red";
+        cardDateInputError.removeAttribute("id");
+        cardDateInputError.setAttribute("id", "error");
+      }
+    }
+  });
 
   const cardDateInputError = createElementWithClass(
     "span",
@@ -261,6 +327,23 @@ export const createModal = () => {
     "modal__credit-card-cvv"
   ) as HTMLInputElement;
   cardCvvInput.placeholder = "CVV";
+  cardCvvInput.type = "number";
+  cardCvvInput.addEventListener("input", () => {
+    const val = cardCvvInput.value;
+    if (val.length != 3) {
+      cardCvvInputError.style.opacity = "1";
+      cardCvvInputError.style.visibility = "visible";
+      cardCvvInput.style.border = "1px solid red";
+      cardCvvInputError.removeAttribute("id");
+      cardCvvInputError.setAttribute("id", "error");
+    } else {
+      cardCvvInputError.style.opacity = "0";
+      cardCvvInputError.style.visibility = "hidden";
+      cardCvvInput.style.border = "1px solid gray";
+      cardCvvInputError.removeAttribute("id");
+      cardCvvInputError.setAttribute("id", "success");
+    }
+  });
 
   const cardCvvInputError = createElementWithClass(
     "span",
@@ -278,11 +361,53 @@ export const createModal = () => {
   );
   creditCardWrappper.append(creditCardNumberContainer, cardDateCvvContainer);
 
+  const modalCommonErr = createElementWithClass(
+    "p",
+    "modal__common-error",
+    "error"
+  ) as HTMLParagraphElement;
+  modalCommonErr.textContent = "Error: all fields must be filled";
+  modalCommonErr.style.margin = "0";
+  modalCommonErr.style.color = "red";
+
   const buttonConfirm = createElementWithClass(
     "button",
     "modal__button-confirm"
   ) as HTMLButtonElement;
   buttonConfirm.textContent = "CONFIRM";
+  buttonConfirm.addEventListener("click", () => {
+    const errors = document.querySelectorAll(".error");
+    let counter = 0;
+    for (let i = 0; i < errors.length; i++) {
+      if (errors[i].getAttribute("id") == "success") {
+        counter++;
+      }
+    }
+    if (counter == 7) {
+      modalCommonErr.style.opacity = "0";
+      modalCommonErr.style.visibility = "hidden";
+      popupBg.style.opacity = "1";
+      popupBg.style.visibility = "visible";
+      popup.style.opacity = "1";
+      popup.style.visibility = "visible";
+      for (let i = 0; i < 200; i++) {
+        cartArray.pop();
+      }
+      for (let i = 0; i < 20; i++) {
+        localStorage.setItem(`add-buttons-value${i}`, "Add to cart");
+      }
+      setTimeout(() => {
+        location.href = `#${PageIds.MainPage}`;
+      }, 3000);
+    } else {
+      modalCommonErr.style.opacity = "1";
+      modalCommonErr.style.visibility = "visible";
+      setTimeout(() => {
+        modalCommonErr.style.opacity = "0";
+        modalCommonErr.style.visibility = "hidden";
+      }, 2000);
+    }
+  });
 
   modalForm.append(
     modalTitle,
@@ -296,8 +421,26 @@ export const createModal = () => {
     modalEmailErr,
     modalTitleBankCard,
     creditCardWrappper,
+    modalCommonErr,
     buttonConfirm
   );
-  modalWrapper.append(bg, modalForm);
+  const popupBg = createElementWithClass(
+    "div",
+    "modal__popup-bg"
+  ) as HTMLDivElement;
+  const popup = createElementWithClass("div", "modal__popup") as HTMLDivElement;
+  const successLogo = createElementWithClass(
+    "img",
+    "modal__popup-logo"
+  ) as HTMLImageElement;
+  successLogo.setAttribute("src", `${images["success-logo"].src}`);
+  const successText = createElementWithClass(
+    "p",
+    "modal__popup-text"
+  ) as HTMLParagraphElement;
+  successText.textContent = "Payment accepted";
+
+  popup.append(successLogo, successText);
+  modalWrapper.append(bg, modalForm, popupBg, popup);
   return modalWrapper;
 };
