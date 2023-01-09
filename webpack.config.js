@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const ghpages = require('gh-pages');
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -99,6 +100,10 @@ module.exports = () => {
     config.plugins.push(new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
     }));
+
+    ghpages.publish('dist', {
+      message: 'build: online-store production'
+    });
   } else {
     config.mode = "development";
     config.devtool = "source-map";
