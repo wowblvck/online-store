@@ -1,6 +1,15 @@
 .modal__phone {
-    width: 50%;
-    padding: 5px;
     border-radius: 5px;
     border: 1px solid gray;
+    margin-left: -7px;
+    padding: 5px 5px 5px 17px;
+    width: 100%;
+    width: 97%;
+}
+
+.modal__phone::-webkit-outer-spin-button,
+.modal__phone::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+    margin: 0;
 }

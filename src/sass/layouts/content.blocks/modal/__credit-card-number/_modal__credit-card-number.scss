@@ -3,4 +3,14 @@
     border-radius: 5px;
     padding: 5px;
     width: 70%;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.modal__credit-card-number::-webkit-outer-spin-button,
+.modal__credit-card-number::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+    margin: 0;
 }

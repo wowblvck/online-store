@@ -19,6 +19,9 @@ import cartMain from "../../../assets/icons/cart-home.png";
 import laptop from "../../../assets/images/laptop.png";
 import error404 from "../../../assets/images/error404.png";
 import cardLogo from "../../../assets/icons/credit-card1.png";
+import visa from "../../../assets/icons/visa.png";
+import masterCard from "../../../assets/icons/mastercard.png";
+import americanExpress from "../../../assets/icons/americanexpress.png";
 
 //Multimedia Icons
 import camera from "../../../assets/icons/multimedia/camera.svg";
@@ -54,6 +57,18 @@ const images: ImagesData = {
   "card-logo": {
     name: "Card Icon",
     src: cardLogo,
+  },
+  "visa-card": {
+    name: "Visa",
+    src: visa,
+  },
+  "master-card": {
+    name: "Master Card",
+    src: masterCard,
+  },
+  "american-express": {
+    name: "American Express",
+    src: americanExpress,
   },
 };
 

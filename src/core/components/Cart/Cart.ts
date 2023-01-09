@@ -8,7 +8,6 @@ import { PageIds } from "../../interfaces/Page";
 import { removeFromCart1 } from "../ProductsList/ProductsList";
 import { createModal } from "../Modal/Modal";
 import { promoCodes } from "../../data/promo/promoCodes";
-import ProductPageItem from "../ProductPageItem/ProductPageItem";
 import { sortProducts } from "../../Pagination/Pagination";
 import { goNextPage } from "../../Pagination/Pagination";
 import { goPrevPage } from "../../Pagination/Pagination";
@@ -100,17 +99,6 @@ class Cart extends Component {
       summaryTotal.setAttribute("id", `${i}`);
       summaryPricesContainer.append(summaryTotal);
     }
-
-    /*const summaryDiscount_10 = createElementWithClass(
-      "div",
-      "summary__total",
-      "summary__discount-10p"
-    ) as HTMLParagraphElement;
-    const summaryDiscount_20 = createElementWithClass(
-      "div",
-      "summary__total",
-      "summary__discount-20p"
-    ) as HTMLParagraphElement; */
     const discountBlock = createElementWithClass(
       "div",
       "summary__discounts"
@@ -217,8 +205,6 @@ class Cart extends Component {
     summaryMain.append(
       summaryProductsNum,
       summaryPricesContainer,
-      //summaryDiscount_10,
-      //summaryDiscount_20,
       discountBlock,
       summaryBtn
     );
@@ -465,6 +451,7 @@ class Cart extends Component {
                 "Add to cart"
               );
               updateValues();
+              sortProducts();
             } else {
               return false;
             }
