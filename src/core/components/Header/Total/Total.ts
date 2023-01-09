@@ -1,6 +1,6 @@
 import Component from "../../../templates/Component";
 import { createElementWithClass } from "../../../utils/functions";
-import { totalSum } from "../../ProductsList/ProductsList";
+// import { totalSum } from "../../ProductsList/ProductsList";
 
 export default class Total extends Component {
   constructor(tagName: string, className: string, ...subClass: string[]) {
