@@ -21,12 +21,31 @@ export async function getProductsFromStorage(): Promise<ProductData[]> {
       if (products === null) {
         resolve(getProducts(PRODUCTS));
       } else {
-        const arrayProducts = JSON.parse(products);
-        if (JSON.stringify(arrayProducts) === JSON.stringify(PRODUCTS)) {
+        const arrayProducts: ProductData[] = JSON.parse(products);
+        if (
+          JSON.stringify(arrayProducts.sort((a, b) => a.id - b.id)) ===
+          JSON.stringify(PRODUCTS.sort((a, b) => a.id - b.id))
+        ) {
           resolve(arrayProducts);
         } else {
           resolve(getProducts(PRODUCTS));
         }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+export async function getFilteredProductsFromStorage(): Promise<ProductData[]> {
+  return await new Promise((resolve, reject) => {
+    try {
+      const products = localStorage.getItem("filter-products");
+      if (products !== null) {
+        const arrayProducts = JSON.parse(products);
+        resolve(arrayProducts);
+      } else {
+        resolve([]);
       }
     } catch (error) {
       reject(error);
@@ -55,7 +74,7 @@ export async function getCategoriesFromStorage(
         );
         localStorage.setItem(
           "filters-categories",
-          JSON.stringify(productCategories.sort())
+          JSON.stringify(productCategories)
         );
         resolve(productCategories);
       }

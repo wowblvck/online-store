@@ -1,5 +1,5 @@
 import { BehaviorSubject } from "rxjs";
-import { ProductData } from "../interfaces/Products";
+import { ProductCategories, ProductData } from "../interfaces/Products";
 import { State } from "../interfaces/State";
 
 const DEFAULT_STATE: State = {
@@ -9,6 +9,7 @@ const DEFAULT_STATE: State = {
   },
   categories: [],
   filterProducts: [],
+  searchedProducts: [],
 };
 
 class Store {
@@ -18,7 +19,6 @@ class Store {
   private state = DEFAULT_STATE;
   public $state = new BehaviorSubject<State>(this.state);
   private loaded = false;
-  private filterProducts: ProductData[] = [];
 
   constructor() {
     if (Store.isExits) {
@@ -42,6 +42,14 @@ class Store {
     return this.state.categories;
   }
 
+  set Categories(categories: ProductCategories[]) {
+    this.state.categories = categories;
+    localStorage.setItem(
+      "filters-categories",
+      JSON.stringify(this.state.categories)
+    );
+  }
+
   get Loaded() {
     return this.loaded;
   }
@@ -50,24 +58,35 @@ class Store {
     this.loaded = state;
   }
 
+  get SearchedProducts() {
+    return this.state.searchedProducts ?? [];
+  }
+
+  set SearchedProducts(products: ProductData[]) {
+    this.state.searchedProducts = products;
+  }
+
   get FilterProducts() {
-    return this.filterProducts;
+    return this.state.filterProducts ?? [];
   }
 
   set FilterProducts(products: ProductData[]) {
     products.forEach((product) => {
-      const index = this.filterProducts.indexOf(product);
-      if (index === -1) {
-        this.filterProducts.push(product);
+      const index = this.state.filterProducts.indexOf(product);
+      if (index !== -1) {
+        this.state.filterProducts.splice(index, 1);
       } else {
-        this.filterProducts.splice(index, 1);
+        this.state.filterProducts.push(product);
       }
     });
-    console.log(this.filterProducts);
-    // localStorage.setItem(
-    //   "filter-products",
-    //   JSON.stringify(this.filterProducts)
-    // );
+    if (this.state.filterProducts.length) {
+      localStorage.setItem(
+        "filter-products",
+        JSON.stringify(this.state.filterProducts)
+      );
+    } else {
+      localStorage.removeItem("filter-products");
+    }
   }
 }
 

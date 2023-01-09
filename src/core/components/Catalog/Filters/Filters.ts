@@ -45,6 +45,7 @@ class Filters extends Component {
 
   addEvents() {
     this.categories.addEvents();
+    this.search.addEvents();
     // this.brands.addEvents();
   }
 

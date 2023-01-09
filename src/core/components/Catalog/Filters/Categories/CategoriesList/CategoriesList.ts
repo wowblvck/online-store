@@ -21,6 +21,11 @@ class CategoriesList implements AppComponent {
           );
         }
       });
+    } else {
+      CategoriesList.categories = store.Categories;
+      CategoriesList.categoriesComponents = CategoriesList.categories.map(
+        (category) => new CategoriesItem(category.name, category.state)
+      );
     }
   }
 
@@ -37,6 +42,7 @@ class CategoriesList implements AppComponent {
           ? `<div class="lds-ring lds-ring_view_small"><div></div><div></div><div></div><div></div></div>`
           : ""
       }
+      ${this.error ? `${this.error.message}` : ""}
       ${CategoriesList.categoriesComponents
         .map((category) => {
           return category.render();

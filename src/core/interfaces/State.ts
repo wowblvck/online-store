@@ -6,6 +6,7 @@ interface State {
   products: ProductData[];
   categories: ProductCategories[];
   filterProducts: ProductData[];
+  searchedProducts: ProductData[];
 }
 
 export { State };

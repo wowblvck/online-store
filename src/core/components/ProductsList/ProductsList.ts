@@ -10,27 +10,43 @@ export default class ProductsList {
   private error: Error | null = null;
   private static products: ProductData[] = [];
 
-  constructor(newProducts?: ProductData[]) {
+  constructor() {
     this.fetchProducts();
     if (!store.Loaded) {
-      store.$state.subscribe(({ products }) => {
-        if (products.length && this.loading === true) {
+      store.$state.subscribe(({ products, filterProducts }) => {
+        if ((products.length || filterProducts.length) && this.loading) {
           this.loading = false;
           this.error = null;
-          ProductsList.products = products;
+          ProductsList.products = filterProducts.length
+            ? filterProducts
+            : products;
         }
       });
     } else {
-      if (newProducts) {
-        ProductsList.products = newProducts;
+      if (store.SearchedProducts.length !== 0) {
+        ProductsList.products = store.SearchedProducts;
       } else {
-        ProductsList.products = store.Products;
+        const searchInput = document.querySelector(
+          ".search__input"
+        ) as HTMLInputElement;
+        if (searchInput) {
+          if (searchInput.value.length) {
+            ProductsList.products = [];
+          } else {
+            ProductsList.products = store.FilterProducts.length
+              ? store.FilterProducts
+              : store.Products;
+          }
+        } else {
+          ProductsList.products = store.FilterProducts.length
+            ? store.FilterProducts
+            : store.Products;
+        }
       }
     }
   }
 
   fetchProducts = () => {
-    // store.update();
     productModel.getProducts().catch((error) => {
       this.error = error;
       this.loading = false;
@@ -47,10 +63,15 @@ export default class ProductsList {
           : ""
       }
       ${this.error ? `${this.error.message}` : ""}
-      ${ProductsList.products
-        .map((product: ProductData) => new ProductItem(product))
-        .map((el: ProductItem) => el.render().outerHTML)
-        .join("")}
+      ${
+        !ProductsList.products.length && this.loading !== true
+          ? `<p class="products-content__no-items">Not items found</p>`
+          : ProductsList.products
+              .sort((a, b) => a.title.localeCompare(b.title))
+              .map((product: ProductData) => new ProductItem(product))
+              .map((el: ProductItem) => el.render().outerHTML)
+              .join("")
+      }
     `;
   };
 }
