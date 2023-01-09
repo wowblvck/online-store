@@ -1,4 +1,5 @@
 import { AppComponent } from "../../../../../interfaces/AppComponent";
+import { updateView } from "../../../Products/ProductsHeader/ProductsHeader";
 
 export default class BrandsItem implements AppComponent {
   private brand: string;
@@ -28,6 +29,7 @@ export default class BrandsItem implements AppComponent {
       e.preventDefault();
       const elem = e.target as HTMLLIElement;
       console.log(`Click ${elem.textContent}`);
+      updateView();
     });
   }
 }
