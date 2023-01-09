@@ -3,6 +3,7 @@
 //Example: createElementWithClass("div", "nav", "container__nav")
 
 import { ImageMap } from "../interfaces/Images";
+import { ProductData } from "../interfaces/Products";
 
 const createElementWithClass = (elemName: string, ...args: string[]) => {
   const node = document.createElement(elemName);
@@ -18,4 +19,10 @@ function importAll(r: __WebpackModuleApi.RequireContext): ImageMap {
   return images;
 }
 
-export { createElementWithClass, importAll };
+function toggleObjects(array: ProductData[], objects: ProductData[]) {
+  const toRemove = array.filter((a) => !objects.some((o) => o.id === a.id));
+  const toAdd = objects.filter((o) => !array.some((a) => a.id === o.id));
+  return array.filter((a) => toRemove.indexOf(a) === -1).concat(toAdd);
+}
+
+export { createElementWithClass, importAll, toggleObjects };

@@ -3,8 +3,11 @@ import Container from "../../../Container/Container";
 import { createElementWithClass } from "../../../../utils/functions";
 import { sorts } from "../../../../data/sorts/sorts";
 import Button from "../../../Button/Button";
+import { store } from "../../../../store/Store";
+import FoundItems from "./FoundItems/FoundItems";
 
 class ProductsHeader extends Component {
+  private foundItems = new FoundItems();
   private sortWrapper: Container;
   private viewItems: Container;
   constructor(tagName: string, className: string, ...subClass: string[]) {
@@ -58,9 +61,15 @@ class ProductsHeader extends Component {
   };
 
   createFoundItems = () => {
-    const title = createElementWithClass("p", "found-items");
-    title.textContent = "Items: 0";
-    this.container.append(title);
+    const container = new Container("p", "found-items");
+    store.$state.subscribe(() => {
+      const root: HTMLElement | null = document.querySelector(".found-items");
+      if (root) {
+        root.innerHTML = this.foundItems.render();
+      }
+    });
+    container.render().innerHTML = this.foundItems.render();
+    this.container.append(container.render());
   };
 
   createViewItemsButtons = () => {

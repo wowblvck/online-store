@@ -1,4 +1,5 @@
 @use "../../../modules/mixins" as mix;
+@use "./__no-items/products-content__no-items";
 
 .products-content {
     display: flex;
