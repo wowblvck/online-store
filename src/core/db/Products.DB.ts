@@ -83,3 +83,29 @@ export async function getCategoriesFromStorage(
     }
   });
 }
+
+export async function getBrandsFromStorage(
+  products: ProductData[]
+): Promise<ProductCategories[]> {
+  return await new Promise((resolve, reject) => {
+    try {
+      const filters = localStorage.getItem("filters-brands");
+      if (filters !== null) {
+        const arrayFilters = JSON.parse(filters);
+        resolve(arrayFilters);
+      } else {
+        const brands = Array.from(
+          new Set(products.map((product: ProductData) => product.brand))
+        );
+        const productBrands: ProductCategories[] = brands.map((brand) => ({
+          name: brand,
+          state: false,
+        }));
+        localStorage.setItem("filters-brands", JSON.stringify(productBrands));
+        resolve(productBrands);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+}

@@ -1,30 +1,31 @@
 import { AppComponent } from "../../../../../interfaces/AppComponent";
-import { ProductData } from "../../../../../interfaces/Products";
+import { ProductBrands } from "../../../../../interfaces/Products";
 import { store } from "../../../../../store/Store";
 import BrandsItem from "../BrandsItem/BrandsItem";
 
 class BrandsList implements AppComponent {
   private loading = !store.Loaded ? true : false;
-  private static products: ProductData[] = [];
-  private static sortBrands: string[] = [];
+  private error: Error | null = null;
+  private static brands: ProductBrands[] = [];
   private static brandsComponents: BrandsItem[] = [];
 
   constructor() {
-    if (this.loading) {
-      store.$state.subscribe(({ products }) => {
-        if (products.length) {
+    if (!store.Loaded) {
+      store.$state.subscribe(({ brands }) => {
+        if (brands.length && this.loading === true) {
           this.loading = false;
-          BrandsList.products = products;
-          BrandsList.sortBrands = Array.from(
-            new Set(
-              BrandsList.products.map((product: ProductData) => product.brand)
-            )
-          ).sort();
-          BrandsList.brandsComponents = BrandsList.sortBrands.map(
-            (brand) => new BrandsItem(brand)
+          this.error = null;
+          BrandsList.brands = brands;
+          BrandsList.brandsComponents = BrandsList.brands.map(
+            (brand) => new BrandsItem(brand.name, brand.state)
           );
         }
       });
+    } else {
+      BrandsList.brands = store.Brands;
+      BrandsList.brandsComponents = BrandsList.brands.map(
+        (brand) => new BrandsItem(brand.name, brand.state)
+      );
     }
   }
 
@@ -41,6 +42,7 @@ class BrandsList implements AppComponent {
           ? `<div class="lds-ring lds-ring_view_small"><div></div><div></div><div></div><div></div></div>`
           : ""
       }
+      ${this.error ? `${this.error.message}` : ""}
       ${BrandsList.brandsComponents
         .map((brand) => {
           return brand.render();

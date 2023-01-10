@@ -17,4 +17,9 @@ interface ProductCategories {
   state: boolean;
 }
 
-export { ProductData, ProductCategories };
+interface ProductBrands {
+  name: string;
+  state: boolean;
+}
+
+export { ProductData, ProductCategories, ProductBrands };

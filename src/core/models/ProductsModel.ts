@@ -2,9 +2,13 @@
 //Создаем модель продуктов возможности расширения и управления товарами. Подгружаем продукты из базыд данных продуктов.
 
 import { ProductData } from "../interfaces/Products";
-import { getProductsFromStorage } from "../db/Products.DB";
-import { getCategoriesFromStorage } from "../db/Products.DB";
-import { getFilteredProductsFromStorage } from "../db/Products.DB";
+import {
+  getProductsFromStorage,
+  getCategoriesFromStorage,
+  getFilteredProductsFromStorage,
+  getBrandsFromStorage,
+} from "../db/Products.DB";
+
 import { store } from "../store/Store";
 
 class ProductsModel {
@@ -26,12 +30,14 @@ class ProductsModel {
     const filterProducts = await getFilteredProductsFromStorage();
     const products = await getProductsFromStorage();
     const categories = await getCategoriesFromStorage(products);
+    const brands = await getBrandsFromStorage(products);
     if (!store.Loaded) {
       store.Loaded = true;
       store.update({
         filterProducts: filterProducts ?? undefined,
         products: products ?? undefined,
         categories: categories ?? undefined,
+        brands: brands ?? undefined,
       });
     }
     return products;

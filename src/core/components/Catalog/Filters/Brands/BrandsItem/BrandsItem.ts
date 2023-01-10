@@ -3,8 +3,10 @@ import { updateView } from "../../../Products/ProductsHeader/ProductsHeader";
 
 export default class BrandsItem implements AppComponent {
   private brand: string;
-  constructor(brand: string) {
+  private state: boolean;
+  constructor(brand: string, state: boolean) {
     this.brand = brand;
+    this.state = state;
   }
 
   private getHtmlID = () => `brand_${this.brand}`;
@@ -13,8 +15,8 @@ export default class BrandsItem implements AppComponent {
     return `<li class="filters-form__item" id="${this.getHtmlID()}">
             <input class="filters-form__input" type="checkbox" id="${
               this.brand
-            }">
-            <label class="filters-form__label for="${this.brand}">${
+            }" ${this.state ? `checked` : ""}>
+            <label class="filters-form__label for="${this.getHtmlID()}">${
       this.brand.charAt(0).toUpperCase() + this.brand.slice(1)
     }</label>
           </li>`;

@@ -10,6 +10,7 @@ const DEFAULT_STATE: State = {
   categories: [],
   filterProducts: [],
   searchedProducts: [],
+  brands: [],
 };
 
 class Store {
@@ -36,6 +37,10 @@ class Store {
       ...state,
     });
   };
+
+  get Brands() {
+    return this.state.brands;
+  }
 
   get Products() {
     return this.state.products;

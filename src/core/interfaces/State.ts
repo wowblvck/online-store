@@ -1,4 +1,4 @@
-import { ProductData, ProductCategories } from "./Products";
+import { ProductData, ProductCategories, ProductBrands } from "./Products";
 import { Cart } from "./Cart";
 
 interface State {
@@ -7,6 +7,7 @@ interface State {
   categories: ProductCategories[];
   filterProducts: ProductData[];
   searchedProducts: ProductData[];
+  brands: ProductBrands[];
 }
 
 export { State };

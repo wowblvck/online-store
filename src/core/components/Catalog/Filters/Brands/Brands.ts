@@ -1,12 +1,11 @@
 import Component from "../../../../templates/Component";
 import Container from "../../../Container/Container";
 import { store } from "../../../../store/Store";
-import ProductsBrands from "./BrandsList/BrandsList";
-
 import { createElementWithClass } from "../../../../utils/functions";
+import BrandsList from "./BrandsList/BrandsList";
 
 class Brands extends Component {
-  private brands = new ProductsBrands();
+  private brands = new BrandsList();
 
   constructor(tagName: string, className: string, ...subClass: string[]) {
     super(tagName, className, ...subClass);
