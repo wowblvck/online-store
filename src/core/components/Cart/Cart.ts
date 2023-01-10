@@ -5,7 +5,7 @@ import { icons } from "../../data/images/images";
 import { productsInfo } from "../../data/products/products";
 import { cartArray } from "../ProductsList/ProductsList";
 import { PageIds } from "../../interfaces/Page";
-// import { removeFromCart1 } from "../ProductsList/ProductsList";
+import { removeFromCart1 } from "../ProductsList/ProductsList";
 import { Modal } from "./Modal/Modal";
 import { promoCodes } from "../../data/promo/promoCodes";
 import { sortProducts } from "../../Pagination/Pagination";
@@ -305,7 +305,7 @@ class Cart extends Component {
 
     for (let i = 0; i < copyOfArr.length; i++) {
       for (let j = 0; j < productsInfo.length; j++) {
-        if (copyOfArr[i] === (productsInfo[j].id - 1).toString()) {
+        if (copyOfArr[i] === productsInfo[j].id.toString()) {
           const productWrapper = createElementWithClass(
             "div",
             "cart__products-item"
@@ -375,7 +375,7 @@ class Cart extends Component {
 
           let counterOfProduct = 0;
           for (let i = 0; i < cartArray.length; i++) {
-            if (cartArray[i] == `${productsInfo[j].id - 1}`) {
+            if (cartArray[i] == `${productsInfo[j].id}`) {
               counterOfProduct++;
             }
           }
@@ -411,7 +411,7 @@ class Cart extends Component {
               Number(productNum.textContent) <
               Number(productStock.textContent?.substring(7))
             ) {
-              cartArray.push(`${productsInfo[j].id - 1}`);
+              cartArray.push(`${productsInfo[j].id}`);
               console.log(cartArray);
               productNum.textContent = (
                 Number(productNum.textContent) + 1
@@ -434,12 +434,12 @@ class Cart extends Component {
                 Number(productSumm.textContent?.slice(0, -1)) -
                 Number(productsInfo[j].price)
               ).toString()}$`;
-              const val = cartArray.indexOf(`${productsInfo[j].id - 1}`);
+              const val = cartArray.indexOf(`${productsInfo[j].id}`);
               cartArray.splice(val, 1);
               console.log(cartArray);
               updateValues();
             } else if (productNum.textContent == "1") {
-              // removeFromCart1(`${productsInfo[j].id - 1}`);
+              removeFromCart1(`${productsInfo[j].id}`);
               cartProducts.removeChild(productWrapper);
               productWrapper.style.display = "none";
               productNum.textContent = "0";
@@ -449,7 +449,7 @@ class Cart extends Component {
               ) as HTMLParagraphElement;
               cartNum.textContent = `${cartArray.length}`;
               localStorage.setItem(
-                `add-buttons-value${productsInfo[j].id - 1}`,
+                `add-buttons-value${productsInfo[j].id}`,
                 "Add to cart"
               );
               updateValues();

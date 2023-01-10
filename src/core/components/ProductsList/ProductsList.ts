@@ -100,6 +100,11 @@ export default class ProductsList implements AppComponent {
 export let cartArray: string[] = [];
 export let totalSum = 0;
 
+export const getButtonID = (selector: HTMLButtonElement) =>
+  selector.getAttribute("id")?.replace(/\D/g, "") as string;
+
+export const checkInCart = (id: string) => cartArray.includes(id);
+
 export const addToCart = (id: string) => {
   cartArray.push(id);
   totalSum = totalSum + productsInfo[Number(id)].price;
