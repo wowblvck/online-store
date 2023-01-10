@@ -7,10 +7,6 @@
     padding: 40px 0;
     row-gap: 20px;
 
-    @include mix.responsive(tablet-m) {
-        padding-top: 100px;
-    }
-
     @include mix.responsive(tablet-s) {
         padding-top: 100px;
     }

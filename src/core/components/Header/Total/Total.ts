@@ -31,7 +31,10 @@ export const updateTotal = () => {
   const totalVal = document.querySelector(".total__value") as HTMLSpanElement;
   totalVal.textContent = `${localStorage.getItem("total")}.00$`;
   const totalWrapper = document.querySelector(".total") as HTMLDivElement;
-  if (totalVal.textContent == "0.00$") {
+  if (totalVal.textContent == "null.00$") {
+    totalWrapper.style.opacity = "0";
+    totalWrapper.style.visibility = "hidden";
+  } else if (totalVal.textContent == "0.00$") {
     totalWrapper.style.opacity = "0";
     totalWrapper.style.visibility = "hidden";
   } else {

@@ -1,8 +1,9 @@
 .cart__container {
     display: flex;
     column-gap: 20px;
-    padding: 35px 35px 15px 35px;
+    padding: 35px 35px 35px 35px;
     height: 100%;
+    box-sizing: border-box;
 }
 
 @media (max-width: 1065px) {
@@ -29,7 +30,7 @@
     .cart__container {
         align-items: center;
         padding: 35px 10px;
-        width: 300px;
+        width: 320px;
         padding-top: 95px;
     }
 }

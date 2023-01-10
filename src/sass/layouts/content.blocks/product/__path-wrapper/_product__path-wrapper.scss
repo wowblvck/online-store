@@ -4,3 +4,18 @@
     font-family: 'Quicksand';
     color: #727272;
 }
+
+@media (max-width: 530px) {
+    .product__path-wrapper {
+        column-gap: 5px;
+        font-family: "Quicksand";
+        color: #727272;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 370px) {
+    .product__path-wrapper {
+        font-size: 10px;
+    }
+}

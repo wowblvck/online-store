@@ -1,3 +1,6 @@
+@forward "./__subtitle/total__subtitle";
+@forward "./__value/total__value";
+
 .total {
     display: flex;
     align-items: center;
@@ -7,4 +10,5 @@
     color: #d8d8d8;
     opacity: 0;
     visibility: hidden;
+    transition: none;
 }

@@ -11,6 +11,7 @@ import { promoCodes } from "../../data/promo/promoCodes";
 import { sortProducts } from "../../Pagination/Pagination";
 import { goNextPage } from "../../Pagination/Pagination";
 import { goPrevPage } from "../../Pagination/Pagination";
+import { updateTotal } from "../Header/Total/Total";
 
 class Cart extends Component {
   private subContainer: Container;
@@ -202,7 +203,8 @@ class Cart extends Component {
     summaryBtn.textContent = "BUY NOW";
     summaryBtn.addEventListener("click", () => {
       const modal = document.querySelector(".modal__wrapper") as HTMLDivElement;
-      modal.style.display = "flex";
+      modal.style.opacity = "1";
+      modal.style.visibility = "visible";
     });
     summaryMain.append(
       summaryProductsNum,
@@ -412,7 +414,6 @@ class Cart extends Component {
               Number(productStock.textContent?.substring(7))
             ) {
               cartArray.push(`${productsInfo[j].id}`);
-              console.log(cartArray);
               productNum.textContent = (
                 Number(productNum.textContent) + 1
               ).toString();
@@ -436,7 +437,6 @@ class Cart extends Component {
               ).toString()}$`;
               const val = cartArray.indexOf(`${productsInfo[j].id}`);
               cartArray.splice(val, 1);
-              console.log(cartArray);
               updateValues();
             } else if (productNum.textContent == "1") {
               removeFromCart1(`${productsInfo[j].id}`);
@@ -461,7 +461,6 @@ class Cart extends Component {
         }
       }
     }
-    console.log(cartArray);
     setTimeout(updateValues, 10);
     this.subContainer
       .render()
@@ -501,6 +500,12 @@ const updateValues = () => {
     ".products-count"
   ) as HTMLParagraphElement;
   cartNum.textContent = cartArray.length.toString();
+  const headerTotal = document.querySelector(
+    ".total__value"
+  ) as HTMLSpanElement;
+  headerTotal.textContent = Total[0].textContent = `${total}.00$`;
+  localStorage.setItem("total", `${headerTotal.textContent.slice(0, -4)}`);
+  updateTotal();
 };
 
 export default Cart;

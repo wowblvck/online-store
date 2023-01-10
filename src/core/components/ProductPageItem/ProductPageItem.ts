@@ -165,7 +165,8 @@ class ProductPageItem extends Component {
     buttonBuyNow.textContent = "Buy now";
     buttonBuyNow.addEventListener("click", () => {
       const modal = document.querySelector(".modal__wrapper") as HTMLDivElement;
-      modal.style.display = "flex";
+      modal.style.opacity = "1";
+      modal.style.visibility = "visible";
     });
 
     arrowLeft.addEventListener("click", () => {
