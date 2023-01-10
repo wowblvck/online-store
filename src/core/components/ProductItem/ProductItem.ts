@@ -1,7 +1,12 @@
 import { AppComponent } from "../../interfaces/AppComponent";
 import { PageIds } from "../../interfaces/Page";
 import { ProductData } from "../../interfaces/Products";
-import { cartModel } from "../../models/CartModel";
+import {
+  addToCart,
+  checkInCart,
+  getButtonID,
+  removeFromCart,
+} from "../ProductsList/ProductsList";
 
 export default class ProductItem implements AppComponent {
   private product: ProductData;
@@ -34,7 +39,9 @@ export default class ProductItem implements AppComponent {
           <p class="products-item__stock">Stock: ${this.product.stock}</p>
           <div class="products-item__buttons-wrapper">
             <button class="products-item__button btn__add-to-cart" id="${this.getAddHtmlID()}">${
-      cartModel.checkProduct(this.product) ? "Remove" : "Add to cart"
+      checkInCart(this.getAddHtmlID().replace(/\D/g, "") as string)
+        ? "Remove"
+        : "Add to cart"
     }</button>
             <button class="products-item__button btn__see-more" id="${this.getSeeHtmlID()}">See more</button>
           </div>
@@ -58,17 +65,26 @@ export default class ProductItem implements AppComponent {
     if (!addButton) throw new Error("Button is undefined");
     addButton.addEventListener("click", (e) => {
       e.preventDefault();
-      if (cartModel.checkProduct(this.product)) {
-        cartModel.removeProduct(this.product);
+      const btn = e.currentTarget as HTMLButtonElement;
+      const btnID = getButtonID(btn);
+      if (checkInCart(btnID)) {
+        removeFromCart(btnID);
+        btn.textContent = "Add to cart";
       } else {
-        cartModel.addProduct(this.product);
+        addToCart(btnID);
+        btn.textContent = "Remove";
       }
-      const productsCount = document.querySelector(
-        ".products-count"
-      ) as HTMLParagraphElement;
-      if (productsCount) {
-        productsCount.textContent = cartModel.getTotalAmount().toString();
-      }
+      // if (cartModel.checkProduct(this.product)) {
+      //   cartModel.removeProduct(this.product);
+      // } else {
+      //   cartModel.addProduct(this.product);
+      // }
+      // const productsCount = document.querySelector(
+      //   ".products-count"
+      // ) as HTMLParagraphElement;
+      // if (productsCount) {
+      //   productsCount.textContent = cartModel.getTotalAmount().toString();
+      // }
     });
   }
 }
