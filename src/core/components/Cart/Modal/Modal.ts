@@ -1,9 +1,10 @@
 import { createElementWithClass } from "../../../utils/functions";
 import { images } from "../../../data/images/images";
 import { PageIds } from "../../../interfaces/Page";
-// import { cartArray } from "../../ProductsList/ProductsList";
+import { cartArray } from "../../ProductsList/ProductsList";
 import Component from "../../../templates/Component";
 import Container from "../../Container/Container";
+import { updateTotal } from "../../Header/Total/Total";
 
 class Modal extends Component {
   private subContainer: Container;
@@ -15,7 +16,8 @@ class Modal extends Component {
   private createBackground = () => {
     const bg = createElementWithClass("div", "modal__bg") as HTMLDivElement;
     bg.addEventListener("click", () => {
-      this.container.style.display = "none";
+      this.container.style.opacity = "0";
+      this.container.style.visibility = "hidden";
     });
     this.container.append(bg);
   };
@@ -426,11 +428,20 @@ class Modal extends Component {
         popup.style.opacity = "1";
         popup.style.visibility = "visible";
         for (let i = 0; i < 200; i++) {
-          // cartArray.pop();
+          cartArray.pop();
         }
         for (let i = 0; i < 20; i++) {
           localStorage.setItem(`add-buttons-value${i}`, "Add to cart");
         }
+        localStorage.setItem("total", "0");
+        updateTotal();
+        const productCounter = document.querySelector(
+          ".products-count"
+        ) as HTMLParagraphElement;
+        localStorage.setItem("product-in-cart", "0");
+        productCounter.textContent = `${localStorage.getItem(
+          "product-in-cart"
+        )}`;
         setTimeout(() => {
           location.href = `#${PageIds.MainPage}`;
         }, 3000);

@@ -161,7 +161,6 @@ export default class ProductsList implements AppComponent {
 }
 
 export let cartArray: string[] = [];
-export let totalSum = 0;
 
 export const getButtonID = (selector: HTMLButtonElement) =>
   selector.getAttribute("id")?.replace(/\D/g, "") as string;
@@ -170,43 +169,55 @@ export const checkInCart = (id: string) => cartArray.includes(id);
 
 export const addToCart = (id: string) => {
   cartArray.push(id);
-  totalSum = totalSum + productsInfo[Number(id)].price;
-  localStorage.setItem("total", `${totalSum}`);
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
   localStorage.setItem(`add-buttons-value${id}`, `Remove`);
+  let totalHeader = 0;
+  for (let i = 0; i < cartArray.length; i++) {
+    for (let j = 0; j < productsInfo.length; j++) {
+      if (cartArray[i] == productsInfo[j].id.toString()) {
+        totalHeader = totalHeader + productsInfo[j].price;
+      }
+    }
+  }
+  localStorage.setItem("total", `${totalHeader}`);
   updateTotal();
 };
 
 export const removeFromCart = (id: string) => {
-  totalSum = totalSum - productsInfo[Number(id)].price;
-  localStorage.setItem("total", `${totalSum}`);
+  let totalHeader = Number(
+    document.querySelector(".total__value")?.textContent?.slice(0, -4)
+  );
+  for (let i = 0; i < cartArray.length; i++) {
+    if (cartArray[i] == id) {
+      totalHeader = totalHeader - productsInfo[Number(id)].price;
+    }
+  }
+  localStorage.setItem("total", `${totalHeader}`);
+  updateTotal();
   cartArray = cartArray.filter((el) => el != `${id}`);
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
   localStorage.setItem(`add-buttons-value${id}`, `Add to cart`);
-  updateTotal();
 };
 
 export const removeFromCart1 = (id: string) => {
+  updateTotal();
   cartArray = cartArray.filter((x) => cartArray.indexOf(x));
   for (let i = 0; i < cartArray.length; i++) {
     if (cartArray[i] === `${id}`) {
-      totalSum - productsInfo[Number(id)].price;
       cartArray.splice(i, 1);
     }
   }
-  localStorage.setItem("total", `${totalSum}`);
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
   localStorage.setItem(`add-buttons-value${id}`, `Add to cart`);
-  updateTotal();
 };
 
 export const getButtons = (timer: number): Promise<HTMLButtonElement> => {
@@ -270,17 +281,16 @@ const saveCart = () => {
 
 window.addEventListener("beforeunload", saveCart);
 window.addEventListener("beforeunload", () => {
-  localStorage.setItem("total", `${totalSum}`);
+  const headerTotal = document.querySelector(
+    ".total__value"
+  ) as HTMLSpanElement;
+  localStorage.setItem("total", `${headerTotal.textContent?.slice(0, -4)}`);
 });
 
 window.addEventListener("load", () => {
   for (let i = 0; i < Number(localStorage.getItem("product-in-cart")); i++) {
     cartArray.push(localStorage.getItem(`product-in-cart${i}`) as string);
   }
-  if (localStorage.getItem("total")) {
-    totalSum = Number(localStorage.getItem("total"));
-  }
-  updateTotal;
 });
 
 window.addEventListener("load", () => {
@@ -293,3 +303,5 @@ window.addEventListener("load", () => {
     productCounter.textContent = `${localStorage.getItem("product-in-cart")}`;
   }
 });
+
+window.addEventListener("load", updateTotal);
