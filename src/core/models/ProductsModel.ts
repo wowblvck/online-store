@@ -4,9 +4,15 @@
 import { ProductData } from "../interfaces/Products";
 import {
   getProductsFromStorage,
-  getCategoriesFromStorage,
+  getCategoriesStateFromStorage,
   getFilteredProductsFromStorage,
-  getBrandsFromStorage,
+  getBrandsStateFromStorage,
+  getCategoriesFiltersFromStorage,
+  getBrandsFiltersFromStorage,
+  getPriceFiltersFromStorage,
+  getStockFiltersFromStorage,
+  getSearchFiltersFromStorage,
+  getSortProductsFromStorage,
 } from "../db/Products.DB";
 
 import { store } from "../store/Store";
@@ -29,15 +35,33 @@ class ProductsModel {
   async getProducts(): Promise<ProductData[]> {
     const filterProducts = await getFilteredProductsFromStorage();
     const products = await getProductsFromStorage();
-    const categories = await getCategoriesFromStorage(products);
-    const brands = await getBrandsFromStorage(products);
+    const categories = await getCategoriesStateFromStorage(products);
+    const brands = await getBrandsStateFromStorage(products);
+    const filtersCategories = await getCategoriesFiltersFromStorage();
+    const filtersBrands = await getBrandsFiltersFromStorage();
+    const filtersPrice = await getPriceFiltersFromStorage(products);
+    const filtersStock = await getStockFiltersFromStorage(products);
+    const filtersSearch = await getSearchFiltersFromStorage();
+    const sorts = await getSortProductsFromStorage();
     if (!store.Loaded) {
       store.Loaded = true;
       store.update({
-        filterProducts: filterProducts ?? undefined,
-        products: products ?? undefined,
-        categories: categories ?? undefined,
-        brands: brands ?? undefined,
+        filterProducts: filterProducts,
+        products: products,
+        stateCategories: categories,
+        stateBrands: brands,
+        filterCategories: filtersCategories,
+        filterBrands: filtersBrands,
+        filterSearch: filtersSearch,
+        price: {
+          minPrice: filtersPrice.minPrice,
+          maxPrice: filtersPrice.maxPrice,
+        },
+        stock: {
+          minStock: filtersStock.minStock,
+          maxStock: filtersStock.maxStock,
+        },
+        sortMethod: sorts,
       });
     }
     return products;

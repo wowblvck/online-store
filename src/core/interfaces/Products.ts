@@ -14,12 +14,36 @@ interface ProductData {
 
 interface ProductCategories {
   name: string;
+  amount: number;
+  stock: number;
   state: boolean;
 }
 
 interface ProductBrands {
   name: string;
+  amount: number;
+  stock: number;
   state: boolean;
 }
 
-export { ProductData, ProductCategories, ProductBrands };
+interface SortState {
+  name: string | null;
+  value: number;
+}
+
+interface BrandCounts {
+  [key: string]: number;
+}
+
+interface CategoryCounts {
+  [key: string]: number;
+}
+
+export {
+  ProductData,
+  ProductCategories,
+  ProductBrands,
+  SortState,
+  BrandCounts,
+  CategoryCounts,
+};

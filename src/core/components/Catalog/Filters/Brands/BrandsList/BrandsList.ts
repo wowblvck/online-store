@@ -11,21 +11,32 @@ class BrandsList implements AppComponent {
 
   constructor() {
     if (!store.Loaded) {
-      store.$state.subscribe(({ brands }) => {
-        if (brands.length && this.loading === true) {
+      store.$state.subscribe(({ stateBrands }) => {
+        if (stateBrands.length) {
           this.loading = false;
           this.error = null;
-          BrandsList.brands = brands;
-          BrandsList.brandsComponents = BrandsList.brands.map(
-            (brand) => new BrandsItem(brand.name, brand.state)
-          );
+          BrandsList.brands = stateBrands;
+          BrandsList.brandsComponents = BrandsList.brands
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map(
+              (brand) =>
+                new BrandsItem(
+                  brand.name,
+                  brand.state,
+                  brand.amount,
+                  brand.stock
+                )
+            );
         }
       });
     } else {
-      BrandsList.brands = store.Brands;
-      BrandsList.brandsComponents = BrandsList.brands.map(
-        (brand) => new BrandsItem(brand.name, brand.state)
-      );
+      BrandsList.brands = store.StateBrands;
+      BrandsList.brandsComponents = BrandsList.brands
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(
+          (brand) =>
+            new BrandsItem(brand.name, brand.state, brand.amount, brand.stock)
+        );
     }
   }
 

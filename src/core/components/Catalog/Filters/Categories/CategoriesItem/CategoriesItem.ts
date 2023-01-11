@@ -1,17 +1,19 @@
 import { AppComponent } from "../../../../../interfaces/AppComponent";
-import { ProductData } from "../../../../../interfaces/Products";
 import { store } from "../../../../../store/Store";
-import { toggleObjects } from "../../../../../utils/functions";
+import { addOrRemove } from "../../../../../utils/functions";
 import ProductsList from "../../../../ProductsList/ProductsList";
-import FoundItems from "../../../Products/ProductsHeader/FoundItems/FoundItems";
 import { updateView } from "../../../Products/ProductsHeader/ProductsHeader";
 
 export default class CategoriesItem implements AppComponent {
   private category: string;
   private state: boolean;
-  constructor(category: string, state: boolean) {
+  private amount: number;
+  private stock: number;
+  constructor(category: string, state: boolean, amount: number, stock: number) {
     this.category = category;
     this.state = state;
+    this.amount = amount;
+    this.stock = stock;
   }
 
   private getHtmlID = () => `category_${this.category}`;
@@ -21,9 +23,12 @@ export default class CategoriesItem implements AppComponent {
       <input class="filters-form__input" type="checkbox" id="${
         this.category
       }" ${this.state ? `checked` : ""}>
-      <label class="filters-form__label for="${this.getHtmlID()}">${
+      <label class="filters-form__label" for="${this.getHtmlID()}">${
       this.category.charAt(0).toUpperCase() + this.category.slice(1)
     }</label>
+      <p class="filters-form__value"><span class="category-amount">${
+        this.stock
+      }</span> / ${this.amount}</p>
       </li>`;
   };
 
@@ -39,7 +44,7 @@ export default class CategoriesItem implements AppComponent {
 
       input.checked = !input.checked;
 
-      store.Categories = store.Categories.map((category) => {
+      store.StateCategories = store.StateCategories.map((category) => {
         if (category.name === this.category) {
           return {
             ...category,
@@ -49,71 +54,14 @@ export default class CategoriesItem implements AppComponent {
         return category;
       });
 
-      //Получаем продукты выбранной категории
-      const selectCategories: ProductData[] = store.Products.filter(
-        (el) => el.category === this.category
+      store.FiltersCategories = addOrRemove(
+        store.FiltersCategories,
+        this.category
       );
-
-      //Добавляем в отфильтрованные продукты тех категории, которые мы выбрали
-      store.FilterProducts = toggleObjects(
-        store.FilterProducts,
-        selectCategories
-      );
-
-      //Получаем селектор поискового окна
-      const searchInput = document.querySelector(
-        ".search__input"
-      ) as HTMLInputElement;
-
-      //Проверяем, существует ли такой селектор
-      if (searchInput) {
-        //Проверяем, если в селекторе поисковой запрос
-        if (searchInput.value.length > 0) {
-          //Проверяем, состояния включения каждой категории
-          const stateOff = store.Categories.every(
-            (category) => category.state === false
-          );
-
-          //Если stateOff not true (Состояние каждой категории не равно False), то начинаем поиск по отфильтрованным товарам
-          if (!stateOff) {
-            const searchTerm = searchInput.value.toLowerCase();
-            const foundProducts = store.FilterProducts.filter((product) => {
-              return (
-                product.brand.toLowerCase().includes(searchTerm) ||
-                product.category.toLowerCase().includes(searchTerm) ||
-                product.title.toLowerCase().includes(searchTerm)
-              );
-            });
-            store.SearchedProducts = foundProducts;
-            //Иначе будем искать во всех товарах
-          } else {
-            const searchTerm = searchInput.value.toLowerCase();
-            const foundProducts = store.Products.filter((product) => {
-              return (
-                product.brand.toLowerCase().includes(searchTerm) ||
-                product.category.toLowerCase().includes(searchTerm) ||
-                product.title.toLowerCase().includes(searchTerm)
-              );
-            });
-            store.SearchedProducts = foundProducts;
-          }
-        } else {
-          store.SearchedProducts = [];
-        }
-      }
 
       const wrapper = document.querySelector(
         ".products-content"
       ) as HTMLDivElement;
-
-      const foundWrapper = document.querySelector(
-        ".found-items"
-      ) as HTMLDivElement;
-
-      const foundItems = new FoundItems();
-      if (foundWrapper) {
-        foundWrapper.innerHTML = foundItems.render();
-      }
 
       const productList = new ProductsList();
       if (wrapper) {

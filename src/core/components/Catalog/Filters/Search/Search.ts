@@ -1,9 +1,7 @@
-import { ProductData } from "../../../../interfaces/Products";
 import { store } from "../../../../store/Store";
 import Component from "../../../../templates/Component";
 import { createElementWithClass } from "../../../../utils/functions";
 import ProductsList from "../../../ProductsList/ProductsList";
-import FoundItems from "../../Products/ProductsHeader/FoundItems/FoundItems";
 
 class Search extends Component {
   constructor(tagName: string, className: string, ...subClass: string[]) {
@@ -19,7 +17,12 @@ class Search extends Component {
       "input",
       "search__input"
     ) as HTMLInputElement;
-    searchInput.placeholder = "Search";
+
+    if (store.StateSearch.length === 0) {
+      searchInput.placeholder = "Name, brand or category";
+    } else {
+      searchInput.value = store.StateSearch;
+    }
     this.container.append(searchIcon, searchInput);
   };
 
@@ -28,25 +31,12 @@ class Search extends Component {
       ".search__input"
     ) as HTMLInputElement;
     searchInput?.addEventListener("input", () => {
+      if (searchInput.value.length === 0) {
+        searchInput.placeholder = "Name, brand or category";
+      }
       const searchTerm = searchInput.value.toLowerCase();
 
-      let arrayFind: ProductData[] = [];
-
-      if (store.FilterProducts.length) {
-        arrayFind = store.FilterProducts;
-      } else if (searchTerm.length != 0) {
-        arrayFind = store.Products;
-      }
-
-      const foundProducts = arrayFind.filter((product) => {
-        return (
-          product.brand.toLowerCase().includes(searchTerm) ||
-          product.category.toLowerCase().includes(searchTerm) ||
-          product.title.toLowerCase().includes(searchTerm)
-        );
-      });
-
-      store.SearchedProducts = foundProducts;
+      store.StateSearch = searchTerm;
 
       const wrapper = document.querySelector(
         ".products-content"
@@ -56,15 +46,6 @@ class Search extends Component {
       if (wrapper) {
         wrapper.innerHTML = productList.render();
         productList.addEvents();
-      }
-
-      const foundWrapper = document.querySelector(
-        ".found-items"
-      ) as HTMLDivElement;
-
-      const foundItems = new FoundItems();
-      if (foundWrapper) {
-        foundWrapper.innerHTML = foundItems.render();
       }
     });
   };

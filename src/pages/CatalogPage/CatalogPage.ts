@@ -1,6 +1,5 @@
 import Page from "../../core/templates/Page";
 import Catalog from "../../core/components/Catalog/Catalog";
-import { store } from "../../core/store/Store";
 
 class CatalogPage extends Page {
   private catalog = new Catalog("section", "catalog", "main__catalog");
@@ -19,7 +18,6 @@ class CatalogPage extends Page {
   };
 
   render(): HTMLElement {
-    store.SearchedProducts = [];
     this.updateTitle(CatalogPage.TextObject.Title);
     this.updateDescription(CatalogPage.TextObject.Description);
     this.container.append(this.catalog.render());

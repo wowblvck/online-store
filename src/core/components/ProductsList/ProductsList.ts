@@ -1,10 +1,21 @@
 import ProductItem from "../ProductItem/ProductItem";
 import { productModel } from "../../models/ProductsModel";
-import { ProductData } from "../../interfaces/Products";
+import {
+  BrandCounts,
+  CategoryCounts,
+  ProductData,
+} from "../../interfaces/Products";
 import { store } from "../../store/Store";
 import { AppComponent } from "../../interfaces/AppComponent";
 import { productsInfo } from "../../data/products/products";
 import { updateTotal } from "../Header/Total/Total";
+import {
+  filterProducts,
+  updateBrandAmount,
+  updateCategoryAmount,
+} from "../../utils/functions";
+import FoundItems from "../Catalog/Products/ProductsHeader/FoundItems/FoundItems";
+// import { BrandsCount } from "../../interfaces/Filter";
 
 export default class ProductsList implements AppComponent {
   private loading = !store.Loaded ? true : false;
@@ -15,51 +26,103 @@ export default class ProductsList implements AppComponent {
   constructor() {
     this.fetchProducts();
     if (!store.Loaded) {
-      store.$state.subscribe(({ products, filterProducts }) => {
-        if ((products.length || filterProducts.length) && this.loading) {
+      store.$state.subscribe(({ products }) => {
+        if (products.length) {
           this.loading = false;
           this.error = null;
-          ProductsList.products = filterProducts.length
-            ? filterProducts
-            : products;
-          ProductsList.productsComponents = ProductsList.products.map(
-            (product: ProductData) => new ProductItem(product)
-          );
-        }
-      });
-    } else {
-      if (store.SearchedProducts.length !== 0) {
-        ProductsList.products = store.SearchedProducts;
-        ProductsList.productsComponents = ProductsList.products.map(
-          (product: ProductData) => new ProductItem(product)
-        );
-      } else {
-        const searchInput = document.querySelector(
-          ".search__input"
-        ) as HTMLInputElement;
-        if (searchInput) {
-          if (searchInput.value.length !== 0) {
-            ProductsList.products = [];
+
+          const filters = {
+            categories: store.FiltersCategories,
+            brands: store.FiltersBrands,
+            search: store.StateSearch,
+            price: { minPrice: store.MinPrice, maxPrice: store.MaxPrice },
+            stock: { minStock: store.MinStock, maxStock: store.MaxStock },
+          };
+
+          const filteredProducts = filterProducts(store.Products, filters);
+
+          if (filteredProducts.length) {
+            ProductsList.products = filteredProducts;
             ProductsList.productsComponents = ProductsList.products.map(
               (product: ProductData) => new ProductItem(product)
             );
           } else {
-            ProductsList.products = store.FilterProducts.length
-              ? store.FilterProducts
-              : store.Products;
+            ProductsList.products = products;
             ProductsList.productsComponents = ProductsList.products.map(
               (product: ProductData) => new ProductItem(product)
             );
           }
-        } else {
-          ProductsList.products = store.FilterProducts.length
-            ? store.FilterProducts
-            : store.Products;
-          ProductsList.productsComponents = ProductsList.products.map(
-            (product: ProductData) => new ProductItem(product)
-          );
+
+          const searchInput = document.querySelector(
+            ".search__input"
+          ) as HTMLInputElement;
+
+          if (searchInput) {
+            searchInput.value = store.StateSearch;
+          }
+
+          const foundWrapper = document.querySelector(
+            ".found-items"
+          ) as HTMLParagraphElement;
+
+          if (foundWrapper) {
+            const foundItems = new FoundItems();
+            foundWrapper.innerHTML = foundItems.render();
+          }
         }
+      });
+    } else {
+      const filters = {
+        categories: store.FiltersCategories,
+        brands: store.FiltersBrands,
+        search: store.StateSearch,
+        price: { minPrice: store.MinPrice, maxPrice: store.MaxPrice },
+        stock: { minStock: store.MinStock, maxStock: store.MaxStock },
+      };
+
+      const filteredProducts = filterProducts(store.Products, filters);
+
+      const brandCounts: BrandCounts = filteredProducts.reduce(
+        (counts, product) => {
+          const brand = product.brand;
+          counts[brand] = (counts[brand] || 0) + 1;
+          return counts;
+        },
+        {} as BrandCounts
+      );
+
+      const categoryCounts: CategoryCounts = filteredProducts.reduce(
+        (counts, product) => {
+          const category = product.category;
+          counts[category] = (counts[category] || 0) + 1;
+          return counts;
+        },
+        {} as CategoryCounts
+      );
+
+      updateBrandAmount(brandCounts);
+      updateCategoryAmount(categoryCounts);
+
+      if (filteredProducts.length) {
+        ProductsList.products = filteredProducts;
+        ProductsList.productsComponents = ProductsList.products.map(
+          (product: ProductData) => new ProductItem(product)
+        );
+        store.FilterProducts = ProductsList.products;
+      } else {
+        ProductsList.products = [];
+        ProductsList.productsComponents = [];
+        store.FilterProducts = ProductsList.products;
       }
+    }
+
+    const foundWrapper = document.querySelector(
+      ".found-items"
+    ) as HTMLParagraphElement;
+
+    if (foundWrapper) {
+      const foundItems = new FoundItems();
+      foundWrapper.innerHTML = foundItems.render();
     }
   }
 
@@ -114,21 +177,18 @@ export const addToCart = (id: string) => {
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
   localStorage.setItem(`add-buttons-value${id}`, `Remove`);
-  console.log(cartArray);
   updateTotal();
 };
 
 export const removeFromCart = (id: string) => {
   totalSum = totalSum - productsInfo[Number(id)].price;
   localStorage.setItem("total", `${totalSum}`);
-  console.log(totalSum);
   cartArray = cartArray.filter((el) => el != `${id}`);
   const productCounter = document.querySelector(
     ".products-count"
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
   localStorage.setItem(`add-buttons-value${id}`, `Add to cart`);
-  console.log(cartArray);
   updateTotal();
 };
 
@@ -146,7 +206,6 @@ export const removeFromCart1 = (id: string) => {
   ) as HTMLParagraphElement;
   productCounter.textContent = `${cartArray.length}`;
   localStorage.setItem(`add-buttons-value${id}`, `Add to cart`);
-  console.log(cartArray);
   updateTotal();
 };
 
@@ -221,7 +280,6 @@ window.addEventListener("load", () => {
   if (localStorage.getItem("total")) {
     totalSum = Number(localStorage.getItem("total"));
   }
-  console.log(cartArray);
   updateTotal;
 });
 
