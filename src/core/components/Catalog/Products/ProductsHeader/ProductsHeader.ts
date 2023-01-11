@@ -60,6 +60,17 @@ class ProductsHeader extends Component {
     this.container.append(this.sortWrapper.render());
   };
 
+  addEvents = () => {
+    const item = document.getElementById("sort-select") as HTMLSelectElement;
+    item?.addEventListener("change", () => {
+      const selectedOption = item.options[item.selectedIndex];
+      store.SortState = {
+        name: selectedOption.text,
+        value: Number(selectedOption.value),
+      };
+    });
+  };
+
   createFoundItems = () => {
     const container = new Container("p", "found-items");
     store.$state.subscribe(() => {

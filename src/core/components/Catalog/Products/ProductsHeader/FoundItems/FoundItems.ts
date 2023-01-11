@@ -13,37 +13,17 @@ class FoundItems implements AppComponent {
           this.loading = false;
           this.error = null;
           FoundItems.items = filterProducts.length;
-        }
-        if (products.length && this.loading) {
+        } else if (products.length && this.loading) {
           this.loading = false;
           this.error = null;
           FoundItems.items = products.length;
         }
       });
     } else {
-      if (store.SearchedProducts.length) {
-        FoundItems.items = store.SearchedProducts.length;
+      if (store.FilterProducts.length) {
+        FoundItems.items = store.FilterProducts.length;
       } else {
-        const searchInput = document.querySelector(
-          ".search__input"
-        ) as HTMLInputElement;
-        if (searchInput) {
-          if (searchInput.value.length) {
-            FoundItems.items = 0;
-          } else {
-            if (store.FilterProducts.length) {
-              FoundItems.items = store.FilterProducts.length;
-            } else {
-              FoundItems.items = store.Products.length;
-            }
-          }
-        } else {
-          if (store.FilterProducts.length) {
-            FoundItems.items = store.FilterProducts.length;
-          } else {
-            FoundItems.items = store.Products.length;
-          }
-        }
+        FoundItems.items = 0;
       }
     }
   }
@@ -53,13 +33,7 @@ class FoundItems implements AppComponent {
       Items:
       ${this.loading ? "Loading..." : ""}
       ${this.error ? `${this.error.message}` : ""}
-      ${
-        FoundItems.items
-          ? FoundItems.items
-          : this.loading === true
-          ? ""
-          : FoundItems.items
-      }
+      ${FoundItems.items >= 0 ? FoundItems.items : ""}
     `;
   };
 }

@@ -14,19 +14,19 @@ export const sorts: Array<SortData> = [
     value: "2",
   },
   {
-    sortType: "Sort by rating ASC",
+    sortType: "Sort by name ASC",
     value: "3",
   },
   {
-    sortType: "Sort by rating DESC",
+    sortType: "Sort by name DESC",
     value: "4",
   },
   {
-    sortType: "Sort by discount ASC",
+    sortType: "Sort by stock ASC",
     value: "5",
   },
   {
-    sortType: "Sort by discrount DESC",
+    sortType: "Sort by stock DESC",
     value: "6",
   },
 ];

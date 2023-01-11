@@ -7,14 +7,14 @@ import Container from "../../Container/Container";
 
 class Products extends Component {
   private products = new ProductsList();
+  private header = new ProductsHeader("div", "products-header");
 
   constructor(tagName: string, className: string, ...subClass: string[]) {
     super(tagName, className, ...subClass);
   }
 
   createProductsHeader = () => {
-    const header = new ProductsHeader("div", "products-header");
-    this.container.append(header.render());
+    this.container.append(this.header.render());
   };
 
   createHeaderLine = () => {
@@ -37,6 +37,7 @@ class Products extends Component {
 
   addEvents = () => {
     this.products.addEvents();
+    this.header.addEvents();
   };
 
   render = () => {

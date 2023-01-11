@@ -11,21 +11,37 @@ class CategoriesList implements AppComponent {
 
   constructor() {
     if (!store.Loaded) {
-      store.$state.subscribe(({ categories }) => {
-        if (categories.length && this.loading === true) {
+      store.$state.subscribe(({ stateCategories }) => {
+        if (stateCategories.length && this.loading === true) {
           this.loading = false;
           this.error = null;
-          CategoriesList.categories = categories;
-          CategoriesList.categoriesComponents = CategoriesList.categories.map(
-            (category) => new CategoriesItem(category.name, category.state)
-          );
+          CategoriesList.categories = stateCategories;
+          CategoriesList.categoriesComponents = CategoriesList.categories
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map(
+              (category) =>
+                new CategoriesItem(
+                  category.name,
+                  category.state,
+                  category.amount,
+                  category.stock
+                )
+            );
         }
       });
     } else {
-      CategoriesList.categories = store.Categories;
-      CategoriesList.categoriesComponents = CategoriesList.categories.map(
-        (category) => new CategoriesItem(category.name, category.state)
-      );
+      CategoriesList.categories = store.StateCategories;
+      CategoriesList.categoriesComponents = CategoriesList.categories
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(
+          (category) =>
+            new CategoriesItem(
+              category.name,
+              category.state,
+              category.amount,
+              category.stock
+            )
+        );
     }
   }
 
