@@ -255,7 +255,7 @@ addEventListener("popstate", () => {
   saveCart();
 });
 
-const saveButtons = () => {
+export const saveButtons = () => {
   const btnAdd = document.querySelectorAll(".btn__add-to-cart");
   if (btnAdd.length != 0) {
     for (let i = 0; i < btnAdd.length; i++) {
@@ -266,7 +266,7 @@ const saveButtons = () => {
 
 window.addEventListener("beforeunload", saveButtons);
 
-const saveCart = () => {
+export const saveCart = () => {
   if (cartArray.length === 0) {
     localStorage.setItem("product-in-cart", "0");
     for (let i = 0; i < productsInfo.length; i++) {

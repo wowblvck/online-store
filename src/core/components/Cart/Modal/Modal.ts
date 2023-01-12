@@ -408,7 +408,7 @@ class Modal extends Component {
     modalCommonErr.style.color = "red";
 
     const buttonConfirm = createElementWithClass(
-      "button",
+      "div",
       "modal__button-confirm"
     ) as HTMLButtonElement;
     buttonConfirm.textContent = "CONFIRM";

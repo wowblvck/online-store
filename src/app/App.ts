@@ -88,6 +88,18 @@ class App {
   //Enable hash routing. Cut off the # symbol and draw the required page
   //Включаем роутинг по хэшу. Обрезаем символ # и отрисовываем необходимую страницу
   private enableRouteChange() {
+    window.addEventListener("popstate", () => {
+      const hash = window.location.hash.slice(1);
+      App.renderNewPage(hash);
+    });
+    window.addEventListener("load", () => {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        App.renderNewPage(hash);
+      } else {
+        App.renderNewPage("main-page");
+      }
+    });
     window.addEventListener("hashchange", () => {
       const hash = window.location.hash.slice(1);
       App.renderNewPage(hash);
