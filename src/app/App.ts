@@ -94,6 +94,14 @@ class App {
     });
     window.addEventListener("load", () => {
       const hash = window.location.hash.slice(1);
+      if (hash) {
+        App.renderNewPage(hash);
+      } else {
+        App.renderNewPage("main-page");
+      }
+    });
+    window.addEventListener("hashchange", () => {
+      const hash = window.location.hash.slice(1);
       App.renderNewPage(hash);
     });
   }
