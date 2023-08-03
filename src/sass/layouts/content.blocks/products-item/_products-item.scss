@@ -1,0 +1,38 @@
+@forward "./__title/products-item__title";
+@forward "./__wrapper/products-item__wrapper";
+@forward "./__category/products-item__category";
+@forward "./__brand/products-item__brand";
+@forward "./__price/products-item__price";
+@forward "./__stock/products-item__stock";
+@forward "./__buttons-wrapper/products-item__buttons-wrapper";
+@forward "./__button/products-item__button";
+@use "../../../modules/mixins" as mix;
+
+.products-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 42px 1fr;
+    width: 230px;
+    height: 230px;
+    background: none;
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center 70%; 
+    border: 1px solid #b6b6b6;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px 1px rgb(27 28 29 / 11%);
+    overflow: hidden;
+    transition: 0.3s;
+    background-color: #fff;
+
+    &:hover {
+        .products-item__wrapper {
+            top: 0;
+        }
+    }
+
+    @include mix.responsive(mobile) {
+        width: 190px;
+    }
+}

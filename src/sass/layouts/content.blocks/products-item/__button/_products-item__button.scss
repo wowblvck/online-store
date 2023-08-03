@@ -1,0 +1,15 @@
+@use "../../../../modules/mixins" as mix;
+
+.products-item__button {
+    @include mix.font("Quicksand", 16px);
+    background-color: transparent;
+    border: none;
+    color: #ddd;
+    transition: 0.2s;
+    cursor: pointer;
+    font-weight: 900;
+
+    &:hover {
+        color: #fff;
+    }
+}

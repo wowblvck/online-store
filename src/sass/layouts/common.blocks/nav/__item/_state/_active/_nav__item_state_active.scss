@@ -1,0 +1,6 @@
+.nav__item_state_active {
+    &:hover {
+        background-color: transparent !important;
+        cursor: default !important;
+    }
+}

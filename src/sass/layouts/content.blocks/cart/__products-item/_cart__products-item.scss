@@ -1,0 +1,21 @@
+.cart__products-item {
+    display: flex;
+    box-shadow: 0 2px 4px 1px rgb(27 28 29 / 11%);
+    border-radius: 10px;
+    border: 1px solid #cfcfcf;
+    background-color: #f8f8f8;
+    height: 200px;
+    box-sizing: border-box;
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    padding: 20px;
+}
+
+@media (max-width: 600px) {
+    .cart__products-item {
+        flex-direction: column;
+        height: 500px;
+        row-gap: 20px;
+    }
+}

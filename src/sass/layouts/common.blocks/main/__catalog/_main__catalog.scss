@@ -1,0 +1,14 @@
+@use "../../../../modules/mixins" as mix;
+
+.main__catalog {
+    margin-top: 25px;
+    margin-bottom: 25px;
+
+    @include mix.responsive(mobile) {
+        margin-top: 90px;
+    }
+
+    @include mix.responsive(tablet-s) {
+        margin-top: 90px;
+    }
+}

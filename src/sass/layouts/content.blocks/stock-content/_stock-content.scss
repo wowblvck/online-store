@@ -1,0 +1,7 @@
+@forward "./__min/stock-content__min";
+@forward "./__max/stock-content__max";
+
+.stock-content {
+    display: flex;
+    justify-content: space-evenly;
+}

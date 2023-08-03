@@ -1,0 +1,28 @@
+.modal__button-confirm {
+    width: 100%;
+    max-width: 360px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: bold;
+    font-family: "Quicksand";
+    font-size: 16px;
+    border: 1px solid #b6b6b6;
+    border-radius: 10px;
+    background-color: #f6f6f6;
+    box-shadow: 0px 2px 4px 1px rgb(27 28 29 / 11%);
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal__button-confirm:hover {
+    background-color: #fff;
+    border: 1px solid #9c9c9c;
+}
+
+@media (max-width: 360px) {
+    .modal__button-confirm {
+        max-width: 300px;
+    }
+}

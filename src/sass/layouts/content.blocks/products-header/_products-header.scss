@@ -1,0 +1,34 @@
+@use "../../../modules/mixins" as mix;
+@forward "./__line/products-header__line";
+
+.products-header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+        "sort items layouts";
+    column-gap: 15px;
+    align-items: center;
+
+    @include mix.responsive(mobile) {
+        flex-direction: column;
+        row-gap: 15px;
+        align-items: center;
+    }
+
+    @include mix.responsive(tablet-m) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "sort sort"
+            "items layouts";
+        row-gap: 20px;
+    }
+
+    @include mix.responsive(mobile) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: 
+            "sort"
+            "items";
+    }
+}

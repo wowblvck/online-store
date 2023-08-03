@@ -1,0 +1,18 @@
+@use "../../../modules/mixins" as mix;
+@forward "./__image/cart__image";
+
+.cart {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+
+    @include mix.responsive(tablet-s) {
+        flex-direction: row;
+        column-gap: 10px;
+    }
+
+    @include mix.responsive(mobile) {
+        flex-direction: row;
+        column-gap: 10px;
+    }
+}

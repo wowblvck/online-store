@@ -1,0 +1,19 @@
+.page {
+    height: 100vh;
+    background-image: url('../assets/images/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+      'header'
+      'main'
+      'footer';
+}
+
+* {
+  transition: .2s;
+}

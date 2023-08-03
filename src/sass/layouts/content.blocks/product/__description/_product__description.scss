@@ -1,0 +1,7 @@
+@use "../../../../modules/mixins" as mix;
+
+.product__description {
+    text-align: center;
+    @include mix.font("Quicksand", 16px);
+    max-width: 700px;
+}

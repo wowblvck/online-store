@@ -1,0 +1,6 @@
+@use "../../../../modules/mixins" as mix;
+
+.price-content__min {
+    @include mix.font("Quicksand", 16px);
+    margin: 0;
+}

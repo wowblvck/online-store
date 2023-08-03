@@ -1,0 +1,10 @@
+@forward "./__welcome/main__welcome";
+@forward "./__catalog/main__catalog";
+@forward "./__error/main__error";
+@forward "./__cart/main__cart";
+
+.main {
+    display: flex;
+    justify-content: center;
+    grid-area: main;
+}

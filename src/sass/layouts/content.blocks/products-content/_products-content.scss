@@ -1,0 +1,31 @@
+@use "../../../modules/mixins" as mix;
+@use "./__no-items/products-content__no-items";
+
+.products-content {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 2px;
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #6d6d6d88;
+        border-radius: 100px;
+    }
+
+    @include mix.responsive(mobile) {
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+    }
+    @include mix.responsive(tablet-s) {
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+    }
+}

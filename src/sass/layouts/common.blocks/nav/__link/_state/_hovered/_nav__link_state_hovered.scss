@@ -1,0 +1,14 @@
+@use "../../../../../../modules/mixins" as mix;
+
+.nav__link_state_hovered {
+    color: rgb(216, 216, 216);
+
+    @include mix.responsive(tablet-s) {
+        color: #fff;
+    }
+
+    @include mix.responsive(mobile) {
+        color: #fff;
+    }
+    pointer-events: none;
+}

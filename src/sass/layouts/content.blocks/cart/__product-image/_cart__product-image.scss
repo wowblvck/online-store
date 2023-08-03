@@ -1,0 +1,15 @@
+.cart__product-image {
+    width: 200px;
+    height: 150px;
+    background-size: 65%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fff;
+}
+
+@media (max-width: 780px) {
+    .cart__product-image {
+        width: 150px;
+        height: 100px;
+    }
+}

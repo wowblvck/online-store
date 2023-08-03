@@ -1,0 +1,15 @@
+.summary__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    row-gap: 15px;
+}
+
+@media (max-width: 1065px) {
+    .summary__main {
+        align-items: center;
+    }
+
+    
+}

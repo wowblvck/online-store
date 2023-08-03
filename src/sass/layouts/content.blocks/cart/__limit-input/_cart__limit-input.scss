@@ -1,0 +1,33 @@
+.cart__limit-input {
+    background-color: hsla(0deg, 0%, 94%, 0.26);
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    padding: 5px;
+    text-align: center;
+    width: 30px;
+    height: 10px;
+    border-radius: 5px;
+    border: 1px solid #dfdfdf;
+    outline: none;
+    padding: 5px;
+    font-family: "Quicksand";
+    border-radius: 5px;
+    border: 1px solid #b6b6b6;
+    outline: none;
+    transition: 0.5s;
+}
+
+.cart__limit-input:focus {
+    background-color: #fff;
+    border-color: rgba(0,0,0,.19);
+    outline: none;
+}
+
+.cart__limit-input::-webkit-outer-spin-button,
+.cart__limit-input::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+    margin: 0;
+}

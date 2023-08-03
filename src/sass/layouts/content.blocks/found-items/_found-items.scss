@@ -1,0 +1,11 @@
+@use "../../../modules/mixins" as mix;
+
+.found-items {
+    @include mix.font("Quicksand", 16px);
+    margin: 0;
+    justify-self: center;
+
+    @include mix.responsive(tablet-m) {
+        justify-self: flex-start;
+    }
+}

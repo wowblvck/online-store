@@ -1,0 +1,19 @@
+.cart__products {
+    font-family: "Quicksand";
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    overflow: auto;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+.cart__products::-webkit-scrollbar {
+    width: 2px;
+    background-color: transparent;
+}
+
+.cart__products::-webkit-scrollbar-thumb {
+    background-color: #afafaf;
+    border-radius: 100px;
+}

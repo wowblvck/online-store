@@ -1,0 +1,22 @@
+@forward "./__item/filters-form__item";
+@forward "./__input/filters-form__input";
+@forward "./__label/filters-form__label";
+@forward "./__value/filters-form__value";
+
+.filters-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    overflow: auto;
+    max-height: 115px;
+
+    &::-webkit-scrollbar {
+        width: 2px;
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #6d6d6d88;
+        border-radius: 100px;
+    }
+}

@@ -1,0 +1,8 @@
+@use "../../../../modules/mixins" as mix;
+
+.products-item__stock {
+    @include mix.font("Quicksand", 16px);
+    margin: 0;
+    color: #ddd;
+    letter-spacing: 1px;
+}

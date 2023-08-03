@@ -1,0 +1,8 @@
+@use "../../../modules/mixins" as mix;
+@use "../../../modules/colors" as *;
+
+.products-count {
+    margin: 0;
+    @include mix.font("Quicksand", 20px);
+    color: $main-grey;
+}
